@@ -2,8 +2,11 @@
  * Test helpers: boot the app on an ephemeral port with an in-memory database and the fixture
  * word bank, plus a tiny cookie-jar HTTP client.
  */
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import v8 from 'node:v8';
+import vm from 'node:vm';
 import { createApp } from '../../server/app.js';
 import { loadConfig } from '../../server/config.js';
 import { openDatabase } from '../../server/db.js';
@@ -82,9 +85,10 @@ export class Client {
 }
 
 /**
- * Start the app on 127.0.0.1:0 with ':memory:' storage and the fixture bank.
+ * Start the app on 127.0.0.1:0 with ':memory:' storage (a single-connection libSQL client, see
+ * server/db.js) and the fixture bank.
  * @param {{ config?: Partial<import('../../server/config.js').Config> }} [options] config overrides
- * @returns {Promise<{ baseUrl: string, db: import('node:sqlite').DatabaseSync,
+ * @returns {Promise<{ baseUrl: string, db: import('../../server/db.js').Database,
  *   bank: import('../../server/services/wordbank.js').WordBank, client: () => Client,
  *   errors: Error[], close: () => Promise<void> }>}
  */
@@ -92,13 +96,15 @@ export async function startTestServer({ config: overrides = {} } = {}) {
   const config = {
     ...loadConfig({ NODE_ENV: 'test' }),
     dbPath: ':memory:',
+    dbUrl: null,
+    dbAuthToken: null,
     wordsPath: FIXTURE_WORDS_PATH,
     authRateLimit: { windowMs: 60_000, max: 10_000 },
     loginFailureLimit: { windowMs: 60_000, max: 10_000 },
     ...overrides,
   };
   const bank = await loadWordBank(config.wordsPath);
-  const db = openDatabase(config.dbPath);
+  const db = await openDatabase({ url: config.dbUrl, authToken: config.dbAuthToken, path: config.dbPath });
   /** Unexpected (5xx) errors captured instead of printed. */
   const errors = [];
   const app = createApp({ config, db, wordbank: bank, log: (err) => errors.push(err) });
@@ -140,4 +146,31 @@ export async function registerUser(ctx, fields = {}) {
   const res = await client.post('/api/auth/register', { displayName: fields.displayName ?? `Learner ${userSeq}`, email, password });
   if (res.status !== 201) throw new Error(`register failed: ${res.status} ${res.text}`);
   return { client, user: res.body.user, email, password };
+}
+
+/** `gc()`, enabled at runtime when the process was not started with --expose-gc. */
+const collectGarbage = (() => {
+  if (typeof globalThis.gc === 'function') return globalThis.gc;
+  v8.setFlagsFromString('--expose-gc');
+  return vm.runInNewContext('gc');
+})();
+
+/**
+ * Remove a temp directory holding SQLite files. libsql keeps a closed database's file handle until
+ * its statement objects are garbage-collected, and Windows refuses to delete open files, so
+ * EPERM/EBUSY trigger a GC and a retry.
+ * @param {string} dir
+ * @returns {Promise<void>}
+ */
+export async function removeDbDir(dir) {
+  for (let attempt = 1; ; attempt += 1) {
+    try {
+      fs.rmSync(dir, { recursive: true, force: true });
+      return;
+    } catch (err) {
+      if (!['EPERM', 'EBUSY'].includes(/** @type {any} */ (err).code) || attempt >= 20) throw err;
+      collectGarbage();
+      await new Promise((resolve) => setTimeout(resolve, 25));
+    }
+  }
 }

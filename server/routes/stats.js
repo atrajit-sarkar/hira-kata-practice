@@ -8,16 +8,16 @@ import { computeOverview, parseStatsQuery } from '../services/stats.js';
 
 /**
  * Build the stats router.
- * @param {{ db: import('node:sqlite').DatabaseSync }} deps
+ * @param {{ db: import('../db.js').Database }} deps
  * @returns {import('express').Router}
  */
 export function statsRoutes({ db }) {
   const router = Router();
   router.use(requireAuth);
 
-  router.get('/overview', (req, res) => {
+  router.get('/overview', async (req, res) => {
     const { tz, days } = parseStatsQuery(req.query);
-    res.json(computeOverview(db, req.user.id, { tz, days }));
+    res.json(await computeOverview(db, req.user.id, { tz, days }));
   });
 
   return router;

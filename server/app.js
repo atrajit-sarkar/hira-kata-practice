@@ -28,7 +28,7 @@ const staticOptions = {
 
 /**
  * Create the HiraKata Express app.
- * @param {{ config: import('./config.js').Config, db: import('node:sqlite').DatabaseSync,
+ * @param {{ config: import('./config.js').Config, db: import('./db.js').Database,
  *           wordbank: import('./services/wordbank.js').WordBank,
  *           log?: (err: Error) => void }} options `log` receives unexpected (5xx) errors
  * @returns {import('express').Express}
@@ -54,15 +54,20 @@ export function createApp({ config, db, wordbank, log }) {
     res.set('Cache-Control', 'no-store');
     next();
   });
+  // Liveness probe for the host (e.g. Render's health check): no database round trip.
+  api.get('/health', (_req, res) => {
+    res.json({ ok: true });
+  });
   api.use(csrfGuard);
   api.use(express.json({ limit: '64kb' }));
+  // Public word-bank routes need no session, so they skip the session lookup (a DB round trip).
+  api.use('/words', wordRoutes(deps));
   api.use(sessionMiddleware(deps));
   api.use(authRoutes(deps));
   api.use(reportRoutes(deps));
   api.use('/tests', testRoutes(deps));
   api.use('/stats', statsRoutes(deps));
   api.use('/vocab', vocabRoutes(deps));
-  api.use('/words', wordRoutes(deps));
   api.use(apiNotFound);
   app.use('/api', api);
 

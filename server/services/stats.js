@@ -3,7 +3,6 @@
  * @module server/services/stats
  */
 import { analyzeKana } from '../../shared/kana.js';
-import { stmt } from '../db.js';
 import { Validator } from '../http.js';
 import { ratio } from './scoring.js';
 import { testSummary } from './serializers.js';
@@ -141,25 +140,45 @@ export function rankWeakChars(chars, { minAttempts = 2, limit = 10 } = {}) {
 }
 
 /**
- * Build the StatsOverview for a user.
- * @param {import('node:sqlite').DatabaseSync} db
+ * Queries behind a StatsOverview, for one read batch: tests (newest first), answered questions,
+ * vocabulary counts and per-character stats.
  * @param {number} userId
+ * @returns {[string, unknown[]][]}
+ */
+export function overviewQueries(userId) {
+  return [
+    ['SELECT * FROM tests WHERE user_id = ? ORDER BY updated_at DESC, id DESC', [userId]],
+    [`SELECT q.test_id, q.status, q.script, q.kana, q.hint1_used, q.hint2_used, q.hint3_used, q.error_type,
+             q.input_method, q.points, q.answered_at
+      FROM test_questions q JOIN tests t ON t.id = q.test_id
+      WHERE t.user_id = ? AND q.status != 'pending'`, [userId]],
+    [`SELECT COALESCE(SUM(seen > 0), 0) AS seen, COALESCE(SUM(correct > 0), 0) AS learned,
+             COALESCE(SUM(last_result IN ('wrong', 'skipped')), 0) AS review
+      FROM vocab_progress WHERE user_id = ?`, [userId]],
+    ['SELECT char, script, correct, wrong FROM char_stats WHERE user_id = ? ORDER BY script, char', [userId]],
+  ];
+}
+
+/**
+ * Build the StatsOverview for a user (one database round trip).
+ * @param {import('../db.js').Database} db
+ * @param {number} userId
+ * @param {{ tz?: number, days?: number, now?: Date }} [options]
+ * @returns {Promise<object>} StatsOverview
+ */
+export async function computeOverview(db, userId, options = {}) {
+  return buildOverview(await db.read(overviewQueries(userId)), options);
+}
+
+/**
+ * StatsOverview from the rows of {@link overviewQueries}.
+ * @param {Record<string, any>[][]} rows results of overviewQueries, in order
  * @param {{ tz?: number, days?: number, now?: Date }} [options]
  * @returns {object} StatsOverview
  */
-export function computeOverview(db, userId, { tz = 0, days = DAYS_RANGE.default, now = new Date() } = {}) {
-  const tests = stmt(db, 'SELECT * FROM tests WHERE user_id = ? ORDER BY updated_at DESC, id DESC').all(userId);
-  const answered = stmt(db, `
-    SELECT q.test_id, q.status, q.script, q.kana, q.hint1_used, q.hint2_used, q.hint3_used, q.error_type,
-           q.input_method, q.points, q.answered_at
-    FROM test_questions q JOIN tests t ON t.id = q.test_id
-    WHERE t.user_id = ? AND q.status != 'pending'`).all(userId);
-  const vocab = stmt(db, `
-    SELECT COALESCE(SUM(seen > 0), 0) AS seen, COALESCE(SUM(correct > 0), 0) AS learned,
-           COALESCE(SUM(last_result IN ('wrong', 'skipped')), 0) AS review
-    FROM vocab_progress WHERE user_id = ?`).get(userId);
-  const charStats = stmt(db, 'SELECT char, script, correct, wrong FROM char_stats WHERE user_id = ? ORDER BY script, char')
-    .all(userId).map((c) => ({ char: c.char, script: c.script, correct: c.correct, wrong: c.wrong }));
+export function buildOverview([tests, answered, [vocab], charRows],
+  { tz = 0, days = DAYS_RANGE.default, now = new Date() } = {}) {
+  const charStats = charRows.map((c) => ({ char: c.char, script: c.script, correct: c.correct, wrong: c.wrong }));
 
   const today = localDate(now, tz);
   const levelOf = new Map();

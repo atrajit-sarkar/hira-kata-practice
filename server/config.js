@@ -18,7 +18,9 @@ export const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)
  * @typedef {object} Config
  * @property {number} port
  * @property {string} host
- * @property {string} dbPath        absolute path, or ':memory:'
+ * @property {string} dbPath        local SQLite file: absolute path, or ':memory:' (used when dbUrl is null)
+ * @property {string|null} dbUrl     remote libSQL database (TURSO_DATABASE_URL, e.g. libsql://app-org.turso.io)
+ * @property {string|null} dbAuthToken  token for dbUrl (TURSO_AUTH_TOKEN)
  * @property {string} wordsPath     absolute path of the word bank (.json.gz or .json)
  * @property {string} wordsFallbackPath  the other spelling of wordsPath (x.json.gz <-> x.json), tried when
  *           wordsPath does not exist
@@ -46,16 +48,17 @@ function parseBool(value) {
 }
 
 /**
- * Parse TRUST_PROXY: a boolean, a hop count, or an Express trust string (e.g. "loopback").
+ * Parse TRUST_PROXY: a hop count, a boolean, or an Express trust string (e.g. "loopback").
+ * Digits are a hop count, checked before booleans so "1" trusts exactly one proxy (e.g. Render's)
+ * rather than every proxy, which would let clients spoof X-Forwarded-For; "0" trusts none.
  * @param {string|undefined} value
  * @returns {boolean|number|string}
  */
-function parseTrustProxy(value) {
-  if (value === undefined || value.trim() === '') return false;
-  const bool = parseBool(value);
-  if (bool !== undefined) return bool;
-  if (/^\d+$/.test(value.trim())) return Number(value.trim());
-  return value.trim();
+export function parseTrustProxy(value) {
+  const v = value?.trim() ?? '';
+  if (v === '') return false;
+  if (/^\d+$/.test(v)) return Number(v) === 0 ? false : Number(v);
+  return parseBool(v) ?? v;
 }
 
 /**
@@ -91,10 +94,13 @@ export function loadConfig(env = process.env) {
     throw new Error(`Invalid PORT "${env.PORT}": expected an integer between 0 and 65535.`);
   }
   const wordsPath = resolvePath(env.WORDS_PATH || path.join('data', 'words.json.gz'));
+  const dbUrl = env.TURSO_DATABASE_URL?.trim() || null;
   return {
     port,
     host: env.HOST || '127.0.0.1',
     dbPath: resolvePath(env.DB_PATH || path.join('data', 'hirakata.db')),
+    dbUrl,
+    dbAuthToken: dbUrl ? env.TURSO_AUTH_TOKEN?.trim() || null : null,
     wordsPath,
     wordsFallbackPath: alternateWordsPath(wordsPath),
     nodeEnv,

@@ -39,7 +39,7 @@ function sendPdf(res, pdf, filename) {
 
 /**
  * Build the reports router.
- * @param {{ db: import('node:sqlite').DatabaseSync, bank: import('../services/wordbank.js').WordBank }} deps
+ * @param {{ db: import('../db.js').Database, bank: import('../services/wordbank.js').WordBank }} deps
  * @returns {import('express').Router}
  */
 export function reportRoutes(deps) {
@@ -49,7 +49,7 @@ export function reportRoutes(deps) {
     const id = parseId(req.params.id, 'Test');
     const tz = readTz(req.query);
     const now = new Date();
-    const data = buildTestReportData(deps, req.user, id, { tz, now });
+    const data = await buildTestReportData(deps, req.user, id, { tz, now });
     const { renderTestReport } = await import('../report/pdf.js');
     sendPdf(res, await renderTestReport(data), `hirakata-test-${id}-${localDate(now, tz)}.pdf`);
   });
@@ -57,7 +57,7 @@ export function reportRoutes(deps) {
   router.get('/reports/overall.pdf', requireAuth, async (req, res) => {
     const tz = readTz(req.query);
     const now = new Date();
-    const data = buildOverallReportData(deps, req.user, { tz, now });
+    const data = await buildOverallReportData(deps, req.user, { tz, now });
     const { renderOverallReport } = await import('../report/pdf.js');
     sendPdf(res, await renderOverallReport(data), `hirakata-progress-${localDate(now, tz)}.pdf`);
   });

@@ -6,5 +6,7 @@ data/*.db-*
 e2e/screenshots/
 e2e/downloads/
 .env
+.env.*
+!.env.example
 .DS_Store
 Thumbs.db

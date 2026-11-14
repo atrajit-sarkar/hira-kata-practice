@@ -5,9 +5,9 @@
 import { charOutcomes, detectScript } from '../../shared/kana.js';
 import { CHAR_STATS_SKIP, INPUT_METHODS } from './answers.js';
 import { questionDetail, testSummary } from './serializers.js';
-import { breakdownBy, computeOverview, rankWeakChars, scriptBreakdown } from './stats.js';
-import { findTest, listTests, testMode, testQuestions } from './tests.js';
-import { vocabForReport } from './vocab.js';
+import { breakdownBy, buildOverview, overviewQueries, rankWeakChars, scriptBreakdown } from './stats.js';
+import { loadTest, testMode } from './tests.js';
+import { vocabForReport, vocabQuery } from './vocab.js';
 
 /** Attribution lines (SPEC §14). */
 export const JMDICT_ATTRIBUTION =
@@ -61,15 +61,16 @@ export const INPUT_LABELS = Object.freeze({ keys: 'Kana keys', handwriting: 'Han
  * Data for a single-test PDF. Besides the TestSummary (whose `config.mode` is always set) it
  * carries `mode`/`modeLabel`, `byInput` (answered/correct/accuracy per input method) and
  * `inputLabels`; each answered question carries `inputMethod` and `romajiHintUsed`.
- * @param {{ db: import('node:sqlite').DatabaseSync, bank: import('./wordbank.js').WordBank }} deps
+ * One database round trip.
+ * @param {{ db: import('../db.js').Database, bank: import('./wordbank.js').WordBank }} deps
  * @param {Record<string, any>} user users row
  * @param {number} testId
  * @param {{ tz?: number, now?: Date }} [options]
- * @returns {object} TestReportData
+ * @returns {Promise<object>} TestReportData
+ * @throws {import('../http.js').ApiError} NOT_FOUND
  */
-export function buildTestReportData({ db, bank }, user, testId, { tz = 0, now = new Date() } = {}) {
-  const test = findTest(db, user.id, testId);
-  const questions = testQuestions(db, test.id);
+export async function buildTestReportData({ db, bank }, user, testId, { tz = 0, now = new Date() } = {}) {
+  const { test, questions } = await loadTest(db, user.id, testId);
   const mode = testMode(test);
   const answered = questions.filter((q) => q.status !== 'pending');
   return {
@@ -90,22 +91,24 @@ export function buildTestReportData({ db, bank }, user, testId, { tz = 0, now = 
 
 /**
  * Data for the overall progress PDF (`overview.byMode` / `overview.byInput` carry the mode and
- * input-method breakdowns; each test's `config.mode` is always set).
- * @param {{ db: import('node:sqlite').DatabaseSync, bank: import('./wordbank.js').WordBank }} deps
+ * input-method breakdowns; each test's `config.mode` is always set). One database round trip.
+ * @param {{ db: import('../db.js').Database, bank: import('./wordbank.js').WordBank }} deps
  * @param {Record<string, any>} user users row
  * @param {{ tz?: number, now?: Date }} [options]
- * @returns {object} OverallReportData
+ * @returns {Promise<object>} OverallReportData
  */
-export function buildOverallReportData({ db, bank }, user, { tz = 0, now = new Date() } = {}) {
+export async function buildOverallReportData({ db, bank }, user, { tz = 0, now = new Date() } = {}) {
+  const rows = await db.read([...overviewQueries(user.id), vocabQuery(user.id)]);
+  const overviewRows = rows.slice(0, -1);
   return {
     generatedAt: now.toISOString(),
     tzOffset: tz,
     user: reportUser(user),
-    overview: computeOverview(db, user.id, { tz, now }),
+    overview: buildOverview(overviewRows, { tz, now }),
     modeLabels: MODE_LABELS,
     inputLabels: INPUT_LABELS,
-    tests: listTests(db, user.id).map(testSummary),
-    vocab: vocabForReport(db, bank, user.id),
+    tests: overviewRows[0].map(testSummary), // overviewQueries' tests: newest updated_at first
+    vocab: vocabForReport(rows.at(-1), bank),
     source: sourceAttribution(bank),
   };
 }

@@ -12,8 +12,9 @@ import { buildTestReportData } from '../server/services/reportData.js';
 import { testSummary } from '../server/services/serializers.js';
 import { WordBankError, loadWordBank, loadWordBankWithFallback } from '../server/services/wordbank.js';
 import { addDays, computeStreaks, localDate } from '../server/services/stats.js';
-import { MIGRATIONS, SCHEMA_VERSION, housekeeping, migrate, openDatabase, tx } from '../server/db.js';
-import { FIXTURE_WORDS_PATH, registerUser, startTestServer } from './helpers/server.js';
+import { createClient } from '@libsql/client';
+import { MIGRATIONS, SCHEMA_VERSION, fileUrl, housekeeping, migrate, openDatabase, schemaVersion } from '../server/db.js';
+import { FIXTURE_WORDS_PATH, registerUser, removeDbDir, startTestServer } from './helpers/server.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PDF_AVAILABLE = fs.existsSync(path.join(ROOT, 'server', 'report', 'pdf.js'));
@@ -35,9 +36,9 @@ const expectError = (res, status, code) => {
 };
 
 /** Expected kana of a question, read straight from the DB. */
-const kanaOf = (qid) => ctx.db.prepare('SELECT kana FROM test_questions WHERE id = ?').get(qid).kana;
+const kanaOf = async (qid) => (await ctx.db.get('SELECT kana FROM test_questions WHERE id = ?', [qid])).kana;
 /** Romaji snapshot of a question, read straight from the DB. */
-const kanaOfRomaji = (qid) => ctx.db.prepare('SELECT romaji FROM test_questions WHERE id = ?').get(qid).romaji;
+const kanaOfRomaji = async (qid) => (await ctx.db.get('SELECT romaji FROM test_questions WHERE id = ?', [qid])).romaji;
 
 /** Create a test and return the response body (asserting 201). */
 async function newTest(client, body = {}) {
@@ -49,7 +50,7 @@ async function newTest(client, body = {}) {
 /** Answer the current question; `answerFor(kana)` returns the raw answer. */
 async function answerCurrent(client, testId, current, answerFor = (k) => k, extra = {}) {
   const res = await client.post(`/api/tests/${testId}/questions/${current.id}/answer`,
-    { answer: answerFor(kanaOf(current.id)), timeMs: 1000, ...extra });
+    { answer: answerFor(await kanaOf(current.id)), timeMs: 1000, ...extra });
   assert.equal(res.status, 200, res.text);
   return res.body;
 }
@@ -86,7 +87,7 @@ describe('auth', () => {
     const me = await client.get('/api/auth/me');
     assert.equal(me.status, 200);
     assert.deepEqual(me.body.user, user);
-    const row = ctx.db.prepare('SELECT password_hash FROM users WHERE id = ?').get(user.id);
+    const row = (await ctx.db.get('SELECT password_hash FROM users WHERE id = ?', [user.id]));
     assert.match(row.password_hash, /^scrypt\$16384\$8\$1\$[A-Za-z0-9+/=]+\$[A-Za-z0-9+/=]+$/);
   });
 
@@ -128,11 +129,10 @@ describe('auth', () => {
     const remembered = await ctx.client().post('/api/auth/login', { email, password, remember: true });
     assert.match(remembered.headers.getSetCookie()[0], /Max-Age=2592000/);
 
-    const sessions = ctx.db.prepare('SELECT created_at, expires_at FROM sessions WHERE user_id = ? ORDER BY created_at')
-      .all(res.body.user.id).map((s) => Date.parse(s.expires_at) - Date.parse(s.created_at));
+    const sessions = (await ctx.db.all('SELECT created_at, expires_at FROM sessions WHERE user_id = ? ORDER BY created_at', [res.body.user.id])).map((s) => Date.parse(s.expires_at) - Date.parse(s.created_at));
     assert.ok(sessions.includes(24 * 3600 * 1000));
     assert.ok(sessions.includes(30 * 24 * 3600 * 1000));
-    const last = ctx.db.prepare('SELECT last_login_at FROM users WHERE id = ?').get(res.body.user.id);
+    const last = (await ctx.db.get('SELECT last_login_at FROM users WHERE id = ?', [res.body.user.id]));
     assert.ok(last.last_login_at);
   });
 
@@ -252,9 +252,9 @@ describe('account management', () => {
     expectError(await ctx.client().post('/api/auth/login', { email, password }), 401, 'UNAUTHORIZED');
     for (const table of ['users', 'sessions', 'tests', 'vocab_progress', 'char_stats']) {
       const column = table === 'users' ? 'id' : 'user_id';
-      assert.equal(ctx.db.prepare(`SELECT COUNT(*) AS n FROM ${table} WHERE ${column} = ?`).get(user.id).n, 0, table);
+      assert.equal((await ctx.db.get(`SELECT COUNT(*) AS n FROM ${table} WHERE ${column} = ?`, [user.id])).n, 0, table);
     }
-    assert.equal(ctx.db.prepare('SELECT COUNT(*) AS n FROM test_questions WHERE test_id = ?').get(test.id).n, 0);
+    assert.equal((await ctx.db.get('SELECT COUNT(*) AS n FROM test_questions WHERE test_id = ?', [test.id])).n, 0);
 
     const guest = ctx.client();
     await guest.post('/api/auth/guest');
@@ -268,7 +268,7 @@ describe('account management', () => {
     expectError(await client.del('/api/progress', { password: 'wrong password' }), 400, 'VALIDATION_ERROR');
     assert.equal((await client.del('/api/progress', { password })).status, 204);
     for (const table of ['tests', 'vocab_progress', 'char_stats']) {
-      assert.equal(ctx.db.prepare(`SELECT COUNT(*) AS n FROM ${table} WHERE user_id = ?`).get(user.id).n, 0, table);
+      assert.equal((await ctx.db.get(`SELECT COUNT(*) AS n FROM ${table} WHERE user_id = ?`, [user.id])).n, 0, table);
     }
     assert.equal((await client.get('/api/auth/me')).status, 200);
     const stats = await client.get('/api/stats/overview');
@@ -361,9 +361,7 @@ describe('creating tests', () => {
     ({ client } = await registerUser(ctx));
   });
 
-  const questionsOf = (testId) => ctx.db.prepare(
-    'SELECT q.*, t.user_id FROM test_questions q JOIN tests t ON t.id = q.test_id WHERE test_id = ? ORDER BY position',
-  ).all(testId);
+  const questionsOf = async (testId) => (await ctx.db.all('SELECT q.*, t.user_id FROM test_questions q JOIN tests t ON t.id = q.test_id WHERE test_id = ? ORDER BY position', [testId]));
   const distinctKana = (bank, filter) => new Set(bank.filter(filter).map((w) => w.kana)).size;
 
   it('defaults to a mixed 20-word test split evenly between scripts', async () => {
@@ -382,11 +380,11 @@ describe('creating tests', () => {
     assert.equal(current.mode, 'romaji');
     assert.equal(current.speak, null);
     assert.equal(current.romajiHintUsed, false);
-    assert.equal(current.romaji, kanaOfRomaji(current.id));
+    assert.equal(current.romaji, await kanaOfRomaji(current.id));
     assert.equal(current.position, 0);
     assert.equal(current.answer, null);
     assert.equal(current.script, null);
-    const qs = questionsOf(test.id);
+    const qs = await questionsOf(test.id);
     assert.equal(qs.filter((q) => q.script === 'hiragana').length, 10);
     assert.equal(qs.filter((q) => q.script === 'katakana').length, 10);
     assert.equal(new Set(qs.map((q) => q.kana)).size, 20);
@@ -409,7 +407,7 @@ describe('creating tests', () => {
     for (const [body, title, filter] of cases) {
       const { test } = await newTest(client, body);
       assert.equal(test.title, title);
-      const qs = questionsOf(test.id);
+      const qs = await questionsOf(test.id);
       assert.equal(qs.length, test.totalQuestions);
       assert.equal(test.config.count, qs.length);
       for (const q of qs) assert.ok(ctx.bank.matches(ctx.bank.get(q.word_id), filter), `${q.kana} matches ${title}`);
@@ -420,14 +418,14 @@ describe('creating tests', () => {
     const hiragana = distinctKana(ctx.bank, { script: 'hiragana' });
     const katakana = distinctKana(ctx.bank, { script: 'katakana' });
     const { test } = await newTest(client, { script: 'mixed', count: 40 });
-    const qs = questionsOf(test.id);
+    const qs = await questionsOf(test.id);
     assert.equal(qs.length, 40);
     assert.equal(qs.filter((q) => q.script === 'katakana').length, katakana, 'all katakana used');
     assert.equal(qs.filter((q) => q.script === 'hiragana').length, 40 - katakana);
 
     const all = await newTest(client, { script: 'hiragana', count: 100 });
     assert.equal(all.test.totalQuestions, hiragana, 'homophones collapse to one question');
-    const kana = questionsOf(all.test.id).map((q) => q.kana);
+    const kana = (await questionsOf(all.test.id)).map((q) => q.kana);
     assert.equal(new Set(kana).size, kana.length, 'no duplicate kana');
     assert.equal(kana.filter((k) => k === 'かみ').length, 1);
   });
@@ -453,14 +451,13 @@ describe('creating tests', () => {
     const fresh = await registerUser(ctx);
     const pool = ctx.bank.filter({ script: 'katakana' });
     const seen = pool.slice(0, 9).map((w) => w.id);
-    const insert = ctx.db.prepare(`INSERT INTO vocab_progress (user_id, word_id, seen, correct, last_result, last_seen_at)
-                                   VALUES (?, ?, 1, 1, 'correct', ?)`);
-    for (const id of seen) insert.run(fresh.user.id, id, new Date().toISOString());
+    await ctx.db.batch(seen.map((id) => [`INSERT INTO vocab_progress (user_id, word_id, seen, correct, last_result, last_seen_at)
+      VALUES (?, ?, 1, 1, 'correct', ?)`, [fresh.user.id, id, new Date().toISOString()]]));
     let seenPicks = 0;
     let total = 0;
     for (let i = 0; i < 30; i += 1) {
       const { test } = await newTest(fresh.client, { script: 'katakana', count: 5 });
-      const qs = questionsOf(test.id);
+      const qs = await questionsOf(test.id);
       total += qs.length;
       seenPicks += qs.filter((q) => seen.includes(q.word_id)).length;
     }
@@ -522,7 +519,7 @@ describe('playing a test', () => {
     assert.deepEqual(Object.keys(state.body.questions[0]).sort(), ['id', 'position', 'status']);
     const detail = await client.get(`/api/tests/${test.id}`);
     assert.deepEqual(Object.keys(detail.body.questions[0]).sort(), ['id', 'position', 'romaji', 'status']);
-    assert.ok(!JSON.stringify(detail.body.questions).includes(kanaOf(current.id)));
+    assert.ok(!JSON.stringify(detail.body.questions).includes(await kanaOf(current.id)));
 
     const answered = await answerCurrent(client, test.id, current);
     const resumed = await client.get(`/api/tests/${test.id}/state`);
@@ -530,17 +527,17 @@ describe('playing a test', () => {
     assert.equal(resumed.body.lastResult.id, current.id);
     assert.equal(resumed.body.questions[0].status, 'correct');
     const full = await client.get(`/api/tests/${test.id}`);
-    assert.equal(full.body.questions[0].expected, kanaOf(current.id));
-    assert.equal(full.body.questions[0].word.id, ctx.db.prepare('SELECT word_id FROM test_questions WHERE id = ?').get(current.id).word_id);
+    assert.equal(full.body.questions[0].expected, await kanaOf(current.id));
+    assert.equal(full.body.questions[0].word.id, (await ctx.db.get('SELECT word_id FROM test_questions WHERE id = ?', [current.id])).word_id);
   });
 
   it('hints are idempotent and counted once', async () => {
     const { test, current } = await newTest(client, { count: 5 });
-    const kana = kanaOf(current.id);
+    const kana = await kanaOf(current.id);
     const h1 = await client.post(url(test.id, current.id, 'hint'), { type: 'script' });
     assert.equal(h1.status, 200, h1.text);
     assert.equal(h1.body.question.hint1Used, true);
-    assert.equal(h1.body.question.script, ctx.db.prepare('SELECT script FROM test_questions WHERE id = ?').get(current.id).script);
+    assert.equal(h1.body.question.script, (await ctx.db.get('SELECT script FROM test_questions WHERE id = ?', [current.id])).script);
     assert.equal(h1.body.question.answer, null);
     assert.deepEqual((await client.post(url(test.id, current.id, 'hint'), { type: 'script' })).body, h1.body);
     const h2 = await client.post(url(test.id, current.id, 'hint'), { type: 'spelling' });
@@ -607,17 +604,17 @@ describe('playing a test', () => {
 
     // Both hints, explicit counts.
     let q = current;
-    let len = [...kanaOf(q.id)].length;
+    let len = [...await kanaOf(q.id)].length;
     await client.post(url(test.id, q.id, 'hint'), { type: 'script' });
     await client.post(url(test.id, q.id, 'hint'), { type: 'spelling' });
     let r = await answerCurrent(client, test.id, q, (k) => k, { hint2From: 1, hint2Revealed: 2 });
     assert.equal(r.result.points, pts(len, true, 2));
     assert.equal(r.result.hint2Revealed, 2);
-    assert.equal(ctx.db.prepare('SELECT hint2_from FROM test_questions WHERE id = ?').get(q.id).hint2_from, 1);
+    assert.equal((await ctx.db.get('SELECT hint2_from FROM test_questions WHERE id = ?', [q.id])).hint2_from, 1);
 
     // Hint 2 without hint2Revealed → len − hint2From.
     q = r.next;
-    len = [...kanaOf(q.id)].length;
+    len = [...await kanaOf(q.id)].length;
     await client.post(url(test.id, q.id, 'hint'), { type: 'spelling' });
     r = await answerCurrent(client, test.id, q, (k) => k, { hint2From: 2 });
     assert.equal(r.result.hint2Revealed, len - 2);
@@ -625,7 +622,7 @@ describe('playing a test', () => {
 
     // Hint 2 with neither field → everything revealed; values above len are clamped.
     q = r.next;
-    len = [...kanaOf(q.id)].length;
+    len = [...await kanaOf(q.id)].length;
     await client.post(url(test.id, q.id, 'hint'), { type: 'spelling' });
     r = await answerCurrent(client, test.id, q, (k) => k, { hint2Revealed: 99 });
     assert.equal(r.result.hint2Revealed, len);
@@ -636,7 +633,7 @@ describe('playing a test', () => {
     r = await answerCurrent(client, test.id, q, (k) => k, { hint2From: 0, hint2Revealed: 3 });
     assert.equal(r.result.points, 100);
     assert.equal(r.result.hint2Revealed, 0);
-    assert.equal(ctx.db.prepare('SELECT hint2_from FROM test_questions WHERE id = ?').get(q.id).hint2_from, null);
+    assert.equal((await ctx.db.get('SELECT hint2_from FROM test_questions WHERE id = ?', [q.id])).hint2_from, null);
 
     // Wrong answers score 0 regardless of hints.
     q = r.next;
@@ -720,7 +717,7 @@ describe('test lifecycle', () => {
     assert.equal(renamed.body.test.title, 'Kana sprint');
     // Renaming is not practice activity: it must not move an old test to the top of the list.
     const old = '2020-01-02T03:04:05.000Z';
-    ctx.db.prepare('UPDATE tests SET updated_at = ? WHERE id = ?').run(old, test.id);
+    await ctx.db.run('UPDATE tests SET updated_at = ? WHERE id = ?', [old, test.id]);
     const again = await client.patch(`/api/tests/${test.id}`, { title: 'Autumn warm-up' });
     assert.equal(again.body.test.title, 'Autumn warm-up');
     assert.equal(again.body.test.updatedAt, old, 'rename keeps updatedAt');
@@ -730,7 +727,7 @@ describe('test lifecycle', () => {
     assert.equal((await client.del(`/api/tests/${test.id}`)).status, 204);
     expectError(await client.get(`/api/tests/${test.id}`), 404, 'NOT_FOUND');
     expectError(await client.del(`/api/tests/${test.id}`), 404, 'NOT_FOUND');
-    assert.equal(ctx.db.prepare('SELECT COUNT(*) AS n FROM test_questions WHERE test_id = ?').get(test.id).n, 0);
+    assert.equal((await ctx.db.get('SELECT COUNT(*) AS n FROM test_questions WHERE test_id = ?', [test.id])).n, 0);
     expectError(await client.get('/api/tests/abc'), 404, 'NOT_FOUND');
     expectError(await client.get('/api/tests/0'), 404, 'NOT_FOUND');
   });
@@ -763,7 +760,7 @@ describe('test lifecycle', () => {
     let q = current;
     const missed = [];
     for (const how of outcomes) {
-      const kana = kanaOf(q.id);
+      const kana = await kanaOf(q.id);
       const body = how
         ? (await c.post(url(test.id, q.id, 'answer'), { answer: how(kana), timeMs: 500 })).body
         : (await c.post(url(test.id, q.id, 'skip'), { timeMs: 500 })).body;
@@ -774,14 +771,13 @@ describe('test lifecycle', () => {
     assert.equal(retry.test.title, `Retry · ${test.title}`);
     assert.equal(retry.test.totalQuestions, 3);
     assert.equal(retry.test.config.sourceTestId, test.id);
-    const retryKana = ctx.db.prepare('SELECT kana FROM test_questions WHERE test_id = ? ORDER BY position')
-      .all(retry.test.id).map((r) => r.kana);
+    const retryKana = (await ctx.db.all('SELECT kana FROM test_questions WHERE test_id = ? ORDER BY position', [retry.test.id])).map((r) => r.kana);
     assert.deepEqual(retryKana, missed, 'mistakes in original order');
 
     const review = await newTest(c, { source: 'review', count: 5 });
     assert.equal(review.test.title, 'Review · 3 words');
     assert.equal(review.test.config.count, 3);
-    const reviewKana = ctx.db.prepare('SELECT kana FROM test_questions WHERE test_id = ?').all(review.test.id).map((r) => r.kana);
+    const reviewKana = (await ctx.db.all('SELECT kana FROM test_questions WHERE test_id = ?', [review.test.id])).map((r) => r.kana);
     assert.deepEqual(reviewKana.sort(), [...missed].sort());
     expectError(await c.post('/api/tests', { source: 'review', script: 'katakana' }), 422, 'NO_REVIEW_WORDS');
 
@@ -804,7 +800,7 @@ describe('statistics', () => {
     // q0 clean correct, q1 correct with script hint, q2 wrong spelling, q3 skipped, q4 clean correct.
     let q = current;
     for (let i = 0; i < 5; i += 1) {
-      const kana = kanaOf(q.id);
+      const kana = await kanaOf(q.id);
       let body;
       if (i === 1) await client.post(`/api/tests/${testId}/questions/${q.id}/hint`, { type: 'script' });
       if (i === 3) body = (await client.post(`/api/tests/${testId}/questions/${q.id}/skip`, { timeMs: 100 })).body;
@@ -815,11 +811,10 @@ describe('statistics', () => {
     // Move answers to local dates: today, today, −1, −2, −4 (gap at −3), at 01:00 local time.
     const today = localDate(new Date(), TZ);
     const daysAgo = [0, 0, 1, 2, 4];
-    const update = ctx.db.prepare('UPDATE test_questions SET answered_at = ? WHERE id = ?');
-    played.forEach((p, i) => {
+    await ctx.db.batch(played.map((p, i) => {
       const localMidnight = Date.parse(`${addDays(today, -daysAgo[i])}T01:00:00Z`);
-      update.run(new Date(localMidnight + TZ * 60_000).toISOString(), p.id);
-    });
+      return ['UPDATE test_questions SET answered_at = ? WHERE id = ?', [new Date(localMidnight + TZ * 60_000).toISOString(), p.id]];
+    }));
   });
 
   it('computes totals, breakdowns, streaks and daily buckets in local time', async () => {
@@ -867,8 +862,7 @@ describe('statistics', () => {
     const utc = (await client.get('/api/stats/overview?tz=0&days=371')).body;
     assert.equal(utc.daily.length, 371);
     const answeredDates = utc.daily.filter((d) => d.answered).map((d) => d.date);
-    const expected = [...new Set(ctx.db.prepare('SELECT answered_at FROM test_questions WHERE test_id = ?')
-      .all(testId).map((r) => r.answered_at.slice(0, 10)))].sort();
+    const expected = [...new Set((await ctx.db.all('SELECT answered_at FROM test_questions WHERE test_id = ?', [testId])).map((r) => r.answered_at.slice(0, 10)))].sort();
     assert.deepEqual(answeredDates, expected.filter((d) => d <= localDate(new Date(), 0)));
     assert.equal((await client.get('/api/stats/overview')).body.daily.length, 182, 'default days');
     assert.equal((await client.get('/api/stats/overview?days=2')).body.daily.length, 7, 'clamped');
@@ -889,18 +883,18 @@ describe('statistics', () => {
   it('records kana stats only before hint2From and never for script/empty errors', async () => {
     const { client: c, user } = await registerUser(ctx);
     const { test, current } = await newTest(c, { script: 'hiragana', level: 2, count: 5 });
-    const charTotal = () => ctx.db.prepare('SELECT COALESCE(SUM(correct + wrong), 0) AS n FROM char_stats WHERE user_id = ?').get(user.id).n;
+    const charTotal = async () => (await ctx.db.get('SELECT COALESCE(SUM(correct + wrong), 0) AS n FROM char_stats WHERE user_id = ?', [user.id])).n;
     await c.post(`/api/tests/${test.id}/questions/${current.id}/hint`, { type: 'spelling' });
     let r = await answerCurrent(c, test.id, current, (k) => k, { hint2From: 1, hint2Revealed: 2 });
-    assert.equal(charTotal(), 1, 'only index 0 counted');
+    assert.equal(await charTotal(), 1, 'only index 0 counted');
     r = await answerCurrent(c, test.id, r.next, (k) => toKatakana(k));
-    assert.equal(charTotal(), 1, 'script errors add nothing');
+    assert.equal(await charTotal(), 1, 'script errors add nothing');
     r = await answerCurrent(c, test.id, r.next, () => '');
-    assert.equal(charTotal(), 1, 'empty answers add nothing');
-    const kana = kanaOf(r.next.id);
+    assert.equal(await charTotal(), 1, 'empty answers add nothing');
+    const kana = await kanaOf(r.next.id);
     await answerCurrent(c, test.id, r.next, misspell);
-    assert.equal(charTotal(), 1 + [...kana].length);
-    const wrongChar = ctx.db.prepare('SELECT char, wrong FROM char_stats WHERE user_id = ? AND wrong > 0').all(user.id);
+    assert.equal(await charTotal(), 1 + [...kana].length);
+    const wrongChar = (await ctx.db.all('SELECT char, wrong FROM char_stats WHERE user_id = ? AND wrong > 0', [user.id]));
     assert.deepEqual(wrongChar.map((w) => w.char), [[...kana].at(-1)]);
   });
 });
@@ -915,7 +909,7 @@ describe('vocabulary', () => {
     let q = current;
     let i = 0;
     while (q) {
-      const kana = kanaOf(q.id);
+      const kana = await kanaOf(q.id);
       const body = await answerCurrent(client, test.id, q, i % 3 === 2 ? misspell : (k) => k);
       results[kana] = body.result.status;
       q = body.next;
@@ -966,10 +960,9 @@ describe('vocabulary', () => {
     assert.ok((await hits(toHiragana(word.kana))).includes(word.id), 'hiragana query finds katakana word');
     assert.deepEqual(await hits('zzzz'), []);
     const coffee = ctx.bank.get('1049180');
-    const db = ctx.db;
     const { user } = (await client.get('/api/auth/me')).body;
-    db.prepare(`INSERT OR IGNORE INTO vocab_progress (user_id, word_id, seen, correct, last_result, last_seen_at)
-                VALUES (?, ?, 1, 1, 'correct', ?)`).run(user.id, coffee.id, new Date().toISOString());
+    await ctx.db.run(`INSERT OR IGNORE INTO vocab_progress (user_id, word_id, seen, correct, last_result, last_seen_at)
+                VALUES (?, ?, 1, 1, 'correct', ?)`, [user.id, coffee.id, new Date().toISOString()]);
     assert.ok((await hits('珈琲')).includes(coffee.id), 'kanji search');
     assert.ok((await hits('kohi')).includes(coffee.id), 'macron-insensitive romaji search');
   });
@@ -1078,36 +1071,37 @@ describe('PDF reports', { skip: PDF_AVAILABLE ? false : 'server/report/pdf.js is
   });
 });
 describe('database housekeeping', () => {
-  it('migrates idempotently, rolls back failed transactions and removes stale data', () => {
-    const db = openDatabase(':memory:');
+  it('migrates idempotently, rolls back failed batches and removes stale data', async () => {
+    const db = await openDatabase(':memory:');
     try {
-      assert.equal(db.prepare('PRAGMA user_version').get().user_version, SCHEMA_VERSION);
-      migrate(db);
-      assert.equal(db.prepare('PRAGMA foreign_keys').get().foreign_keys, 1);
+      assert.equal(await schemaVersion(db), SCHEMA_VERSION);
+      await migrate(db);
+      assert.deepEqual(await db.all('SELECT id, version FROM schema_meta'), [{ id: 1, version: SCHEMA_VERSION }]);
+      assert.equal((await db.get('PRAGMA foreign_keys')).foreign_keys, 0, 'local runs enforce no FKs, like remote');
       const now = new Date('2026-11-14T12:00:00.000Z');
       const iso = (days) => new Date(now.getTime() + days * 86_400_000).toISOString();
-      const addUser = (guest, updated) => Number(db.prepare(`INSERT INTO users (email, display_name, is_guest, created_at, updated_at)
-        VALUES (?, 'U', ?, ?, ?)`).run(guest ? null : `u${updated}@x.io`, guest ? 1 : 0, iso(updated), iso(updated)).lastInsertRowid);
-      const addSession = (userId, id, expiresIn) => db.prepare(`INSERT INTO sessions (id, user_id, created_at, expires_at, last_seen_at)
-        VALUES (?, ?, ?, ?, ?)`).run(id, userId, iso(-40), iso(expiresIn), iso(-40));
-      const staleGuest = addUser(true, -31);
-      const liveGuest = addUser(true, -40);
-      const recentGuest = addUser(true, -5);
-      const oldMember = addUser(false, -400);
-      addSession(staleGuest, 's1', -1);
-      addSession(liveGuest, 's2', 10);
-      addSession(oldMember, 's3', -2);
+      const addUser = async (guest, updated) => (await db.run(`INSERT INTO users (email, display_name, is_guest, created_at, updated_at)
+        VALUES (?, 'U', ?, ?, ?)`, [guest ? null : `u${updated}@x.io`, guest ? 1 : 0, iso(updated), iso(updated)])).lastInsertRowid;
+      const addSession = (userId, id, expiresIn) => db.run(`INSERT INTO sessions (id, user_id, created_at, expires_at, last_seen_at)
+        VALUES (?, ?, ?, ?, ?)`, [id, userId, iso(-40), iso(expiresIn), iso(-40)]);
+      const staleGuest = await addUser(true, -31);
+      const liveGuest = await addUser(true, -40);
+      const recentGuest = await addUser(true, -5);
+      const oldMember = await addUser(false, -400);
+      await addSession(staleGuest, 's1', -1);
+      await addSession(liveGuest, 's2', 10);
+      await addSession(oldMember, 's3', -2);
 
-      assert.throws(() => tx(db, () => {
-        db.prepare("UPDATE users SET display_name = 'changed' WHERE id = ?").run(oldMember);
-        throw new Error('boom');
-      }), /boom/);
-      assert.equal(db.prepare('SELECT display_name FROM users WHERE id = ?').get(oldMember).display_name, 'U');
+      await assert.rejects(db.batch([
+        ["UPDATE users SET display_name = 'changed' WHERE id = ?", [oldMember]],
+        'SELECT * FROM no_such_table',
+      ]), /no_such_table/);
+      assert.equal((await db.get('SELECT display_name FROM users WHERE id = ?', [oldMember])).display_name, 'U');
 
-      assert.deepEqual(housekeeping(db, now), { sessions: 2, guests: 1 });
-      const ids = db.prepare('SELECT id FROM users ORDER BY id').all().map((r) => r.id);
+      assert.deepEqual(await housekeeping(db, now), { sessions: 2, guests: 1 });
+      const ids = (await db.all('SELECT id FROM users ORDER BY id')).map((r) => r.id);
       assert.deepEqual(ids, [liveGuest, recentGuest, oldMember]);
-      assert.deepEqual(db.prepare('SELECT id FROM sessions').all().map((r) => r.id), ['s2']);
+      assert.deepEqual((await db.all('SELECT id FROM sessions')).map((r) => r.id), ['s2']);
     } finally {
       db.close();
     }
@@ -1154,7 +1148,7 @@ describe('v2 word pool (§15.1)', () => {
     const commonKatakana = new Set(ctx.bank.filter({ script: 'katakana', pool: 'common' }).map((w) => w.kana)).size;
     assert.equal(test.totalQuestions, commonKatakana);
     assert.equal(test.title, `Katakana · Common · All levels · ${commonKatakana} words`);
-    const rows = ctx.db.prepare('SELECT word_id FROM test_questions WHERE test_id = ?').all(test.id);
+    const rows = (await ctx.db.all('SELECT word_id FROM test_questions WHERE test_id = ?', [test.id]));
     assert.ok(rows.every((r) => ctx.bank.get(r.word_id).common), 'only common words');
     const bad = await client.post('/api/tests', { pool: 'rare', mode: 'speak' });
     expectError(bad, 400, 'VALIDATION_ERROR');
@@ -1260,7 +1254,7 @@ describe('v2 listen mode (§15.2)', () => {
     ({ client, user } = await registerUser(ctx));
   });
   const url = (t, q, action) => `/api/tests/${t}/questions/${q}/${action}`;
-  const romajiOf = (qid) => ctx.db.prepare('SELECT romaji FROM test_questions WHERE id = ?').get(qid).romaji;
+  const romajiOf = async (qid) => (await ctx.db.get('SELECT romaji FROM test_questions WHERE id = ?', [qid])).romaji;
 
   it('hides romaji, sends speak, and reveals romaji only through the romaji hint', async () => {
     const { test, current } = await newTest(client, { mode: 'listen', count: 5 });
@@ -1268,7 +1262,7 @@ describe('v2 listen mode (§15.2)', () => {
     assert.equal(test.config.mode, 'listen');
     assert.equal(current.mode, 'listen');
     assert.equal(current.romaji, null);
-    assert.equal(current.speak, kanaOf(current.id));
+    assert.equal(current.speak, await kanaOf(current.id));
     assert.equal(current.romajiHintUsed, false);
     assert.deepEqual((await client.get(`/api/tests/${test.id}/state`)).body.current, current);
     const detail = (await client.get(`/api/tests/${test.id}`)).body;
@@ -1277,26 +1271,26 @@ describe('v2 listen mode (§15.2)', () => {
     const h = await client.post(url(test.id, current.id, 'hint'), { type: 'romaji' });
     assert.equal(h.status, 200, h.text);
     assert.equal(h.body.question.romajiHintUsed, true);
-    assert.equal(h.body.question.romaji, romajiOf(current.id));
+    assert.equal(h.body.question.romaji, await romajiOf(current.id));
     assert.deepEqual((await client.post(url(test.id, current.id, 'hint'), { type: 'romaji' })).body, h.body, 'idempotent');
     const state = (await client.get(`/api/tests/${test.id}/state`)).body;
     assert.equal(state.test.romajiHintCount, 1);
     assert.deepEqual(state.current, h.body.question, 'romaji hint restored on resume');
     const shown = (await client.get(`/api/tests/${test.id}`)).body.questions;
-    assert.equal(shown[0].romaji, romajiOf(current.id));
+    assert.equal(shown[0].romaji, await romajiOf(current.id));
     assert.equal(shown[1].romaji, null);
 
     await client.post(url(test.id, current.id, 'hint'), { type: 'script' });
     const r = await answerCurrent(client, test.id, current);
     assert.equal(r.result.points, 50, '100 − 20 (script) − 30 (romaji)');
     assert.equal(r.result.romajiHintUsed, true);
-    assert.equal(r.result.romaji, romajiOf(current.id));
+    assert.equal(r.result.romaji, await romajiOf(current.id));
     assert.equal(r.result.inputMethod, 'keys');
     assert.equal(r.next.romaji, null);
-    assert.equal(r.next.speak, kanaOf(r.next.id));
+    assert.equal(r.next.speak, await kanaOf(r.next.id));
     const r2 = await answerCurrent(client, test.id, r.next);
     assert.equal(r2.result.points, 100);
-    assert.equal(r2.result.romaji, romajiOf(r.next.id), 'results always carry romaji');
+    assert.equal(r2.result.romaji, await romajiOf(r.next.id), 'results always carry romaji');
     assert.equal(r2.result.romajiHintUsed, false);
   });
 
@@ -1305,12 +1299,12 @@ describe('v2 listen mode (§15.2)', () => {
     const res = await client.post(url(test.id, current.id, 'hint'), { type: 'romaji' });
     expectError(res, 400, 'VALIDATION_ERROR');
     assert.ok(res.body.error.fields.type);
-    assert.equal(ctx.db.prepare('SELECT hint3_used FROM test_questions WHERE id = ?').get(current.id).hint3_used, 0);
+    assert.equal((await ctx.db.get('SELECT hint3_used FROM test_questions WHERE id = ?', [current.id])).hint3_used, 0);
     assert.equal((await client.get(`/api/tests/${test.id}/state`)).body.test.romajiHintCount, 0);
   });
 
   it('accepts same-sound spellings as variants in listen mode only (−30, no kana stats)', async () => {
-    const charTotal = () => ctx.db.prepare('SELECT COALESCE(SUM(correct + wrong), 0) AS n FROM char_stats WHERE user_id = ?').get(user.id).n;
+    const charTotal = async () => (await ctx.db.get('SELECT COALESCE(SUM(correct + wrong), 0) AS n FROM char_stats WHERE user_id = ?', [user.id])).n;
     const variantOf = (kana) => toKatakana(soundKey(kana));
     const hasVariant = (kana) => variantOf(kana) !== kana && soundKey(variantOf(kana)) === soundKey(kana);
     assert.ok(hasVariant('コーヒー') && variantOf('コーヒー') === 'コオヒイ');
@@ -1320,13 +1314,13 @@ describe('v2 listen mode (§15.2)', () => {
       let q = current;
       let streak = 0;
       while (q) {
-        const kana = kanaOf(q.id);
+        const kana = await kanaOf(q.id);
         if (!hasVariant(kana)) {
           q = (await answerCurrent(client, test.id, q)).next;
           streak = mode === 'listen' ? streak + 1 : 0;
           continue;
         }
-        const before = charTotal();
+        const before = await charTotal();
         const r = await answerCurrent(client, test.id, q, variantOf, { inputMethod: 'handwriting' });
         if (mode === 'listen') {
           variants += 1;
@@ -1337,14 +1331,13 @@ describe('v2 listen mode (§15.2)', () => {
           assert.equal(r.result.expected, kana, 'the standard spelling is shown');
           assert.equal(r.result.userAnswer, variantOf(kana));
           assert.equal(r.test.currentStreak, streak, 'variants keep the streak');
-          assert.equal(charTotal(), before, 'variants add no kana stats');
-          const vp = ctx.db.prepare('SELECT correct, last_result FROM vocab_progress WHERE user_id = ? AND word_id = ?')
-            .get(user.id, r.result.word.id);
+          assert.equal(await charTotal(), before, 'variants add no kana stats');
+          const vp = (await ctx.db.get('SELECT correct, last_result FROM vocab_progress WHERE user_id = ? AND word_id = ?', [user.id, r.result.word.id]));
           assert.equal(vp.last_result, 'correct');
         } else {
           assert.equal(r.result.status, 'wrong', kana);
           assert.equal(r.result.errorType, 'spelling');
-          assert.ok(charTotal() > before);
+          assert.ok(await charTotal() > before);
         }
         q = r.next;
       }
@@ -1365,7 +1358,7 @@ describe('v2 listen mode (§15.2)', () => {
     assert.equal(r.result.inputMethod, 'keys', 'default');
     const skip = await client.post(url(test.id, r.next.id, 'skip'), { timeMs: 5 });
     assert.equal(skip.body.result.inputMethod, null, 'skips have no input method');
-    const stored = ctx.db.prepare('SELECT input_method FROM test_questions WHERE test_id = ? ORDER BY position').all(test.id);
+    const stored = (await ctx.db.all('SELECT input_method FROM test_questions WHERE test_id = ? ORDER BY position', [test.id]));
     assert.deepEqual(stored.map((s) => s.input_method), ['handwriting', 'device', 'keys', null, null]);
     const full = (await client.get(`/api/tests/${test.id}`)).body.questions;
     assert.deepEqual(full.slice(0, 3).map((q) => q.inputMethod), ['handwriting', 'device', 'keys']);
@@ -1432,9 +1425,9 @@ describe('v2 statistics, reports and settings (§15.2, §15.3)', () => {
     assert.deepEqual(empty.byInput.device, { answered: 0, correct: 0, accuracy: 0 });
   });
 
-  it('gives the PDF builders the mode and input-method data', () => {
-    const row = ctx.db.prepare('SELECT * FROM users WHERE id = ?').get(user.id);
-    const data = buildTestReportData({ db: ctx.db, bank: ctx.bank }, row, listenTestId);
+  it('gives the PDF builders the mode and input-method data', async () => {
+    const row = (await ctx.db.get('SELECT * FROM users WHERE id = ?', [user.id]));
+    const data = await buildTestReportData({ db: ctx.db, bank: ctx.bank }, row, listenTestId);
     assert.equal(data.mode, 'listen');
     assert.equal(data.modeLabel, 'Listen → write');
     assert.equal(data.test.config.mode, 'listen');
@@ -1477,44 +1470,45 @@ describe('v2 statistics, reports and settings (§15.2, §15.3)', () => {
 
 describe('v2 database migration', () => {
   it('upgrades a v1 database in place', async () => {
-    const { DatabaseSync } = await import('node:sqlite');
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'hirakata-migrate-'));
     const file = path.join(dir, 'v1.db');
     try {
-      const v1 = new DatabaseSync(file);
-      v1.exec(MIGRATIONS[0]);
-      v1.exec('PRAGMA user_version = 1');
+      // A database as HiraKata v1 left it: schema v1, versioned only by PRAGMA user_version.
+      const v1 = createClient({ url: fileUrl(file) });
+      await v1.executeMultiple(`${MIGRATIONS[0]}; PRAGMA user_version = 1;`);
       const iso = '2026-11-01T10:00:00.000Z';
-      v1.prepare(`INSERT INTO users (id, email, display_name, password_hash, settings, created_at, updated_at)
-                  VALUES (1, 'old@x.io', 'Old', 'h', '{"theme":"dark","keyboardVisible":false}', ?, ?)`).run(iso, iso);
-      v1.prepare(`INSERT INTO tests (id, user_id, title, config, total_questions, current_index, score, correct_count,
-                  created_at, updated_at) VALUES (1, 1, 'Mixed · All levels · 2 words', ?, 2, 1, 100, 1, ?, ?)`)
-        .run(JSON.stringify({ script: 'mixed', level: 'all', pos: 'any', jlpt: 'any', count: 2, source: 'random', sourceTestId: null }), iso, iso);
-      v1.prepare(`INSERT INTO test_questions (test_id, position, word_id, kana, romaji, script, status, user_answer, points, answered_at)
-                  VALUES (1, 0, '1467640', 'ねこ', 'neko', 'hiragana', 'correct', 'ねこ', 100, ?)`).run(iso);
-      v1.prepare(`INSERT INTO test_questions (test_id, position, word_id, kana, romaji, script)
-                  VALUES (1, 1, '1594600', 'いぬ', 'inu', 'hiragana')`).run();
+      await v1.batch([
+        { sql: `INSERT INTO users (id, email, display_name, password_hash, settings, created_at, updated_at)
+                VALUES (1, 'old@x.io', 'Old', 'h', '{"theme":"dark","keyboardVisible":false}', ?, ?)`, args: [iso, iso] },
+        { sql: `INSERT INTO tests (id, user_id, title, config, total_questions, current_index, score, correct_count,
+                created_at, updated_at) VALUES (1, 1, 'Mixed · All levels · 2 words', ?, 2, 1, 100, 1, ?, ?)`,
+        args: [JSON.stringify({ script: 'mixed', level: 'all', pos: 'any', jlpt: 'any', count: 2, source: 'random', sourceTestId: null }), iso, iso] },
+        { sql: `INSERT INTO test_questions (test_id, position, word_id, kana, romaji, script, status, user_answer, points, answered_at)
+                VALUES (1, 0, '1467640', 'ねこ', 'neko', 'hiragana', 'correct', 'ねこ', 100, ?)`, args: [iso] },
+        `INSERT INTO test_questions (test_id, position, word_id, kana, romaji, script)
+         VALUES (1, 1, '1594600', 'いぬ', 'inu', 'hiragana')`,
+      ], 'write');
       v1.close();
 
-      const db = openDatabase(file);
+      const db = await openDatabase(file);
       try {
-        assert.equal(db.prepare('PRAGMA user_version').get().user_version, SCHEMA_VERSION);
+        assert.equal((await db.get('SELECT version FROM schema_meta WHERE id = 1')).version, SCHEMA_VERSION);
         assert.equal(SCHEMA_VERSION, 2);
-        const qs = db.prepare('SELECT hint3_used, input_method, status FROM test_questions ORDER BY position').all();
+        const qs = await db.all('SELECT hint3_used, input_method, status FROM test_questions ORDER BY position');
         assert.deepEqual(qs.map((q) => [q.hint3_used, q.input_method, q.status]), [[0, null, 'correct'], [0, null, 'pending']]);
-        const summary = testSummary(db.prepare('SELECT * FROM tests WHERE id = 1').get());
+        const summary = testSummary(await db.get('SELECT * FROM tests WHERE id = 1'));
         assert.equal(summary.config.mode, 'romaji');
         assert.equal(summary.config.pool, 'all');
         assert.equal(summary.romajiHintCount, 0);
         assert.equal(summary.score, 100);
-        migrate(db);
-        assert.equal(db.prepare('PRAGMA user_version').get().user_version, SCHEMA_VERSION, 'idempotent');
-        assert.equal(db.prepare("SELECT settings FROM users WHERE id = 1").get().settings, '{"theme":"dark","keyboardVisible":false}');
+        await migrate(db);
+        assert.equal(await schemaVersion(db), SCHEMA_VERSION, 'idempotent');
+        assert.equal((await db.get('SELECT settings FROM users WHERE id = 1')).settings, '{"theme":"dark","keyboardVisible":false}');
       } finally {
         db.close();
       }
     } finally {
-      fs.rmSync(dir, { recursive: true, force: true });
+      await removeDbDir(dir);
     }
   });
 });

@@ -3,7 +3,6 @@
  * Every query is scoped by user id.
  * @module server/services/tests
  */
-import { stmt, tx } from '../db.js';
 import { ApiError, Validator, notFound } from '../http.js';
 import { POOLS, POS_CATEGORIES } from './wordbank.js';
 import { TITLE_MAX, defaultTitle, distinctByKana, selectRandomWords } from './selection.js';
@@ -99,27 +98,45 @@ export function testMode(test) {
 
 /**
  * Load a test owned by the user.
- * @param {import('node:sqlite').DatabaseSync} db
+ * @param {import('../db.js').Database} db
  * @param {number} userId
  * @param {number} testId
- * @returns {Record<string, any>}
+ * @returns {Promise<Record<string, any>>}
  * @throws {ApiError} NOT_FOUND
  */
-export function findTest(db, userId, testId) {
-  const row = stmt(db, 'SELECT * FROM tests WHERE id = ? AND user_id = ?').get(testId, userId);
+export async function findTest(db, userId, testId) {
+  const row = await db.get('SELECT * FROM tests WHERE id = ? AND user_id = ?', [testId, userId]);
   if (!row) throw notFound('Test not found.');
   return row;
 }
 
 /**
- * Words for a `review` test: the user's wrong/skipped words, most-missed first.
- * @returns {import('./selection.js').QuestionWord[]}
+ * Load a test owned by the user and all its questions (position order) in one round trip.
+ * @param {import('../db.js').Database} db
+ * @param {number} userId
+ * @param {number} testId
+ * @returns {Promise<{ test: Record<string, any>, questions: Record<string, any>[] }>}
+ * @throws {ApiError} NOT_FOUND
  */
-function reviewWords(db, bank, userId, script) {
-  const rows = stmt(db, `
+export async function loadTest(db, userId, testId) {
+  const [[test], questions] = await db.read([
+    ['SELECT * FROM tests WHERE id = ? AND user_id = ?', [testId, userId]],
+    [`SELECT * FROM test_questions WHERE test_id = ?1
+      AND EXISTS (SELECT 1 FROM tests WHERE id = ?1 AND user_id = ?2) ORDER BY position`, [testId, userId]],
+  ]);
+  if (!test) throw notFound('Test not found.');
+  return { test, questions };
+}
+
+/**
+ * Words for a `review` test: the user's wrong/skipped words, most-missed first.
+ * @returns {Promise<import('./selection.js').QuestionWord[]>}
+ */
+async function reviewWords(db, bank, userId, script) {
+  const rows = await db.all(`
     SELECT word_id FROM vocab_progress
     WHERE user_id = ? AND last_result IN ('wrong', 'skipped')
-    ORDER BY wrong DESC, last_seen_at DESC, word_id`).all(userId);
+    ORDER BY wrong DESC, last_seen_at DESC, word_id`, [userId]);
   return rows
     .map((r) => bank.get(r.word_id))
     .filter((w) => w && (script === 'mixed' || w.script === script));
@@ -127,27 +144,33 @@ function reviewWords(db, bank, userId, script) {
 
 /**
  * Words for a `test-mistakes` test: wrong/skipped questions of the source test, in order.
- * @returns {{ words: import('./selection.js').QuestionWord[], sourceTitle: string }}
+ * @returns {Promise<{ words: import('./selection.js').QuestionWord[], sourceTitle: string }>}
  */
-function mistakeWords(db, userId, sourceTestId) {
-  const source = stmt(db, 'SELECT id, title FROM tests WHERE id = ? AND user_id = ?').get(sourceTestId, userId);
+async function mistakeWords(db, userId, sourceTestId) {
+  const [[source], rows] = await db.read([
+    ['SELECT id, title FROM tests WHERE id = ? AND user_id = ?', [sourceTestId, userId]],
+    [`SELECT word_id AS id, kana, romaji, script FROM test_questions
+      WHERE test_id = ?1 AND status IN ('wrong', 'skipped')
+        AND EXISTS (SELECT 1 FROM tests WHERE id = ?1 AND user_id = ?2) ORDER BY position`, [sourceTestId, userId]],
+  ]);
   if (!source) throw notFound('Source test not found.');
-  const rows = stmt(db, `
-    SELECT word_id AS id, kana, romaji, script FROM test_questions
-    WHERE test_id = ? AND status IN ('wrong', 'skipped') ORDER BY position`).all(source.id);
   return { words: rows, sourceTitle: source.title };
 }
 
+/** The newest test of a user — inside a write batch, the one the batch just inserted. */
+const NEWEST_TEST = '(SELECT MAX(id) FROM tests WHERE user_id = ?)';
+
 /**
- * Create a test and its questions.
- * @param {{ db: import('node:sqlite').DatabaseSync, bank: import('./wordbank.js').WordBank }} deps
+ * Create a test and its questions: one read (word history) and one atomic write batch.
+ * @param {{ db: import('../db.js').Database, bank: import('./wordbank.js').WordBank }} deps
  * @param {number} userId
  * @param {ReturnType<typeof parseCreateInput>} input
  * @param {{ rng?: () => number, now?: Date }} [options]
- * @returns {number} new test id
+ * @returns {Promise<{ test: Record<string, any>, current: Record<string, any> }>} the new tests row
+ *          and its first question
  * @throws {ApiError} NOT_ENOUGH_WORDS, NO_REVIEW_WORDS, NOT_FOUND (source test)
  */
-export function createTest({ db, bank }, userId, input, { rng = Math.random, now = new Date() } = {}) {
+export async function createTest({ db, bank }, userId, input, { rng = Math.random, now = new Date() } = {}) {
   const { filters, source } = input;
   let words;
   let sourceTitle = null;
@@ -156,16 +179,16 @@ export function createTest({ db, bank }, userId, input, { rng = Math.random, now
     if (pool.length < 1) {
       throw new ApiError('NOT_ENOUGH_WORDS', 'No words match these filters. Try a broader selection.');
     }
-    const seenIds = new Set(stmt(db, 'SELECT word_id FROM vocab_progress WHERE user_id = ? AND seen > 0')
-      .all(userId).map((r) => r.word_id));
+    const seenIds = new Set((await db.all('SELECT word_id FROM vocab_progress WHERE user_id = ? AND seen > 0', [userId]))
+      .map((r) => r.word_id));
     words = selectRandomWords({
       pool, count: input.count ?? DEFAULT_COUNT, script: filters.script,
       jlptAny: filters.jlpt === 'any', commonBoost: filters.pool === 'all', seenIds, rng,
     });
   } else {
     const found = source === 'review'
-      ? { words: reviewWords(db, bank, userId, filters.script), sourceTitle: null }
-      : mistakeWords(db, userId, input.sourceTestId);
+      ? { words: await reviewWords(db, bank, userId, filters.script), sourceTitle: null }
+      : await mistakeWords(db, userId, input.sourceTestId);
     sourceTitle = found.sourceTitle;
     words = distinctByKana(found.words, input.count ?? COUNT_MAX);
     if (!words.length) {
@@ -177,96 +200,108 @@ export function createTest({ db, bank }, userId, input, { rng = Math.random, now
   const config = { ...filters, mode: input.mode ?? 'romaji', count: words.length, source, sourceTestId: input.sourceTestId };
   const title = input.title ?? defaultTitle(config, words.length, sourceTitle);
   const nowIso = now.toISOString();
-  return tx(db, () => {
-    const { lastInsertRowid } = stmt(db, `
-      INSERT INTO tests (user_id, title, config, status, total_questions, created_at, updated_at)
-      VALUES (?, ?, ?, 'active', ?, ?, ?)`)
-      .run(userId, title, JSON.stringify(config), words.length, nowIso, nowIso);
-    const testId = Number(lastInsertRowid);
-    const insert = stmt(db, `INSERT INTO test_questions (test_id, position, word_id, kana, romaji, script)
-                             VALUES (?, ?, ?, ?, ?, ?)`);
-    words.forEach((w, i) => insert.run(testId, i, w.id, w.kana, w.romaji, w.script));
-    return testId;
-  });
+  // The questions reference the test through NEWEST_TEST: the batch is one write transaction and
+  // ids are AUTOINCREMENT, so that is the row inserted just before.
+  const results = await db.batch([
+    [`INSERT INTO tests (user_id, title, config, status, total_questions, created_at, updated_at)
+      VALUES (?, ?, ?, 'active', ?, ?, ?)`, [userId, title, JSON.stringify(config), words.length, nowIso, nowIso]],
+    [`INSERT INTO test_questions (test_id, position, word_id, kana, romaji, script)
+      SELECT ${NEWEST_TEST}, column1, column2, column3, column4, column5
+      FROM (VALUES ${words.map(() => '(?, ?, ?, ?, ?)').join(', ')})`,
+    [userId, ...words.flatMap((w, i) => [i, String(w.id), w.kana, w.romaji, w.script])]],
+    [`SELECT * FROM tests WHERE id = ${NEWEST_TEST}`, [userId]],
+    [`SELECT * FROM test_questions WHERE test_id = ${NEWEST_TEST} AND position = 0`, [userId]],
+  ]);
+  return { test: results[2].rows[0], current: results[3].rows[0] };
 }
 
 /**
  * The user's tests, newest `updated_at` first.
- * @param {import('node:sqlite').DatabaseSync} db
+ * @param {import('../db.js').Database} db
  * @param {number} userId
  * @param {'all'|'active'|'completed'|'closed'} status
- * @returns {Record<string, any>[]}
+ * @returns {Promise<Record<string, any>[]>}
  */
 export function listTests(db, userId, status = 'all') {
-  if (status === 'all') {
-    return stmt(db, 'SELECT * FROM tests WHERE user_id = ? ORDER BY updated_at DESC, id DESC').all(userId);
-  }
-  return stmt(db, 'SELECT * FROM tests WHERE user_id = ? AND status = ? ORDER BY updated_at DESC, id DESC')
-    .all(userId, status);
+  return db.all(...listTestsQuery(userId, status));
 }
 
 /**
- * All questions of a test in position order.
- * @param {import('node:sqlite').DatabaseSync} db
- * @param {number} testId
- * @returns {Record<string, any>[]}
+ * Query behind {@link listTests} (also used inside read batches).
+ * @param {number} userId
+ * @param {'all'|'active'|'completed'|'closed'} [status]
+ * @returns {[string, unknown[]]}
  */
-export function testQuestions(db, testId) {
-  return stmt(db, 'SELECT * FROM test_questions WHERE test_id = ? ORDER BY position').all(testId);
+export function listTestsQuery(userId, status = 'all') {
+  if (status === 'all') return ['SELECT * FROM tests WHERE user_id = ? ORDER BY updated_at DESC, id DESC', [userId]];
+  return ['SELECT * FROM tests WHERE user_id = ? AND status = ? ORDER BY updated_at DESC, id DESC', [userId, status]];
 }
 
 /**
  * The current pending question of an active test, or null.
- * @param {import('node:sqlite').DatabaseSync} db
  * @param {Record<string, any>} test tests row
+ * @param {Record<string, any>[]} questions the test's questions
  * @returns {Record<string, any>|null}
  */
-export function currentQuestion(db, test) {
+export function currentQuestion(test, questions) {
   if (test.status !== 'active') return null;
-  return stmt(db, "SELECT * FROM test_questions WHERE test_id = ? AND position = ? AND status = 'pending'")
-    .get(test.id, test.current_index) ?? null;
+  return questions.find((q) => q.position === test.current_index && q.status === 'pending') ?? null;
 }
 
 /**
  * The most recently answered question (highest position that is not pending), or null.
- * @param {import('node:sqlite').DatabaseSync} db
- * @param {number} testId
+ * @param {Record<string, any>[]} questions
  * @returns {Record<string, any>|null}
  */
-export function lastAnsweredQuestion(db, testId) {
-  return stmt(db, `SELECT * FROM test_questions WHERE test_id = ? AND status != 'pending'
-                   ORDER BY position DESC LIMIT 1`).get(testId) ?? null;
+export function lastAnsweredQuestion(questions) {
+  let last = null;
+  for (const q of questions) {
+    if (q.status !== 'pending' && (!last || q.position > last.position)) last = q;
+  }
+  return last;
 }
 
 /**
- * Close an active test (idempotent for finished tests).
- * @returns {Record<string, any>} updated tests row
+ * Close an active test (idempotent for finished tests). The status check is in the UPDATE, so a
+ * close racing with the last answer cannot reopen or double-finish the test.
+ * @returns {Promise<Record<string, any>>} updated tests row
+ * @throws {ApiError} NOT_FOUND
  */
-export function closeTest(db, userId, testId, now = new Date()) {
-  const test = findTest(db, userId, testId);
-  if (test.status !== 'active') return test;
+export async function closeTest(db, userId, testId, now = new Date()) {
   const nowIso = now.toISOString();
-  stmt(db, "UPDATE tests SET status = 'closed', finished_at = ?, updated_at = ? WHERE id = ?")
-    .run(nowIso, nowIso, test.id);
-  return findTest(db, userId, testId);
+  const [, { rows: [test] }] = await db.batch([
+    [`UPDATE tests SET status = 'closed', finished_at = ?, updated_at = ?
+      WHERE id = ? AND user_id = ? AND status = 'active'`, [nowIso, nowIso, testId, userId]],
+    ['SELECT * FROM tests WHERE id = ? AND user_id = ?', [testId, userId]],
+  ]);
+  if (!test) throw notFound('Test not found.');
+  return test;
 }
 
 /**
  * Rename a test. `updated_at` is left alone: it tracks practice activity (the tests list is
  * ordered by it and shows it as the test's date), and a rename is not activity.
- * @returns {Record<string, any>} updated tests row
+ * @returns {Promise<Record<string, any>>} updated tests row
+ * @throws {ApiError} NOT_FOUND
  */
-export function renameTest(db, userId, testId, title) {
-  findTest(db, userId, testId);
-  stmt(db, 'UPDATE tests SET title = ? WHERE id = ?').run(title, testId);
-  return findTest(db, userId, testId);
+export async function renameTest(db, userId, testId, title) {
+  const [, { rows: [test] }] = await db.batch([
+    ['UPDATE tests SET title = ? WHERE id = ? AND user_id = ?', [title, testId, userId]],
+    ['SELECT * FROM tests WHERE id = ? AND user_id = ?', [testId, userId]],
+  ]);
+  if (!test) throw notFound('Test not found.');
+  return test;
 }
 
 /**
- * Delete a test and its questions.
+ * Delete a test and its questions (explicitly: foreign-key cascades are not relied on).
  * @throws {ApiError} NOT_FOUND
  */
-export function deleteTest(db, userId, testId) {
-  const { changes } = stmt(db, 'DELETE FROM tests WHERE id = ? AND user_id = ?').run(testId, userId);
-  if (!Number(changes)) throw notFound('Test not found.');
+export async function deleteTest(db, userId, testId) {
+  const [, { changes }] = await db.batch([
+    [`DELETE FROM test_questions WHERE test_id = ?1
+      AND EXISTS (SELECT 1 FROM tests WHERE id = ?1 AND user_id = ?2)`, [testId, userId]],
+    ['DELETE FROM tests WHERE id = ? AND user_id = ?', [testId, userId]],
+  ]);
+  if (!changes) throw notFound('Test not found.');
 }

@@ -1,0 +1,28 @@
+# Render Blueprint: free web service + Turso database (see README "Deploying for free").
+# Render's free filesystem is wiped on every restart, so all data lives in Turso.
+services:
+  - type: web
+    name: hirakata
+    runtime: node
+    plan: free
+    # Keep this next to the Turso database location (each request makes a few DB round trips).
+    region: singapore
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      # Render's proxy terminates HTTPS; trust exactly one hop so req.ip / req.protocol are right.
+      - key: TRUST_PROXY
+        value: "1"
+      # Secrets: entered in the Render dashboard when the Blueprint is created (never committed).
+      - key: TURSO_DATABASE_URL
+        sync: false
+      - key: TURSO_AUTH_TOKEN
+        sync: false

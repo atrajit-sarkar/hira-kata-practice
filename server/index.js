@@ -5,7 +5,7 @@
  */
 import { createApp } from './app.js';
 import { loadConfig } from './config.js';
-import { housekeeping, openDatabase } from './db.js';
+import { housekeeping, openDatabase, redactUrl } from './db.js';
 import { WordBankError, loadWordBankWithFallback } from './services/wordbank.js';
 
 const HOUSEKEEPING_INTERVAL_MS = 6 * 60 * 60 * 1000;
@@ -53,8 +53,21 @@ async function main() {
     fail(err.message);
   }
   const { bank: wordbank, path: wordsPath } = await loadWords(config.wordsPath, config.wordsFallbackPath);
-  const db = openDatabase(config.dbPath);
-  const cleaned = housekeeping(db);
+  const where = config.dbUrl ? redactUrl(config.dbUrl) : config.dbPath;
+  let db;
+  let cleaned;
+  try {
+    db = await openDatabase({ url: config.dbUrl, authToken: config.dbAuthToken, path: config.dbPath });
+    cleaned = await housekeeping(db);
+  } catch (err) {
+    db?.close();
+    fail(`The database at ${where} could not be opened: ${err.message}`
+      + (config.dbUrl ? '\n  Check TURSO_DATABASE_URL and TURSO_AUTH_TOKEN.' : ''));
+  }
+  if (config.isProduction && !db.remote) {
+    console.warn('  Warning: using a local SQLite file in production. On hosts with an ephemeral disk'
+      + ' (e.g. Render free tier) all data is lost on restart; set TURSO_DATABASE_URL.');
+  }
   const app = createApp({ config, db, wordbank });
 
   const server = app.listen(config.port, config.host);
@@ -76,7 +89,7 @@ async function main() {
       `  Words     ${fmt(counts.total)} (hiragana ${fmt(counts.byScript.hiragana)} · katakana ${fmt(counts.byScript.katakana)}`
         + ` · common ${fmt(counts.common)})` + (jlptTagged ? ` · JLPT-tagged ${fmt(jlptTagged)}` : ''),
       `  Bank      ${wordsPath}`,
-      `  Database  ${config.dbPath}`,
+      `  Database  ${db.remote ? `${where} (remote libSQL)` : where}`,
       `  Mode      ${config.nodeEnv}${cleaned.sessions || cleaned.guests
         ? ` · cleaned ${cleaned.sessions} expired session(s), ${cleaned.guests} stale guest(s)` : ''}`,
       '',
@@ -84,11 +97,7 @@ async function main() {
   });
 
   const timer = setInterval(() => {
-    try {
-      housekeeping(db);
-    } catch (err) {
-      console.error('Housekeeping failed:', err);
-    }
+    housekeeping(db).catch((err) => console.error('Housekeeping failed:', err));
   }, HOUSEKEEPING_INTERVAL_MS);
   timer.unref();
 

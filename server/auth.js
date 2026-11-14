@@ -4,7 +4,6 @@
  */
 import crypto from 'node:crypto';
 import { promisify } from 'node:util';
-import { stmt } from './db.js';
 import { ApiError } from './http.js';
 
 const scrypt = promisify(crypto.scrypt);
@@ -73,20 +72,39 @@ export function hashToken(token) {
 }
 
 /**
- * Create a session row and return its raw token.
- * @param {import('node:sqlite').DatabaseSync} db
- * @param {number} userId
- * @param {{ ttlMs: number, userAgent?: string, now?: Date }} options
- * @returns {string} raw token for the cookie
+ * A new session for a user, replacing the request's current one. Run `statements` in the caller's
+ * write batch, then set the cookie with {@link setSessionCookie}.
+ * @param {import('express').Request} req
+ * @param {'remember'|'browser'|'guest'} kind
+ * @param {number|null} userId the user's id, or null for the users row inserted by the statement
+ *        just before these in the same batch (`last_insert_rowid()`)
+ * @param {Date} [now=new Date()]
+ * @returns {{ id: string, token: string, maxAgeMs: number|null,
+ *             statements: import('./db.js').Stmt[] }} `id` is the stored (hashed) session id
  */
-export function createSession(db, userId, { ttlMs, userAgent, now = new Date() }) {
+export function newSession(req, kind, userId, now = new Date()) {
   const token = crypto.randomBytes(32).toString('base64url');
+  const id = hashToken(token);
+  const ttlMs = SESSION_TTL[kind];
   const nowIso = now.toISOString();
-  stmt(db, `INSERT INTO sessions (id, user_id, created_at, expires_at, last_seen_at, user_agent)
-            VALUES (?, ?, ?, ?, ?, ?)`)
-    .run(hashToken(token), userId, nowIso, new Date(now.getTime() + ttlMs).toISOString(), nowIso,
-      userAgent ? userAgent.slice(0, 255) : null);
-  return token;
+  const userAgent = req.get('User-Agent');
+  const statements = /** @type {import('./db.js').Stmt[]} */ ([[
+    `INSERT INTO sessions (id, user_id, created_at, expires_at, last_seen_at, user_agent)
+     VALUES (?, ${userId === null ? 'last_insert_rowid()' : '?'}, ?, ?, ?, ?)`,
+    [id, ...(userId === null ? [] : [userId]), nowIso, new Date(now.getTime() + ttlMs).toISOString(), nowIso,
+      userAgent ? userAgent.slice(0, 255) : null],
+  ]]);
+  if (req.sessionId) statements.push(['DELETE FROM sessions WHERE id = ?', [req.sessionId]]);
+  return { id, token, maxAgeMs: kind === 'browser' ? null : ttlMs, statements };
+}
+
+/**
+ * Statement selecting the users row that owns a session (to end a batch that started one).
+ * @param {string} sessionId hashed session id
+ * @returns {import('./db.js').Stmt}
+ */
+export function userOfSession(sessionId) {
+  return ['SELECT * FROM users WHERE id = (SELECT user_id FROM sessions WHERE id = ?)', [sessionId]];
 }
 
 /**
@@ -140,40 +158,26 @@ export function clearSessionCookie(res, { secure }) {
 }
 
 /**
- * Start a session for `userId`, replacing the request's current one, and set the cookie.
- * @param {{ db: import('node:sqlite').DatabaseSync, config: import('./config.js').Config }} deps
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {number} userId
- * @param {'remember'|'browser'|'guest'} kind
- */
-export function startSession({ db, config }, req, res, userId, kind) {
-  if (req.sessionId) stmt(db, 'DELETE FROM sessions WHERE id = ?').run(req.sessionId);
-  const ttlMs = SESSION_TTL[kind];
-  const token = createSession(db, userId, { ttlMs, userAgent: req.get('User-Agent') });
-  setSessionCookie(res, token, { secure: config.cookieSecure, maxAgeMs: kind === 'browser' ? null : ttlMs });
-}
-
-/**
- * Middleware resolving the `hk_sid` cookie to `req.user` (DB row) and `req.sessionId`.
- * @param {{ db: import('node:sqlite').DatabaseSync }} deps
+ * Middleware resolving the `hk_sid` cookie to `req.user` (DB row) and `req.sessionId`: one query,
+ * plus a `last_seen_at` update at most every 5 minutes per session.
+ * @param {{ db: import('./db.js').Database }} deps
  * @returns {import('express').RequestHandler}
  */
 export function sessionMiddleware({ db }) {
-  return (req, _res, next) => {
+  return async (req, _res, next) => {
     req.user = null;
     req.sessionId = null;
     const token = parseCookies(req.get('Cookie'))[SESSION_COOKIE];
     if (!token || token.length > 128) return next();
     const now = new Date();
     const sessionId = hashToken(token);
-    const row = stmt(db, `
+    const row = await db.get(`
       SELECT s.last_seen_at AS session_last_seen, u.*
       FROM sessions s JOIN users u ON u.id = s.user_id
-      WHERE s.id = ? AND s.expires_at > ?`).get(sessionId, now.toISOString());
+      WHERE s.id = ? AND s.expires_at > ?`, [sessionId, now.toISOString()]);
     if (!row) return next();
     if (now.getTime() - Date.parse(row.session_last_seen) >= LAST_SEEN_THROTTLE_MS) {
-      stmt(db, 'UPDATE sessions SET last_seen_at = ? WHERE id = ?').run(now.toISOString(), sessionId);
+      await db.run('UPDATE sessions SET last_seen_at = ? WHERE id = ?', [now.toISOString(), sessionId]);
     }
     delete row.session_last_seen;
     req.user = row;

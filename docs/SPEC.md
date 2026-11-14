@@ -1106,3 +1106,21 @@ working; extend, don't rewrite.
   The server API is unchanged (the spelling hint still returns the answer; the client reveals it
   one character per click). Resume after reload restores the revealed positions (persist them in
   `sessionStorage` per question; if unavailable, treat everything up to the stored count as revealed).
+
+---
+
+## 16. Hosting (Render + Turso) — supersedes the driver details in §1 and §5
+
+- **Driver:** `@libsql/client` is the only database driver. `server/db.js` connects to Turso when
+  `TURSO_DATABASE_URL` (+ `TURSO_AUTH_TOKEN`) is set, otherwise to the local file `file:<DB_PATH>`.
+  `node:sqlite` is no longer used by the server (e2e tooling may still read a run's DB file).
+- **API (async):** `db.get/all/run(sql, args)`, `db.read([stmts])` (one snapshot, one round trip),
+  `db.batch([stmts])` (one atomic write transaction, one round trip). No interactive `tx(fn)`:
+  each action is one guarded write batch, with race guards in the SQL `WHERE` clauses.
+- **Schema version:** a `schema_meta` table replaces `PRAGMA user_version` (seeded from it for older
+  local files). Foreign keys are not relied on remotely: child rows are deleted explicitly.
+- **Round-trip budget:** session lookup 1; answer/skip/hint/create test 3; dashboard, test state and
+  each PDF 2; `/api/health` and `/api/words/*` 0 (enforced by tests).
+- **Deploy:** `render.yaml` (free web service, `NODE_ENV=production`, `HOST=0.0.0.0`,
+  `TRUST_PROXY=1`, health check `GET /api/health` → `{ ok: true }`). `TRUST_PROXY` digits parse as a
+  hop count. Render region and Turso location must be close together (both Singapore by default).

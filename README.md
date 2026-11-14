@@ -11,7 +11,8 @@ kana. The words come from the whole JMdict dictionary (168,267 words). Your prog
 in SQLite and shown on a dashboard. You can download it as a PDF report at any time.
 
 No build step, no framework and no third-party browser JavaScript. It runs on Node.js with
-Express 5, the built-in `node:sqlite`, and vanilla ES modules in the browser.
+Express 5, SQLite through `@libsql/client` (a local file, or a free [Turso](https://turso.tech) database
+when hosted), and vanilla ES modules in the browser.
 
 ---
 
@@ -45,8 +46,8 @@ reduced-motion support, and accessible live-region announcements.
 
 ## Quick start
 
-Requirements: **Node.js ≥ 22.13** (for unflagged `node:sqlite`; developed on Node 24) and
-npm. You do not need a database server, a build step or network access at runtime.
+Requirements: **Node.js ≥ 22.13** (developed on Node 24) and npm. Locally you do not need a
+database server, a build step or network access at runtime: data goes to a SQLite file.
 
 ```bash
 npm install
@@ -78,11 +79,52 @@ them from KanjiVG (cache in `.cache/kanjivg/`): `npm run build:strokes` (add `--
 |---|---|---|
 | `PORT` | `3000` | HTTP port |
 | `HOST` | `127.0.0.1` | Listen address (use `0.0.0.0` to expose it on your network) |
-| `DB_PATH` | `data/hirakata.db` | SQLite file, relative to the project root (`:memory:` is allowed) |
+| `DB_PATH` | `data/hirakata.db` | Local SQLite file, relative to the project root (`:memory:` is allowed). Used when `TURSO_DATABASE_URL` is unset |
+| `TURSO_DATABASE_URL` | unset | Remote database (`libsql://…turso.io`). When set, all data is stored there instead of `DB_PATH` (see [Deploying for free](#deploying-for-free-render--turso)) |
+| `TURSO_AUTH_TOKEN` | unset | Token for `TURSO_DATABASE_URL` (secret; never commit it) |
 | `WORDS_PATH` | `data/words.json.gz` | Word bank built by `npm run build:words`. Gzip or plain `.json`, detected from the content; if the file is missing, the other spelling (`.json` ⇄ `.json.gz`) is tried |
 | `NODE_ENV` | `development` | `production` hides error details and turns on Secure cookies |
 | `COOKIE_SECURE` | on only in production | Force the `Secure` cookie flag on or off (needs HTTPS when on) |
-| `TRUST_PROXY` | unset | Set behind a reverse proxy: `true`, a hop count, or an Express trust value such as `loopback` |
+| `TRUST_PROXY` | unset | Set behind a reverse proxy: a hop count (`1` for Render or one nginx), `true`, or an Express trust value such as `loopback` |
+
+---
+
+## Deploying for free (Render + Turso)
+
+Render's free web services are always online, but their filesystem is wiped on every restart.
+A free instance restarts after 15 minutes without visitors, and on every deploy. A local SQLite
+file would therefore lose every account. The app stores its data in a free
+[Turso](https://turso.tech) database instead, and runs on a free [Render](https://render.com)
+web service. You don't need a credit card for either.
+
+1. **Turso database**
+   1. Sign in at [turso.tech](https://turso.tech) (GitHub sign-in works).
+   2. Create a database, e.g. `hirakata`. Choose the location closest to the Render region in
+      `render.yaml` (Singapore by default).
+   3. On the database page, copy the **database URL** (`libsql://…turso.io`) and create a
+      **token** with read & write access.
+2. **GitHub:** push this repository. `.env`, `data/*.db` and `node_modules/` are git-ignored;
+   the word bank, fonts and stroke data are committed.
+3. **Render**
+   1. Sign in at [render.com](https://render.com) with GitHub.
+   2. Choose **New → Blueprint** and pick the repository. Render reads [render.yaml](render.yaml),
+      which sets up the build and start commands, `NODE_ENV=production`, `HOST=0.0.0.0`,
+      `TRUST_PROXY=1`, Node 24 and the `/api/health` check.
+   3. When asked, paste `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN`, then click **Apply**.
+4. Open `https://<service-name>.onrender.com`. On first start the server creates the tables in
+   Turso. Every later push to `main` redeploys automatically.
+
+Free-tier notes:
+
+- After 15 minutes without visitors the first request takes about a minute while the instance
+  starts again.
+- The instance has 512 MB of RAM and the app needs about 300 MB with the full word bank.
+- Keep the Render region and the Turso location close together, because each request makes a
+  few database round trips. If Turso offers no location near Singapore, choose Oregon on both
+  (`region: oregon` in `render.yaml`, AWS `us-west-2` in Turso).
+- For local development leave the Turso variables unset; the app then uses `DB_PATH`. To run
+  locally against Turso, keep the two variables in a git-ignored `.env.turso` and start with
+  `node --env-file=.env.turso server/index.js`.
 
 ---
 
@@ -95,6 +137,7 @@ them from KanjiVG (cache in `.cache/kanjivg/`): `npm run build:strokes` (add `--
 | `npm test` | Run all unit and API tests (`node:test`) |
 | `npm run e2e` | Run the full browser journey against a temporary server and database (see [Testing](#testing)) |
 | `npm run build:words` | Rebuild `data/words.json.gz` from the full JMdict and the JLPT lists (`--samples=N`, `--uncommon-samples=N` print random words for review) |
+| `npm run build:strokes` | Rebuild the handwriting templates `public/data/kana-strokes.json` from KanjiVG (`-- --refresh` re-downloads) |
 | `npm run shot -- …` | Developer screenshot helper (`scripts/dev/shot.mjs`; its header lists the options) |
 
 ---
@@ -110,7 +153,7 @@ Browser (vanilla ES modules, hash router)          Node.js (Express 5)
 │ handwriting/ recognizer · pad        │          │           stats · vocab · reportData    │
 │ ui/      shared components, tts      │          │ report/   pdfkit PDF renderer + fonts   │
 │ api.js · store.js · router.js        │          │                                         │
-└──────────────────┬───────────────────┘          │ db.js     node:sqlite (WAL, migrations) │
+└──────────────────┬───────────────────┘          │ db.js     libSQL: file or Turso, batches│
                    │ import                       └───────┬───────────────────────┬─────────┘
                    ▼                                      │ import                │ load once
         shared/kana.js  ◀─────────────────────────────────┘                       ▼
@@ -341,7 +384,7 @@ test/            node:test suites, helpers/ and fixtures/
 | Problem | Fix |
 |---|---|
 | `Port 3000 is already in use` | Another program is using the port. Start on a different one: `PORT=3001 npm start` (PowerShell: `$env:PORT=3001; npm start`), or set `PORT` in `.env`. |
-| `No such built-in module: node:sqlite`, or syntax errors on start | Your Node.js is too old. Install Node **22.13 or newer** (`node -v`). |
+| Syntax errors on start | Your Node.js is too old. Install Node **22.13 or newer** (`node -v`). |
 | `The word bank was not found` | `data/words.json.gz` is missing. Restore it or run `npm run build:words` (needs network access). An old `.env` with `WORDS_PATH=data/words.json` still works: the server falls back to the `.gz` file. |
 | Fonts look different offline | The web app loads Inter, Klee One and Noto Sans JP from Google Fonts. Offline, it falls back to system fonts and stays fully usable. PDF fonts are bundled, so reports never need the network. Only `python scripts/build-fonts.py` (rebuilding the PDF font subset) downloads fonts. |
 | `Too many attempts` when logging in | The auth rate limit was hit. Wait for the time in the message, or restart the server in development (the limits are kept in memory). |

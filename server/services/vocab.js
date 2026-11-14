@@ -3,7 +3,6 @@
  * @module server/services/vocab
  */
 import { toHiragana } from '../../shared/kana.js';
-import { stmt } from '../db.js';
 import { Validator, notFound } from '../http.js';
 import { meaningOf } from './wordbank.js';
 
@@ -92,16 +91,36 @@ const SORTS = Object.freeze({
 });
 
 /**
+ * Query for all of a user's vocab_progress rows.
+ * @param {number} userId
+ * @returns {[string, unknown[]]}
+ */
+export function vocabQuery(userId) {
+  return ['SELECT * FROM vocab_progress WHERE user_id = ?', [userId]];
+}
+
+/**
  * List the user's vocabulary. `counts` are totals over the whole vocabulary (not affected by
  * search or script filters) so tab badges stay stable.
- * @param {import('node:sqlite').DatabaseSync} db
+ * @param {import('../db.js').Database} db
  * @param {import('./wordbank.js').WordBank} bank
  * @param {number} userId
  * @param {ReturnType<typeof parseVocabQuery>} params
+ * @returns {Promise<{ items: object[], total: number, page: number, pageSize: number, counts: object }>}
+ */
+export async function listVocab(db, bank, userId, params) {
+  return vocabListing(await db.all(...vocabQuery(userId)), bank, params);
+}
+
+/**
+ * The {@link listVocab} result for already loaded vocab_progress rows.
+ * @param {Record<string, any>[]} rows the user's vocab_progress rows
+ * @param {import('./wordbank.js').WordBank} bank
+ * @param {ReturnType<typeof parseVocabQuery>} params
  * @returns {{ items: object[], total: number, page: number, pageSize: number, counts: object }}
  */
-export function listVocab(db, bank, userId, params) {
-  const entries = stmt(db, 'SELECT * FROM vocab_progress WHERE user_id = ?').all(userId)
+export function vocabListing(rows, bank, params) {
+  const entries = rows
     .map((row) => ({ row, word: bank.get(row.word_id) }))
     .filter((e) => e.word);
   const counts = Object.fromEntries(VOCAB_FILTERS.map((f) => [f, entries.filter((e) => FILTER_TESTS[f](e.row)).length]));
@@ -123,35 +142,37 @@ export function listVocab(db, bank, userId, params) {
 }
 
 /**
- * Star or unstar a word. Rows that end up unseen and unstarred are removed.
- * @param {import('node:sqlite').DatabaseSync} db
+ * Star or unstar a word (one atomic batch). Rows that end up unseen and unstarred are removed.
+ * @param {import('../db.js').Database} db
  * @param {import('./wordbank.js').WordBank} bank
  * @param {number} userId
  * @param {string} wordId
  * @param {boolean} starred
- * @returns {boolean} the new starred state
+ * @returns {Promise<boolean>} the new starred state
  * @throws {import('../http.js').ApiError} NOT_FOUND for unknown words
  */
-export function setStarred(db, bank, userId, wordId, starred) {
+export async function setStarred(db, bank, userId, wordId, starred) {
   if (!bank.get(wordId)) throw notFound('Word not found.');
-  stmt(db, `INSERT INTO vocab_progress (user_id, word_id, starred) VALUES (?, ?, ?)
-            ON CONFLICT (user_id, word_id) DO UPDATE SET starred = excluded.starred`)
-    .run(userId, wordId, starred ? 1 : 0);
-  if (!starred) stmt(db, 'DELETE FROM vocab_progress WHERE user_id = ? AND word_id = ? AND seen = 0 AND starred = 0')
-    .run(userId, wordId);
+  /** @type {import('../db.js').Stmt[]} */
+  const statements = [[`INSERT INTO vocab_progress (user_id, word_id, starred) VALUES (?, ?, ?)
+    ON CONFLICT (user_id, word_id) DO UPDATE SET starred = excluded.starred`, [userId, wordId, starred ? 1 : 0]]];
+  if (!starred) {
+    statements.push(['DELETE FROM vocab_progress WHERE user_id = ? AND word_id = ? AND seen = 0 AND starred = 0',
+      [userId, wordId]]);
+  }
+  await db.batch(statements);
   return starred;
 }
 
 /**
  * Learned and to-review vocabulary for the overall PDF report (≤ `limit` each, most recent first).
- * @param {import('node:sqlite').DatabaseSync} db
+ * @param {Record<string, any>[]} rows the user's vocab_progress rows ({@link vocabQuery})
  * @param {import('./wordbank.js').WordBank} bank
- * @param {number} userId
  * @param {number} [limit=60]
  * @returns {{ learned: object[], review: object[] }}
  */
-export function vocabForReport(db, bank, userId, limit = 60) {
-  const pick = (filter) => listVocab(db, bank, userId, {
+export function vocabForReport(rows, bank, limit = 60) {
+  const pick = (filter) => vocabListing(rows, bank, {
     filter, script: 'all', q: '', sort: filter === 'review' ? 'mistakes' : 'recent', page: 1, pageSize: limit,
   }).items;
   return { learned: pick('learned'), review: pick('review') };
