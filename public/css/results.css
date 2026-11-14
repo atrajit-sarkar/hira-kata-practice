@@ -1,0 +1,367 @@
+/* Results page (SPEC §12.5) — owned by results-vocab. */
+
+.results-content { display: flex; flex-direction: column; gap: var(--s-6); }
+.results-loading { display: flex; flex-direction: column; gap: var(--s-6); }
+
+/* ---------- Resume banner ---------- */
+.results-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  padding: var(--s-4) var(--s-5);
+  border: 1px solid color-mix(in srgb, var(--brand) 30%, transparent);
+  border-radius: var(--r-lg);
+  background: var(--brand-soft);
+}
+.results-banner-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: var(--brand-contrast);
+}
+.results-banner-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; font-size: 14px; color: var(--text-secondary); }
+.results-banner-text strong { color: var(--text-primary); font-size: 15px; }
+
+/* ---------- Hero ---------- */
+.results-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "seal text ring"
+    "seal actions actions";
+  align-items: center;
+  gap: var(--s-4) var(--s-7);
+  padding: var(--s-7) var(--s-8);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background:
+    radial-gradient(120% 140% at 0% 0%, var(--accent-soft) 0%, transparent 42%),
+    var(--surface-1);
+}
+.results-hero-seal { grid-area: seal; display: grid; place-items: center; }
+.results-hero-text { grid-area: text; align-self: end; display: flex; flex-direction: column; gap: var(--s-2); min-width: 0; }
+.results-hero-ring { grid-area: ring; display: grid; place-items: center; }
+.results-hero h1 {
+  font-size: clamp(24px, 1.4vw + 16px, 32px);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.results-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  color: var(--text-muted);
+  font-size: 13.5px;
+}
+.results-hero-message { margin-top: var(--s-1); color: var(--text-secondary); font-size: 15px; line-height: 1.5; max-width: 52ch; }
+.results-hero-message strong { color: var(--text-primary); font-weight: 650; }
+.results-actions { grid-area: actions; align-self: start; display: flex; flex-wrap: wrap; gap: var(--s-2); }
+
+/* ---------- Grade seal (hanko) ---------- */
+.grade-seal {
+  --seal-ink: var(--accent);
+  position: relative;
+  width: var(--seal-size, 148px);
+  height: var(--seal-size, 148px);
+  margin: 0;
+}
+.grade-seal svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.grade-seal-tilt { transform: rotate(-8deg); transform-origin: 60px 60px; }
+.grade-seal.is-empty .grade-seal-tilt { transform: none; }
+.grade-seal-ink circle { stroke: var(--seal-ink); }
+.grade-seal-ink text { fill: var(--seal-ink); }
+.grade-seal-kanji { font-family: var(--font-kana); font-weight: 600; }
+.grade-seal-letter { font-family: var(--font-ui); font-weight: 800; letter-spacing: .12em; }
+.grade-seal-empty circle { stroke: var(--border-strong); }
+.grade-seal-empty text { fill: var(--text-muted); font-family: var(--font-ui); }
+.grade-seal.is-stamping svg { animation: results-stamp 640ms var(--ease-out) 120ms both; }
+.grade-seal.is-stamping::after {
+  content: "";
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  border: 2px solid var(--seal-ink);
+  opacity: 0;
+  pointer-events: none;
+  animation: results-stamp-ripple 700ms var(--ease-out) 420ms both;
+}
+@keyframes results-stamp {
+  0% { opacity: 0; transform: scale(1.9) rotate(-14deg); filter: blur(2px); }
+  55% { opacity: 1; transform: scale(.94) rotate(2deg); filter: blur(0); }
+  75% { transform: scale(1.03) rotate(0deg); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes results-stamp-ripple {
+  0% { opacity: .35; transform: scale(.96); }
+  100% { opacity: 0; transform: scale(1.32); }
+}
+
+/* ---------- Score ring ---------- */
+.score-ring { position: relative; width: 148px; height: 148px; }
+.score-ring svg { display: block; width: 100%; height: 100%; }
+.score-ring-track { stroke: var(--brand-soft); }
+.score-ring-fill { stroke: var(--brand); transition: stroke-dashoffset 1100ms var(--ease-out); }
+.score-ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-align: center;
+}
+.score-ring-value { font-size: 32px; font-weight: 750; letter-spacing: -0.03em; line-height: 1; color: var(--text-primary); }
+.score-ring-caption { max-width: 78%; font-size: 12px; font-weight: 550; line-height: 1.3; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+/* ---------- Stat tiles ---------- */
+.results-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--s-4); }
+.results-tile .stat-value { font-variant-numeric: normal; }
+.results-tile .stat-delta { font-weight: 550; }
+.results-outcome-bar {
+  display: flex;
+  gap: 2px;
+  height: 8px;
+  margin-top: 6px;
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+.results-outcome-bar span { min-width: 4px; }
+.results-outcome-bar .is-correct { background: var(--success); }
+.results-outcome-bar .is-wrong { background: var(--danger); }
+.results-outcome-bar .is-skipped { background: var(--chart-muted); }
+
+/* ---------- Script meters + words to practise ---------- */
+.results-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s-6); align-items: stretch; }
+.results-scripts-body { display: flex; flex-direction: column; gap: var(--s-5); }
+.script-meter { --sm-fill: var(--hira); --sm-track: var(--hira-soft); }
+.script-meter.is-katakana { --sm-fill: var(--kata); --sm-track: var(--kata-soft); }
+.script-meter-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-3); margin-bottom: var(--s-2); }
+.script-meter-name { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--text-primary); }
+.script-meter-name .jp { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+.script-meter-swatch { width: 10px; height: 10px; border-radius: 3px; background: var(--sm-fill); }
+.script-meter-value { display: inline-flex; align-items: baseline; gap: 8px; font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); }
+.script-meter-value small { font-size: 13px; font-weight: 500; letter-spacing: 0; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.script-meter.is-empty .script-meter-value { font-size: 14px; font-weight: 500; color: var(--text-muted); }
+.script-meter-track { height: 10px; border-radius: var(--r-pill); background: var(--sm-track); overflow: hidden; }
+.script-meter-fill {
+  display: block;
+  height: 100%;
+  width: calc(var(--meter) * 100%);
+  border-radius: var(--r-pill);
+  background: var(--sm-fill);
+  transform-origin: left center;
+  animation: results-meter-grow 900ms var(--ease-out) 300ms both;
+}
+@keyframes results-meter-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.results-missed-list { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.results-missed-word {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 8px 12px 7px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--hira);
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background var(--dur-1) ease, border-color var(--dur-1) ease, transform var(--dur-1) var(--ease-out);
+}
+.results-missed-word.is-katakana { border-left-color: var(--kata); }
+.results-missed-word:hover { background: var(--surface-3); transform: translateY(-1px); }
+.results-missed-word:focus-visible { outline: none; box-shadow: var(--ring); }
+.results-missed-word .kana { font-size: 20px; line-height: 1.2; }
+.results-missed-romaji { font-size: 12px; color: var(--text-muted); letter-spacing: .04em; }
+.results-missed-empty { display: flex; align-items: center; gap: var(--s-2); color: var(--text-secondary); font-size: 14.5px; }
+.results-missed-empty .icon { color: var(--text-muted); flex: none; }
+.results-missed-empty.is-perfect .icon { color: var(--success-text); }
+
+/* ---------- Question review ---------- */
+.results-review-head { flex-wrap: wrap; align-items: center; }
+.results-review-head .tabs {
+  flex: none;
+  max-width: 100%;
+  /* Scroll affordance: an edge shade appears only on a side that has more tabs to scroll to
+     (the surface-coloured covers scroll with the content and hide the shade at either end). */
+  background:
+    linear-gradient(to right, var(--surface-1) 40%, transparent) left / 32px 100% no-repeat local,
+    linear-gradient(to left, var(--surface-1) 40%, transparent) right / 32px 100% no-repeat local,
+    linear-gradient(to right, color-mix(in srgb, var(--text-primary) 16%, transparent), transparent) left / 14px 100% no-repeat scroll,
+    linear-gradient(to left, color-mix(in srgb, var(--text-primary) 16%, transparent), transparent) right / 14px 100% no-repeat scroll;
+}
+.review-tab-short { display: none; }
+.results-review-body { padding: var(--s-4) 0 var(--s-2); }
+.review-list { display: flex; flex-direction: column; }
+.review-item { border-top: 1px solid var(--border); }
+.review-item:first-child { border-top: 0; }
+.review-row {
+  display: grid;
+  grid-template-columns: 28px 22px minmax(150px, 1.1fr) minmax(120px, 1fr) minmax(0, 1.3fr) 128px 20px;
+  grid-template-areas: "num result word answer meaning meta chev";
+  align-items: center;
+  gap: var(--s-4);
+  width: 100%;
+  min-height: 60px;
+  padding: var(--s-3) var(--s-6);
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+button.review-row { cursor: pointer; transition: background var(--dur-1) ease; }
+button.review-row:hover { background: var(--surface-2); }
+button.review-row:focus-visible { outline: none; box-shadow: inset var(--ring); }
+.review-item.is-open > .review-row { background: var(--surface-2); }
+.review-num { grid-area: num; color: var(--text-muted); font-size: 13px; font-weight: 600; text-align: right; }
+.review-result { grid-area: result; display: grid; place-items: center; }
+.review-item.is-correct .review-result { color: var(--success-text); }
+.review-item.is-wrong .review-result { color: var(--danger-text); }
+.review-item.is-skipped .review-result, .review-item.is-pending .review-result { color: var(--text-muted); }
+.review-word { grid-area: word; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; }
+.review-kana { max-width: 100%; font-size: 22px; line-height: 1.25; color: var(--text-primary); overflow-wrap: anywhere; }
+.review-sub { display: flex; align-items: center; gap: 8px; min-width: 0; max-width: 100%; }
+.review-sub .chip { flex: none; }
+.review-romaji { min-width: 0; color: var(--text-muted); font-size: 13px; letter-spacing: .04em; overflow-wrap: anywhere; }
+.review-romaji.is-lead { flex-basis: auto; font-size: 15px; color: var(--text-secondary); }
+.review-answer { grid-area: answer; min-width: 0; }
+.review-answer-ok { font-size: 18px; color: var(--success-text); }
+.review-answer-script { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+.review-answer-bad { font-size: 18px; color: var(--danger-text); }
+.review-answer-note { color: var(--text-muted); font-size: 14px; font-style: italic; }
+.review-meaning {
+  grid-area: meaning;
+  min-width: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.review-meta { grid-area: meta; display: inline-flex; align-items: center; justify-content: flex-end; gap: var(--s-2); }
+.review-hints { display: inline-flex; gap: 6px; color: var(--warning-text); }
+.review-hint { display: inline-grid; place-items: center; }
+.review-points { min-width: 40px; text-align: right; font-weight: 700; color: var(--text-primary); }
+.review-points.is-zero { color: var(--text-muted); font-weight: 600; }
+.review-chevron { grid-area: chev; display: grid; place-items: center; color: var(--text-muted); transition: transform var(--dur-2) var(--ease-out); }
+.review-item.is-open .review-chevron { transform: rotate(180deg); }
+.review-item.is-pending .review-row { opacity: .8; }
+
+.review-detail { padding: var(--s-2) var(--s-6) var(--s-6) calc(var(--s-6) + 28px + 22px + var(--s-4) * 2); background: var(--surface-2); }
+.review-detail-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: var(--s-6);
+  align-items: start;
+  animation: hk-rise-in var(--dur-3) var(--ease-out);
+}
+.review-detail-answer { display: flex; flex-direction: column; gap: var(--s-4); }
+.review-diff-block { display: flex; flex-direction: column; gap: var(--s-2); }
+.review-diff-label { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); }
+.review-note { display: flex; align-items: flex-start; gap: var(--s-2); color: var(--text-secondary); font-size: 14px; line-height: 1.5; }
+.review-note .icon { flex: none; margin-top: 2px; color: var(--text-muted); }
+.review-note.is-error { color: var(--danger-text); }
+.review-note.is-error .icon { color: var(--danger-text); }
+.review-facts { display: flex; gap: var(--s-6); margin: 0; }
+.review-facts dt { font-size: 12px; color: var(--text-muted); }
+.review-facts dd { margin: 0; font-weight: 650; font-variant-numeric: tabular-nums; }
+.review-facts { flex-wrap: wrap; row-gap: var(--s-3); }
+.review-fact-input { display: inline-flex; align-items: center; gap: 6px; }
+.review-fact-input .icon { color: var(--text-muted); }
+.review-note.is-variant { color: var(--success-text); }
+.review-note.is-variant .icon { color: var(--success-text); }
+.review-romaji.is-hidden-word { display: inline-flex; align-items: center; gap: 6px; letter-spacing: 0; font-style: italic; }
+
+/* ---------- v2: practice mode chips and input-method badges (shared with the dashboard) ---------- */
+.mode-chip { gap: 5px; }
+.mode-chip .icon { flex: none; }
+.mode-chip.is-romaji { background: transparent; color: var(--text-secondary); border-color: var(--border-strong); }
+.mode-chip.is-listen { background: var(--brand-soft); color: var(--brand-text); }
+.input-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-radius: var(--r-sm);
+  background: var(--surface-3);
+  color: var(--text-secondary);
+}
+.input-badge.is-handwriting { background: var(--accent-soft); color: var(--accent); }
+.review-word-card { box-shadow: var(--shadow-1); }
+.review-empty { padding: var(--s-6); text-align: center; color: var(--text-muted); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1080px) {
+  .results-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .results-hero {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "seal ring"
+      "text text"
+      "actions actions";
+    gap: var(--s-5);
+    padding: var(--s-6);
+  }
+  .results-hero-ring { justify-self: end; }
+  .results-grid { grid-template-columns: minmax(0, 1fr); }
+  .review-row {
+    grid-template-columns: 24px 20px minmax(0, 1fr) minmax(0, 1fr) 128px 18px;
+    grid-template-areas:
+      "num result word answer meta chev"
+      ". . meaning meaning meaning .";
+    row-gap: var(--s-1);
+    padding: var(--s-3) var(--s-5);
+  }
+  .review-meaning { -webkit-line-clamp: 1; }
+  .review-detail { padding: var(--s-2) var(--s-5) var(--s-5); }
+  .review-detail-inner { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .results-content { gap: var(--s-4); }
+  /* The expanded row still names the input method ("Written with"). */
+  .review-meta .input-badge { display: none; }
+  .results-banner { flex-wrap: wrap; padding: var(--s-4); }
+  .results-banner .btn { width: 100%; justify-content: center; }
+  .results-hero { padding: var(--s-5) var(--s-4); border-radius: var(--r-lg); }
+  .results-hero .grade-seal { --seal-size: 116px; }
+  .score-ring { width: 116px; height: 116px; }
+  .score-ring-value { font-size: 26px; }
+  .score-ring-caption { font-size: 11px; }
+  .results-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .results-actions > :first-child, .results-actions > :last-child { grid-column: 1 / -1; }
+  .results-actions .btn { justify-content: center; }
+  .results-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-3); }
+  .results-tile:last-child { grid-column: 1 / -1; }
+  .results-review-head .tabs { width: 100%; gap: 0; }
+  .results-review-head .tab { padding-inline: 8px; font-size: 13.5px; }
+  .review-tab-long { display: none; }
+  .review-tab-short { display: inline; }
+  .review-row {
+    grid-template-columns: 20px minmax(0, 1fr) auto 18px;
+    grid-template-areas:
+      "result word meta chev"
+      ". answer answer ."
+      ". meaning meaning .";
+    gap: var(--s-1) var(--s-3);
+    padding: var(--s-3) var(--s-4);
+  }
+  .review-num { display: none; }
+  .review-detail { padding: var(--s-2) var(--s-4) var(--s-5); }
+}
+
+/* @@END-OF-FILE */

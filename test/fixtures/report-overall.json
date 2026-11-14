@@ -1,0 +1,4786 @@
+{
+  "generatedAt": "2026-11-14T00:30:00.000Z",
+  "tzOffset": -540,
+  "user": {
+    "displayName": "Atrajit Sarkar",
+    "email": "atrajit@example.com",
+    "isGuest": false
+  },
+  "overview": {
+    "totals": {
+      "tests": 12,
+      "activeTests": 1,
+      "completedTests": 10,
+      "closedTests": 1,
+      "answered": 2090,
+      "correct": 1611,
+      "wrong": 335,
+      "skipped": 144,
+      "accuracy": 0.771,
+      "cleanCorrect": 1289,
+      "cleanAccuracy": 0.617,
+      "score": 138546,
+      "timeSpentMs": 19019000,
+      "hint1Used": 251,
+      "hint2Used": 125,
+      "wordsSeen": 1240,
+      "wordsLearned": 1105,
+      "wordsToReview": 96,
+      "romajiHintUsed": 41
+    },
+    "byScript": {
+      "hiragana": {
+        "answered": 1254,
+        "correct": 1031,
+        "accuracy": 0.822
+      },
+      "katakana": {
+        "answered": 836,
+        "correct": 580,
+        "accuracy": 0.694
+      }
+    },
+    "byLevel": {
+      "1": {
+        "answered": 941,
+        "correct": 862,
+        "accuracy": 0.917
+      },
+      "2": {
+        "answered": 732,
+        "correct": 571,
+        "accuracy": 0.78
+      },
+      "3": {
+        "answered": 417,
+        "correct": 192,
+        "accuracy": 0.46
+      }
+    },
+    "byMode": {
+      "romaji": {
+        "answered": 1850,
+        "correct": 1442,
+        "accuracy": 0.779
+      },
+      "listen": {
+        "answered": 240,
+        "correct": 169,
+        "accuracy": 0.704
+      }
+    },
+    "byInput": {
+      "keys": {
+        "answered": 1180,
+        "correct": 941,
+        "accuracy": 0.797
+      },
+      "handwriting": {
+        "answered": 412,
+        "correct": 305,
+        "accuracy": 0.74
+      },
+      "device": {
+        "answered": 214,
+        "correct": 176,
+        "accuracy": 0.822
+      }
+    },
+    "streak": {
+      "current": 6,
+      "best": 14,
+      "todayAnswered": 39,
+      "lastActiveDate": "2026-11-14"
+    },
+    "daily": [
+      {
+        "date": "2026-05-17",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-05-18",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-05-19",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-05-20",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-05-21",
+        "answered": 43,
+        "correct": 30,
+        "score": 2640
+      },
+      {
+        "date": "2026-05-22",
+        "answered": 43,
+        "correct": 27,
+        "score": 2376
+      },
+      {
+        "date": "2026-05-23",
+        "answered": 6,
+        "correct": 4,
+        "score": 352
+      },
+      {
+        "date": "2026-05-24",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-05-25",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-05-26",
+        "answered": 28,
+        "correct": 22,
+        "score": 1936
+      },
+      {
+        "date": "2026-05-27",
+        "answered": 39,
+        "correct": 25,
+        "score": 2200
+      },
+      {
+        "date": "2026-05-28",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-05-29",
+        "answered": 32,
+        "correct": 28,
+        "score": 2464
+      },
+      {
+        "date": "2026-05-30",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-05-31",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-01",
+        "answered": 18,
+        "correct": 12,
+        "score": 1056
+      },
+      {
+        "date": "2026-06-02",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-03",
+        "answered": 35,
+        "correct": 25,
+        "score": 2200
+      },
+      {
+        "date": "2026-06-04",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-05",
+        "answered": 23,
+        "correct": 19,
+        "score": 1672
+      },
+      {
+        "date": "2026-06-06",
+        "answered": 16,
+        "correct": 14,
+        "score": 1232
+      },
+      {
+        "date": "2026-06-07",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-08",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-09",
+        "answered": 27,
+        "correct": 19,
+        "score": 1672
+      },
+      {
+        "date": "2026-06-10",
+        "answered": 27,
+        "correct": 21,
+        "score": 1848
+      },
+      {
+        "date": "2026-06-11",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-12",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-13",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-14",
+        "answered": 37,
+        "correct": 30,
+        "score": 2640
+      },
+      {
+        "date": "2026-06-15",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-16",
+        "answered": 23,
+        "correct": 17,
+        "score": 1496
+      },
+      {
+        "date": "2026-06-17",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-18",
+        "answered": 12,
+        "correct": 10,
+        "score": 880
+      },
+      {
+        "date": "2026-06-19",
+        "answered": 16,
+        "correct": 14,
+        "score": 1232
+      },
+      {
+        "date": "2026-06-20",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-21",
+        "answered": 24,
+        "correct": 17,
+        "score": 1496
+      },
+      {
+        "date": "2026-06-22",
+        "answered": 37,
+        "correct": 26,
+        "score": 2288
+      },
+      {
+        "date": "2026-06-23",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-24",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-25",
+        "answered": 12,
+        "correct": 11,
+        "score": 968
+      },
+      {
+        "date": "2026-06-26",
+        "answered": 13,
+        "correct": 10,
+        "score": 880
+      },
+      {
+        "date": "2026-06-27",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-28",
+        "answered": 21,
+        "correct": 14,
+        "score": 1232
+      },
+      {
+        "date": "2026-06-29",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-06-30",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-01",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-02",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-03",
+        "answered": 24,
+        "correct": 18,
+        "score": 1584
+      },
+      {
+        "date": "2026-07-04",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-05",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-06",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-07",
+        "answered": 27,
+        "correct": 25,
+        "score": 2200
+      },
+      {
+        "date": "2026-07-08",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-09",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-10",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-11",
+        "answered": 18,
+        "correct": 11,
+        "score": 968
+      },
+      {
+        "date": "2026-07-12",
+        "answered": 30,
+        "correct": 27,
+        "score": 2376
+      },
+      {
+        "date": "2026-07-13",
+        "answered": 26,
+        "correct": 19,
+        "score": 1672
+      },
+      {
+        "date": "2026-07-14",
+        "answered": 28,
+        "correct": 23,
+        "score": 2024
+      },
+      {
+        "date": "2026-07-15",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-16",
+        "answered": 31,
+        "correct": 20,
+        "score": 1760
+      },
+      {
+        "date": "2026-07-17",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-18",
+        "answered": 31,
+        "correct": 20,
+        "score": 1760
+      },
+      {
+        "date": "2026-07-19",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-20",
+        "answered": 28,
+        "correct": 22,
+        "score": 1936
+      },
+      {
+        "date": "2026-07-21",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-22",
+        "answered": 42,
+        "correct": 27,
+        "score": 2376
+      },
+      {
+        "date": "2026-07-23",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-24",
+        "answered": 28,
+        "correct": 24,
+        "score": 2112
+      },
+      {
+        "date": "2026-07-25",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-26",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-27",
+        "answered": 36,
+        "correct": 31,
+        "score": 2728
+      },
+      {
+        "date": "2026-07-28",
+        "answered": 39,
+        "correct": 28,
+        "score": 2464
+      },
+      {
+        "date": "2026-07-29",
+        "answered": 13,
+        "correct": 8,
+        "score": 704
+      },
+      {
+        "date": "2026-07-30",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-07-31",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-01",
+        "answered": 36,
+        "correct": 28,
+        "score": 2464
+      },
+      {
+        "date": "2026-08-02",
+        "answered": 13,
+        "correct": 9,
+        "score": 792
+      },
+      {
+        "date": "2026-08-03",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-04",
+        "answered": 30,
+        "correct": 20,
+        "score": 1760
+      },
+      {
+        "date": "2026-08-05",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-06",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-07",
+        "answered": 8,
+        "correct": 7,
+        "score": 616
+      },
+      {
+        "date": "2026-08-08",
+        "answered": 31,
+        "correct": 20,
+        "score": 1760
+      },
+      {
+        "date": "2026-08-09",
+        "answered": 5,
+        "correct": 3,
+        "score": 264
+      },
+      {
+        "date": "2026-08-10",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-11",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-12",
+        "answered": 13,
+        "correct": 9,
+        "score": 792
+      },
+      {
+        "date": "2026-08-13",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-14",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-15",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-16",
+        "answered": 35,
+        "correct": 30,
+        "score": 2640
+      },
+      {
+        "date": "2026-08-17",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-18",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-19",
+        "answered": 9,
+        "correct": 7,
+        "score": 616
+      },
+      {
+        "date": "2026-08-20",
+        "answered": 15,
+        "correct": 12,
+        "score": 1056
+      },
+      {
+        "date": "2026-08-21",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-22",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-23",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-24",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-25",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-26",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-27",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-28",
+        "answered": 40,
+        "correct": 31,
+        "score": 2728
+      },
+      {
+        "date": "2026-08-29",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-30",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-08-31",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-01",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-02",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-03",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-04",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-05",
+        "answered": 22,
+        "correct": 14,
+        "score": 1232
+      },
+      {
+        "date": "2026-09-06",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-07",
+        "answered": 13,
+        "correct": 10,
+        "score": 880
+      },
+      {
+        "date": "2026-09-08",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-09",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-10",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-11",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-12",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-13",
+        "answered": 15,
+        "correct": 9,
+        "score": 792
+      },
+      {
+        "date": "2026-09-14",
+        "answered": 17,
+        "correct": 12,
+        "score": 1056
+      },
+      {
+        "date": "2026-09-15",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-16",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-17",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-18",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-19",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-20",
+        "answered": 23,
+        "correct": 21,
+        "score": 1848
+      },
+      {
+        "date": "2026-09-21",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-22",
+        "answered": 34,
+        "correct": 30,
+        "score": 2640
+      },
+      {
+        "date": "2026-09-23",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-24",
+        "answered": 7,
+        "correct": 5,
+        "score": 440
+      },
+      {
+        "date": "2026-09-25",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-26",
+        "answered": 28,
+        "correct": 19,
+        "score": 1672
+      },
+      {
+        "date": "2026-09-27",
+        "answered": 6,
+        "correct": 5,
+        "score": 440
+      },
+      {
+        "date": "2026-09-28",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-09-29",
+        "answered": 18,
+        "correct": 16,
+        "score": 1408
+      },
+      {
+        "date": "2026-09-30",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-10-01",
+        "answered": 9,
+        "correct": 8,
+        "score": 704
+      },
+      {
+        "date": "2026-10-02",
+        "answered": 24,
+        "correct": 23,
+        "score": 2024
+      },
+      {
+        "date": "2026-10-03",
+        "answered": 31,
+        "correct": 29,
+        "score": 2552
+      },
+      {
+        "date": "2026-10-04",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-10-05",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-10-06",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-10-07",
+        "answered": 35,
+        "correct": 28,
+        "score": 2464
+      },
+      {
+        "date": "2026-10-08",
+        "answered": 16,
+        "correct": 15,
+        "score": 1320
+      },
+      {
+        "date": "2026-10-09",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-10-10",
+        "answered": 11,
+        "correct": 9,
+        "score": 792
+      },
+      {
+        "date": "2026-10-11",
+        "answered": 43,
+        "correct": 36,
+        "score": 3168
+      },
+      {
+        "date": "2026-10-12",
+        "answered": 41,
+        "correct": 32,
+        "score": 2816
+      },
+      {
+        "date": "2026-10-13",
+        "answered": 34,
+        "correct": 22,
+        "score": 1936
+      },
+      {
+        "date": "2026-10-14",
+        "answered": 19,
+        "correct": 16,
+        "score": 1408
+      },
+      {
+        "date": "2026-10-15",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-10-16",
+        "answered": 28,
+        "correct": 22,
+        "score": 1936
+      },
+      {
+        "date": "2026-10-17",
+        "answered": 24,
+        "correct": 18,
+        "score": 1584
+      },
+      {
+        "date": "2026-10-18",
+        "answered": 30,
+        "correct": 22,
+        "score": 1936
+      },
+      {
+        "date": "2026-10-19",
+        "answered": 9,
+        "correct": 8,
+        "score": 704
+      },
+      {
+        "date": "2026-10-20",
+        "answered": 37,
+        "correct": 34,
+        "score": 2992
+      },
+      {
+        "date": "2026-10-21",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-10-22",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-10-23",
+        "answered": 16,
+        "correct": 13,
+        "score": 1144
+      },
+      {
+        "date": "2026-10-24",
+        "answered": 8,
+        "correct": 6,
+        "score": 528
+      },
+      {
+        "date": "2026-10-25",
+        "answered": 41,
+        "correct": 34,
+        "score": 2992
+      },
+      {
+        "date": "2026-10-26",
+        "answered": 7,
+        "correct": 6,
+        "score": 528
+      },
+      {
+        "date": "2026-10-27",
+        "answered": 12,
+        "correct": 8,
+        "score": 704
+      },
+      {
+        "date": "2026-10-28",
+        "answered": 7,
+        "correct": 6,
+        "score": 528
+      },
+      {
+        "date": "2026-10-29",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-10-30",
+        "answered": 10,
+        "correct": 7,
+        "score": 616
+      },
+      {
+        "date": "2026-10-31",
+        "answered": 9,
+        "correct": 6,
+        "score": 528
+      },
+      {
+        "date": "2026-11-01",
+        "answered": 27,
+        "correct": 18,
+        "score": 1584
+      },
+      {
+        "date": "2026-11-02",
+        "answered": 6,
+        "correct": 6,
+        "score": 528
+      },
+      {
+        "date": "2026-11-03",
+        "answered": 18,
+        "correct": 12,
+        "score": 1056
+      },
+      {
+        "date": "2026-11-04",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-11-05",
+        "answered": 22,
+        "correct": 20,
+        "score": 1760
+      },
+      {
+        "date": "2026-11-06",
+        "answered": 13,
+        "correct": 12,
+        "score": 1056
+      },
+      {
+        "date": "2026-11-07",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-11-08",
+        "answered": 28,
+        "correct": 25,
+        "score": 2200
+      },
+      {
+        "date": "2026-11-09",
+        "answered": 31,
+        "correct": 23,
+        "score": 2024
+      },
+      {
+        "date": "2026-11-10",
+        "answered": 11,
+        "correct": 8,
+        "score": 704
+      },
+      {
+        "date": "2026-11-11",
+        "answered": 0,
+        "correct": 0,
+        "score": 0
+      },
+      {
+        "date": "2026-11-12",
+        "answered": 11,
+        "correct": 8,
+        "score": 704
+      },
+      {
+        "date": "2026-11-13",
+        "answered": 32,
+        "correct": 24,
+        "score": 2112
+      },
+      {
+        "date": "2026-11-14",
+        "answered": 39,
+        "correct": 32,
+        "score": 2816
+      }
+    ],
+    "last7": {
+      "answered": 152,
+      "accuracy": 0.86
+    },
+    "prev7": {
+      "answered": 120,
+      "accuracy": 0.8
+    },
+    "recentTests": [
+      {
+        "id": 111,
+        "title": "Katakana · All levels · 100 words",
+        "status": "active",
+        "config": {
+          "script": "katakana",
+          "level": "all",
+          "pos": "any",
+          "jlpt": "any",
+          "count": 100,
+          "source": "random",
+          "sourceTestId": null
+        },
+        "totalQuestions": 100,
+        "answeredCount": 37,
+        "currentIndex": 37,
+        "score": 3005,
+        "maxScore": 10000,
+        "answeredMaxScore": 3700,
+        "correctCount": 31,
+        "wrongCount": 4,
+        "skippedCount": 2,
+        "hint1Count": 7,
+        "hint2Count": 4,
+        "accuracy": 0.838,
+        "scorePercent": 0.812,
+        "grade": "B",
+        "currentStreak": 0,
+        "bestStreak": 14,
+        "timeSpentMs": 340400,
+        "createdAt": "2026-11-13T10:15:00.000Z",
+        "updatedAt": "2026-11-13T10:15:00.000Z",
+        "finishedAt": null
+      },
+      {
+        "id": 109,
+        "title": "Hiragana · Verbs · 20 words",
+        "status": "completed",
+        "config": {
+          "script": "hiragana",
+          "level": "all",
+          "pos": "any",
+          "jlpt": "any",
+          "count": 20,
+          "source": "random",
+          "sourceTestId": null
+        },
+        "totalQuestions": 20,
+        "answeredCount": 20,
+        "currentIndex": 20,
+        "score": 912,
+        "maxScore": 2000,
+        "answeredMaxScore": 2000,
+        "correctCount": 11,
+        "wrongCount": 6,
+        "skippedCount": 3,
+        "hint1Count": 4,
+        "hint2Count": 2,
+        "accuracy": 0.55,
+        "scorePercent": 0.456,
+        "grade": "D",
+        "currentStreak": 0,
+        "bestStreak": 12,
+        "timeSpentMs": 184000,
+        "createdAt": "2026-10-12T10:15:00.000Z",
+        "updatedAt": "2026-10-12T10:15:00.000Z",
+        "finishedAt": "2026-10-12T10:15:00.000Z"
+      },
+      {
+        "id": 110,
+        "title": "Mixed · JLPT N4 · 50 words",
+        "status": "completed",
+        "config": {
+          "script": "mixed",
+          "level": "all",
+          "pos": "any",
+          "jlpt": "any",
+          "count": 50,
+          "source": "random",
+          "sourceTestId": null
+        },
+        "totalQuestions": 50,
+        "answeredCount": 50,
+        "currentIndex": 50,
+        "score": 3241,
+        "maxScore": 5000,
+        "answeredMaxScore": 5000,
+        "correctCount": 38,
+        "wrongCount": 8,
+        "skippedCount": 4,
+        "hint1Count": 10,
+        "hint2Count": 5,
+        "accuracy": 0.76,
+        "scorePercent": 0.648,
+        "grade": "C",
+        "currentStreak": 0,
+        "bestStreak": 13,
+        "timeSpentMs": 460000,
+        "createdAt": "2026-10-06T10:15:00.000Z",
+        "updatedAt": "2026-10-06T10:15:00.000Z",
+        "finishedAt": "2026-10-06T10:15:00.000Z"
+      },
+      {
+        "id": 107,
+        "title": "Mixed · Advanced · 20 words",
+        "status": "closed",
+        "config": {
+          "script": "mixed",
+          "level": "all",
+          "pos": "any",
+          "jlpt": "any",
+          "count": 20,
+          "source": "random",
+          "sourceTestId": null
+        },
+        "totalQuestions": 20,
+        "answeredCount": 9,
+        "currentIndex": 9,
+        "score": 574,
+        "maxScore": 2000,
+        "answeredMaxScore": 900,
+        "correctCount": 6,
+        "wrongCount": 2,
+        "skippedCount": 1,
+        "hint1Count": 2,
+        "hint2Count": 1,
+        "accuracy": 0.667,
+        "scorePercent": 0.638,
+        "grade": "C",
+        "currentStreak": 0,
+        "bestStreak": 9,
+        "timeSpentMs": 82800,
+        "createdAt": "2026-09-11T10:15:00.000Z",
+        "updatedAt": "2026-09-11T10:15:00.000Z",
+        "finishedAt": "2026-09-11T10:15:00.000Z"
+      },
+      {
+        "id": 108,
+        "title": "Loanwords from English, French and German — a very long custom title that should be truncated nicely",
+        "status": "completed",
+        "config": {
+          "script": "mixed",
+          "level": "all",
+          "pos": "any",
+          "jlpt": "any",
+          "count": 25,
+          "source": "random",
+          "sourceTestId": null
+        },
+        "totalQuestions": 25,
+        "answeredCount": 25,
+        "currentIndex": 25,
+        "score": 1724,
+        "maxScore": 2500,
+        "answeredMaxScore": 2500,
+        "correctCount": 20,
+        "wrongCount": 3,
+        "skippedCount": 2,
+        "hint1Count": 5,
+        "hint2Count": 3,
+        "accuracy": 0.8,
+        "scorePercent": 0.69,
+        "grade": "C",
+        "currentStreak": 0,
+        "bestStreak": 11,
+        "timeSpentMs": 230000,
+        "createdAt": "2026-09-05T10:15:00.000Z",
+        "updatedAt": "2026-09-05T10:15:00.000Z",
+        "finishedAt": "2026-09-05T10:15:00.000Z"
+      }
+    ],
+    "accuracyTrend": [
+      {
+        "testId": 100,
+        "title": "Hiragana · Beginner · 10 words",
+        "date": "2026-06-01T10:15:00.000Z",
+        "accuracy": 0.9,
+        "scorePercent": 0.824,
+        "answered": 10
+      },
+      {
+        "testId": 102,
+        "title": "Mixed · All levels · 20 words",
+        "date": "2026-06-02T10:15:00.000Z",
+        "accuracy": 0.95,
+        "scorePercent": 0.818,
+        "answered": 20
+      },
+      {
+        "testId": 101,
+        "title": "Katakana · Beginner · 10 words",
+        "date": "2026-06-08T10:15:00.000Z",
+        "accuracy": 0.7,
+        "scorePercent": 0.565,
+        "answered": 10
+      },
+      {
+        "testId": 104,
+        "title": "Katakana · Intermediate · 30 words",
+        "date": "2026-07-03T10:15:00.000Z",
+        "accuracy": 0.667,
+        "scorePercent": 0.621,
+        "answered": 30
+      },
+      {
+        "testId": 103,
+        "title": "Hiragana · JLPT N5 · 20 words",
+        "date": "2026-07-09T10:15:00.000Z",
+        "accuracy": 0.7,
+        "scorePercent": 0.564,
+        "answered": 20
+      },
+      {
+        "testId": 106,
+        "title": "Retry · Katakana · Intermediate · 30 words",
+        "date": "2026-08-04T10:15:00.000Z",
+        "accuracy": 0.833,
+        "scorePercent": 0.781,
+        "answered": 30
+      },
+      {
+        "testId": 105,
+        "title": "Review · 12 words",
+        "date": "2026-08-10T10:15:00.000Z",
+        "accuracy": 0.917,
+        "scorePercent": 0.823,
+        "answered": 12
+      },
+      {
+        "testId": 108,
+        "title": "Loanwords from English, French and German — a very long custom title that should be truncated nicely",
+        "date": "2026-09-05T10:15:00.000Z",
+        "accuracy": 0.8,
+        "scorePercent": 0.69,
+        "answered": 25
+      },
+      {
+        "testId": 107,
+        "title": "Mixed · Advanced · 20 words",
+        "date": "2026-09-11T10:15:00.000Z",
+        "accuracy": 0.667,
+        "scorePercent": 0.638,
+        "answered": 9
+      },
+      {
+        "testId": 110,
+        "title": "Mixed · JLPT N4 · 50 words",
+        "date": "2026-10-06T10:15:00.000Z",
+        "accuracy": 0.76,
+        "scorePercent": 0.648,
+        "answered": 50
+      },
+      {
+        "testId": 109,
+        "title": "Hiragana · Verbs · 20 words",
+        "date": "2026-10-12T10:15:00.000Z",
+        "accuracy": 0.55,
+        "scorePercent": 0.456,
+        "answered": 20
+      },
+      {
+        "testId": 111,
+        "title": "Katakana · All levels · 100 words",
+        "date": "2026-11-13T10:15:00.000Z",
+        "accuracy": 0.838,
+        "scorePercent": 0.812,
+        "answered": 37
+      }
+    ],
+    "charStats": [
+      {
+        "char": "あ",
+        "script": "hiragana",
+        "correct": 6,
+        "wrong": 0
+      },
+      {
+        "char": "い",
+        "script": "hiragana",
+        "correct": 8,
+        "wrong": 0
+      },
+      {
+        "char": "う",
+        "script": "hiragana",
+        "correct": 6,
+        "wrong": 0
+      },
+      {
+        "char": "え",
+        "script": "hiragana",
+        "correct": 3,
+        "wrong": 3
+      },
+      {
+        "char": "お",
+        "script": "hiragana",
+        "correct": 3,
+        "wrong": 1
+      },
+      {
+        "char": "か",
+        "script": "hiragana",
+        "correct": 12,
+        "wrong": 1
+      },
+      {
+        "char": "き",
+        "script": "hiragana",
+        "correct": 13,
+        "wrong": 4
+      },
+      {
+        "char": "く",
+        "script": "hiragana",
+        "correct": 18,
+        "wrong": 3
+      },
+      {
+        "char": "け",
+        "script": "hiragana",
+        "correct": 7,
+        "wrong": 2
+      },
+      {
+        "char": "こ",
+        "script": "hiragana",
+        "correct": 14,
+        "wrong": 3
+      },
+      {
+        "char": "さ",
+        "script": "hiragana",
+        "correct": 14,
+        "wrong": 3
+      },
+      {
+        "char": "し",
+        "script": "hiragana",
+        "correct": 1,
+        "wrong": 0
+      },
+      {
+        "char": "す",
+        "script": "hiragana",
+        "correct": 1,
+        "wrong": 2
+      },
+      {
+        "char": "せ",
+        "script": "hiragana",
+        "correct": 5,
+        "wrong": 4
+      },
+      {
+        "char": "そ",
+        "script": "hiragana",
+        "correct": 6,
+        "wrong": 4
+      },
+      {
+        "char": "た",
+        "script": "hiragana",
+        "correct": 18,
+        "wrong": 1
+      },
+      {
+        "char": "ち",
+        "script": "hiragana",
+        "correct": 13,
+        "wrong": 1
+      },
+      {
+        "char": "つ",
+        "script": "hiragana",
+        "correct": 6,
+        "wrong": 4
+      },
+      {
+        "char": "て",
+        "script": "hiragana",
+        "correct": 14,
+        "wrong": 2
+      },
+      {
+        "char": "と",
+        "script": "hiragana",
+        "correct": 12,
+        "wrong": 2
+      },
+      {
+        "char": "な",
+        "script": "hiragana",
+        "correct": 8,
+        "wrong": 1
+      },
+      {
+        "char": "に",
+        "script": "hiragana",
+        "correct": 7,
+        "wrong": 4
+      },
+      {
+        "char": "ぬ",
+        "script": "hiragana",
+        "correct": 1,
+        "wrong": 2
+      },
+      {
+        "char": "ね",
+        "script": "hiragana",
+        "correct": 15,
+        "wrong": 0
+      },
+      {
+        "char": "の",
+        "script": "hiragana",
+        "correct": 19,
+        "wrong": 3
+      },
+      {
+        "char": "は",
+        "script": "hiragana",
+        "correct": 15,
+        "wrong": 2
+      },
+      {
+        "char": "ひ",
+        "script": "hiragana",
+        "correct": 1,
+        "wrong": 2
+      },
+      {
+        "char": "ふ",
+        "script": "hiragana",
+        "correct": 9,
+        "wrong": 1
+      },
+      {
+        "char": "へ",
+        "script": "hiragana",
+        "correct": 10,
+        "wrong": 1
+      },
+      {
+        "char": "ほ",
+        "script": "hiragana",
+        "correct": 5,
+        "wrong": 3
+      },
+      {
+        "char": "ま",
+        "script": "hiragana",
+        "correct": 18,
+        "wrong": 1
+      },
+      {
+        "char": "み",
+        "script": "hiragana",
+        "correct": 3,
+        "wrong": 1
+      },
+      {
+        "char": "む",
+        "script": "hiragana",
+        "correct": 1,
+        "wrong": 3
+      },
+      {
+        "char": "め",
+        "script": "hiragana",
+        "correct": 12,
+        "wrong": 3
+      },
+      {
+        "char": "も",
+        "script": "hiragana",
+        "correct": 7,
+        "wrong": 2
+      },
+      {
+        "char": "や",
+        "script": "hiragana",
+        "correct": 1,
+        "wrong": 2
+      },
+      {
+        "char": "ゆ",
+        "script": "hiragana",
+        "correct": 11,
+        "wrong": 1
+      },
+      {
+        "char": "よ",
+        "script": "hiragana",
+        "correct": 0,
+        "wrong": 3
+      },
+      {
+        "char": "ら",
+        "script": "hiragana",
+        "correct": 8,
+        "wrong": 1
+      },
+      {
+        "char": "り",
+        "script": "hiragana",
+        "correct": 8,
+        "wrong": 2
+      },
+      {
+        "char": "る",
+        "script": "hiragana",
+        "correct": 7,
+        "wrong": 1
+      },
+      {
+        "char": "れ",
+        "script": "hiragana",
+        "correct": 7,
+        "wrong": 1
+      },
+      {
+        "char": "ろ",
+        "script": "hiragana",
+        "correct": 15,
+        "wrong": 4
+      },
+      {
+        "char": "わ",
+        "script": "hiragana",
+        "correct": 13,
+        "wrong": 2
+      },
+      {
+        "char": "を",
+        "script": "hiragana",
+        "correct": 6,
+        "wrong": 4
+      },
+      {
+        "char": "ん",
+        "script": "hiragana",
+        "correct": 2,
+        "wrong": 1
+      },
+      {
+        "char": "が",
+        "script": "hiragana",
+        "correct": 15,
+        "wrong": 2
+      },
+      {
+        "char": "ぎ",
+        "script": "hiragana",
+        "correct": 14,
+        "wrong": 0
+      },
+      {
+        "char": "ぐ",
+        "script": "hiragana",
+        "correct": 5,
+        "wrong": 3
+      },
+      {
+        "char": "げ",
+        "script": "hiragana",
+        "correct": 6,
+        "wrong": 3
+      },
+      {
+        "char": "ご",
+        "script": "hiragana",
+        "correct": 12,
+        "wrong": 3
+      },
+      {
+        "char": "ざ",
+        "script": "hiragana",
+        "correct": 5,
+        "wrong": 2
+      },
+      {
+        "char": "じ",
+        "script": "hiragana",
+        "correct": 7,
+        "wrong": 4
+      },
+      {
+        "char": "ず",
+        "script": "hiragana",
+        "correct": 16,
+        "wrong": 3
+      },
+      {
+        "char": "ぜ",
+        "script": "hiragana",
+        "correct": 19,
+        "wrong": 1
+      },
+      {
+        "char": "ぞ",
+        "script": "hiragana",
+        "correct": 12,
+        "wrong": 2
+      },
+      {
+        "char": "だ",
+        "script": "hiragana",
+        "correct": 1,
+        "wrong": 1
+      },
+      {
+        "char": "で",
+        "script": "hiragana",
+        "correct": 1,
+        "wrong": 2
+      },
+      {
+        "char": "ど",
+        "script": "hiragana",
+        "correct": 15,
+        "wrong": 3
+      },
+      {
+        "char": "ば",
+        "script": "hiragana",
+        "correct": 6,
+        "wrong": 4
+      },
+      {
+        "char": "び",
+        "script": "hiragana",
+        "correct": 16,
+        "wrong": 3
+      },
+      {
+        "char": "ぶ",
+        "script": "hiragana",
+        "correct": 5,
+        "wrong": 2
+      },
+      {
+        "char": "べ",
+        "script": "hiragana",
+        "correct": 12,
+        "wrong": 3
+      },
+      {
+        "char": "ぼ",
+        "script": "hiragana",
+        "correct": 0,
+        "wrong": 3
+      },
+      {
+        "char": "ぱ",
+        "script": "hiragana",
+        "correct": 8,
+        "wrong": 1
+      },
+      {
+        "char": "ぴ",
+        "script": "hiragana",
+        "correct": 11,
+        "wrong": 1
+      },
+      {
+        "char": "ぷ",
+        "script": "hiragana",
+        "correct": 3,
+        "wrong": 0
+      },
+      {
+        "char": "ぺ",
+        "script": "hiragana",
+        "correct": 6,
+        "wrong": 2
+      },
+      {
+        "char": "ぽ",
+        "script": "hiragana",
+        "correct": 8,
+        "wrong": 1
+      },
+      {
+        "char": "ゃ",
+        "script": "hiragana",
+        "correct": 2,
+        "wrong": 2
+      },
+      {
+        "char": "ゅ",
+        "script": "hiragana",
+        "correct": 3,
+        "wrong": 1
+      },
+      {
+        "char": "ょ",
+        "script": "hiragana",
+        "correct": 8,
+        "wrong": 2
+      },
+      {
+        "char": "っ",
+        "script": "hiragana",
+        "correct": 8,
+        "wrong": 3
+      },
+      {
+        "char": "ア",
+        "script": "katakana",
+        "correct": 6,
+        "wrong": 1
+      },
+      {
+        "char": "イ",
+        "script": "katakana",
+        "correct": 10,
+        "wrong": 6
+      },
+      {
+        "char": "ウ",
+        "script": "katakana",
+        "correct": 11,
+        "wrong": 1
+      },
+      {
+        "char": "エ",
+        "script": "katakana",
+        "correct": 8,
+        "wrong": 2
+      },
+      {
+        "char": "オ",
+        "script": "katakana",
+        "correct": 12,
+        "wrong": 4
+      },
+      {
+        "char": "カ",
+        "script": "katakana",
+        "correct": 11,
+        "wrong": 0
+      },
+      {
+        "char": "キ",
+        "script": "katakana",
+        "correct": 3,
+        "wrong": 0
+      },
+      {
+        "char": "ク",
+        "script": "katakana",
+        "correct": 1,
+        "wrong": 3
+      },
+      {
+        "char": "ケ",
+        "script": "katakana",
+        "correct": 9,
+        "wrong": 5
+      },
+      {
+        "char": "コ",
+        "script": "katakana",
+        "correct": 11,
+        "wrong": 2
+      },
+      {
+        "char": "サ",
+        "script": "katakana",
+        "correct": 7,
+        "wrong": 3
+      },
+      {
+        "char": "シ",
+        "script": "katakana",
+        "correct": 9,
+        "wrong": 0
+      },
+      {
+        "char": "ス",
+        "script": "katakana",
+        "correct": 3,
+        "wrong": 0
+      },
+      {
+        "char": "セ",
+        "script": "katakana",
+        "correct": 2,
+        "wrong": 5
+      },
+      {
+        "char": "ソ",
+        "script": "katakana",
+        "correct": 7,
+        "wrong": 5
+      },
+      {
+        "char": "タ",
+        "script": "katakana",
+        "correct": 9,
+        "wrong": 3
+      },
+      {
+        "char": "チ",
+        "script": "katakana",
+        "correct": 3,
+        "wrong": 0
+      },
+      {
+        "char": "ツ",
+        "script": "katakana",
+        "correct": 11,
+        "wrong": 2
+      },
+      {
+        "char": "テ",
+        "script": "katakana",
+        "correct": 5,
+        "wrong": 1
+      },
+      {
+        "char": "ト",
+        "script": "katakana",
+        "correct": 7,
+        "wrong": 2
+      },
+      {
+        "char": "ナ",
+        "script": "katakana",
+        "correct": 9,
+        "wrong": 2
+      },
+      {
+        "char": "ニ",
+        "script": "katakana",
+        "correct": 6,
+        "wrong": 0
+      },
+      {
+        "char": "ヌ",
+        "script": "katakana",
+        "correct": 0,
+        "wrong": 3
+      },
+      {
+        "char": "ネ",
+        "script": "katakana",
+        "correct": 3,
+        "wrong": 3
+      },
+      {
+        "char": "ノ",
+        "script": "katakana",
+        "correct": 7,
+        "wrong": 2
+      },
+      {
+        "char": "ハ",
+        "script": "katakana",
+        "correct": 10,
+        "wrong": 4
+      },
+      {
+        "char": "ヒ",
+        "script": "katakana",
+        "correct": 6,
+        "wrong": 5
+      },
+      {
+        "char": "フ",
+        "script": "katakana",
+        "correct": 7,
+        "wrong": 1
+      },
+      {
+        "char": "ヘ",
+        "script": "katakana",
+        "correct": 8,
+        "wrong": 1
+      },
+      {
+        "char": "ホ",
+        "script": "katakana",
+        "correct": 8,
+        "wrong": 5
+      },
+      {
+        "char": "マ",
+        "script": "katakana",
+        "correct": 7,
+        "wrong": 2
+      },
+      {
+        "char": "ミ",
+        "script": "katakana",
+        "correct": 9,
+        "wrong": 4
+      },
+      {
+        "char": "ム",
+        "script": "katakana",
+        "correct": 6,
+        "wrong": 3
+      },
+      {
+        "char": "メ",
+        "script": "katakana",
+        "correct": 9,
+        "wrong": 1
+      },
+      {
+        "char": "モ",
+        "script": "katakana",
+        "correct": 12,
+        "wrong": 0
+      },
+      {
+        "char": "ヤ",
+        "script": "katakana",
+        "correct": 12,
+        "wrong": 5
+      },
+      {
+        "char": "ユ",
+        "script": "katakana",
+        "correct": 6,
+        "wrong": 4
+      },
+      {
+        "char": "ヨ",
+        "script": "katakana",
+        "correct": 13,
+        "wrong": 3
+      },
+      {
+        "char": "ラ",
+        "script": "katakana",
+        "correct": 5,
+        "wrong": 0
+      },
+      {
+        "char": "リ",
+        "script": "katakana",
+        "correct": 1,
+        "wrong": 3
+      },
+      {
+        "char": "ル",
+        "script": "katakana",
+        "correct": 12,
+        "wrong": 4
+      },
+      {
+        "char": "レ",
+        "script": "katakana",
+        "correct": 13,
+        "wrong": 6
+      },
+      {
+        "char": "ロ",
+        "script": "katakana",
+        "correct": 13,
+        "wrong": 4
+      },
+      {
+        "char": "ワ",
+        "script": "katakana",
+        "correct": 13,
+        "wrong": 1
+      },
+      {
+        "char": "ン",
+        "script": "katakana",
+        "correct": 13,
+        "wrong": 1
+      },
+      {
+        "char": "ガ",
+        "script": "katakana",
+        "correct": 11,
+        "wrong": 5
+      },
+      {
+        "char": "ギ",
+        "script": "katakana",
+        "correct": 8,
+        "wrong": 5
+      },
+      {
+        "char": "グ",
+        "script": "katakana",
+        "correct": 10,
+        "wrong": 1
+      },
+      {
+        "char": "ゲ",
+        "script": "katakana",
+        "correct": 5,
+        "wrong": 5
+      },
+      {
+        "char": "ゴ",
+        "script": "katakana",
+        "correct": 9,
+        "wrong": 2
+      },
+      {
+        "char": "ザ",
+        "script": "katakana",
+        "correct": 13,
+        "wrong": 4
+      },
+      {
+        "char": "ジ",
+        "script": "katakana",
+        "correct": 2,
+        "wrong": 1
+      },
+      {
+        "char": "ズ",
+        "script": "katakana",
+        "correct": 9,
+        "wrong": 3
+      },
+      {
+        "char": "ゼ",
+        "script": "katakana",
+        "correct": 3,
+        "wrong": 5
+      },
+      {
+        "char": "ゾ",
+        "script": "katakana",
+        "correct": 4,
+        "wrong": 1
+      },
+      {
+        "char": "ダ",
+        "script": "katakana",
+        "correct": 11,
+        "wrong": 4
+      },
+      {
+        "char": "デ",
+        "script": "katakana",
+        "correct": 1,
+        "wrong": 2
+      },
+      {
+        "char": "ド",
+        "script": "katakana",
+        "correct": 4,
+        "wrong": 5
+      },
+      {
+        "char": "バ",
+        "script": "katakana",
+        "correct": 4,
+        "wrong": 2
+      },
+      {
+        "char": "ビ",
+        "script": "katakana",
+        "correct": 1,
+        "wrong": 1
+      },
+      {
+        "char": "ブ",
+        "script": "katakana",
+        "correct": 2,
+        "wrong": 4
+      },
+      {
+        "char": "ベ",
+        "script": "katakana",
+        "correct": 10,
+        "wrong": 2
+      },
+      {
+        "char": "ボ",
+        "script": "katakana",
+        "correct": 9,
+        "wrong": 5
+      },
+      {
+        "char": "パ",
+        "script": "katakana",
+        "correct": 7,
+        "wrong": 5
+      },
+      {
+        "char": "ピ",
+        "script": "katakana",
+        "correct": 2,
+        "wrong": 0
+      },
+      {
+        "char": "プ",
+        "script": "katakana",
+        "correct": 1,
+        "wrong": 2
+      },
+      {
+        "char": "ペ",
+        "script": "katakana",
+        "correct": 1,
+        "wrong": 6
+      },
+      {
+        "char": "ポ",
+        "script": "katakana",
+        "correct": 13,
+        "wrong": 1
+      },
+      {
+        "char": "ャ",
+        "script": "katakana",
+        "correct": 4,
+        "wrong": 2
+      },
+      {
+        "char": "ュ",
+        "script": "katakana",
+        "correct": 11,
+        "wrong": 5
+      },
+      {
+        "char": "ョ",
+        "script": "katakana",
+        "correct": 9,
+        "wrong": 1
+      },
+      {
+        "char": "ッ",
+        "script": "katakana",
+        "correct": 6,
+        "wrong": 5
+      },
+      {
+        "char": "ー",
+        "script": "katakana",
+        "correct": 7,
+        "wrong": 1
+      }
+    ],
+    "weakChars": [
+      {
+        "char": "よ",
+        "script": "hiragana",
+        "correct": 0,
+        "wrong": 3,
+        "accuracy": 0
+      },
+      {
+        "char": "ぼ",
+        "script": "hiragana",
+        "correct": 0,
+        "wrong": 3,
+        "accuracy": 0
+      },
+      {
+        "char": "ヌ",
+        "script": "katakana",
+        "correct": 0,
+        "wrong": 3,
+        "accuracy": 0
+      },
+      {
+        "char": "ペ",
+        "script": "katakana",
+        "correct": 1,
+        "wrong": 6,
+        "accuracy": 0.143
+      },
+      {
+        "char": "む",
+        "script": "hiragana",
+        "correct": 1,
+        "wrong": 3,
+        "accuracy": 0.25
+      },
+      {
+        "char": "ク",
+        "script": "katakana",
+        "correct": 1,
+        "wrong": 3,
+        "accuracy": 0.25
+      },
+      {
+        "char": "リ",
+        "script": "katakana",
+        "correct": 1,
+        "wrong": 3,
+        "accuracy": 0.25
+      },
+      {
+        "char": "セ",
+        "script": "katakana",
+        "correct": 2,
+        "wrong": 5,
+        "accuracy": 0.286
+      },
+      {
+        "char": "ブ",
+        "script": "katakana",
+        "correct": 2,
+        "wrong": 4,
+        "accuracy": 0.333
+      },
+      {
+        "char": "す",
+        "script": "hiragana",
+        "correct": 1,
+        "wrong": 2,
+        "accuracy": 0.333
+      }
+    ]
+  },
+  "modeLabels": {
+    "romaji": "Romaji → write",
+    "listen": "Listen → write"
+  },
+  "inputLabels": {
+    "keys": "Kana keys",
+    "handwriting": "Handwriting",
+    "device": "Device keyboard"
+  },
+  "tests": [
+    {
+      "id": 111,
+      "title": "Katakana · All levels · 100 words",
+      "status": "active",
+      "config": {
+        "script": "katakana",
+        "level": "all",
+        "pos": "any",
+        "jlpt": "any",
+        "count": 100,
+        "source": "random",
+        "sourceTestId": null,
+        "mode": "romaji",
+        "pool": "all"
+      },
+      "totalQuestions": 100,
+      "answeredCount": 37,
+      "currentIndex": 37,
+      "score": 3005,
+      "maxScore": 10000,
+      "answeredMaxScore": 3700,
+      "correctCount": 31,
+      "wrongCount": 4,
+      "skippedCount": 2,
+      "hint1Count": 7,
+      "hint2Count": 4,
+      "romajiHintCount": 0,
+      "accuracy": 0.838,
+      "scorePercent": 0.812,
+      "grade": "B",
+      "currentStreak": 0,
+      "bestStreak": 14,
+      "timeSpentMs": 340400,
+      "createdAt": "2026-11-13T10:15:00.000Z",
+      "updatedAt": "2026-11-13T10:15:00.000Z",
+      "finishedAt": null
+    },
+    {
+      "id": 109,
+      "title": "Hiragana · Verbs · 20 words",
+      "status": "completed",
+      "config": {
+        "script": "hiragana",
+        "level": "all",
+        "pos": "any",
+        "jlpt": "any",
+        "count": 20,
+        "source": "random",
+        "sourceTestId": null,
+        "mode": "romaji",
+        "pool": "all"
+      },
+      "totalQuestions": 20,
+      "answeredCount": 20,
+      "currentIndex": 20,
+      "score": 912,
+      "maxScore": 2000,
+      "answeredMaxScore": 2000,
+      "correctCount": 11,
+      "wrongCount": 6,
+      "skippedCount": 3,
+      "hint1Count": 4,
+      "hint2Count": 2,
+      "romajiHintCount": 0,
+      "accuracy": 0.55,
+      "scorePercent": 0.456,
+      "grade": "D",
+      "currentStreak": 0,
+      "bestStreak": 12,
+      "timeSpentMs": 184000,
+      "createdAt": "2026-10-12T10:15:00.000Z",
+      "updatedAt": "2026-10-12T10:15:00.000Z",
+      "finishedAt": "2026-10-12T10:15:00.000Z"
+    },
+    {
+      "id": 110,
+      "title": "Mixed · JLPT N4 · 50 words",
+      "status": "completed",
+      "config": {
+        "script": "mixed",
+        "level": "all",
+        "pos": "any",
+        "jlpt": "any",
+        "count": 50,
+        "source": "random",
+        "sourceTestId": null,
+        "mode": "romaji",
+        "pool": "all"
+      },
+      "totalQuestions": 50,
+      "answeredCount": 50,
+      "currentIndex": 50,
+      "score": 3241,
+      "maxScore": 5000,
+      "answeredMaxScore": 5000,
+      "correctCount": 38,
+      "wrongCount": 8,
+      "skippedCount": 4,
+      "hint1Count": 10,
+      "hint2Count": 5,
+      "romajiHintCount": 0,
+      "accuracy": 0.76,
+      "scorePercent": 0.648,
+      "grade": "C",
+      "currentStreak": 0,
+      "bestStreak": 13,
+      "timeSpentMs": 460000,
+      "createdAt": "2026-10-06T10:15:00.000Z",
+      "updatedAt": "2026-10-06T10:15:00.000Z",
+      "finishedAt": "2026-10-06T10:15:00.000Z"
+    },
+    {
+      "id": 107,
+      "title": "Listen · Mixed · Advanced · 20 words",
+      "status": "closed",
+      "config": {
+        "script": "mixed",
+        "level": "all",
+        "pos": "any",
+        "jlpt": "any",
+        "count": 20,
+        "source": "random",
+        "sourceTestId": null,
+        "mode": "listen",
+        "pool": "all"
+      },
+      "totalQuestions": 20,
+      "answeredCount": 9,
+      "currentIndex": 9,
+      "score": 574,
+      "maxScore": 2000,
+      "answeredMaxScore": 900,
+      "correctCount": 6,
+      "wrongCount": 2,
+      "skippedCount": 1,
+      "hint1Count": 2,
+      "hint2Count": 1,
+      "romajiHintCount": 3,
+      "accuracy": 0.667,
+      "scorePercent": 0.638,
+      "grade": "C",
+      "currentStreak": 0,
+      "bestStreak": 9,
+      "timeSpentMs": 82800,
+      "createdAt": "2026-09-11T10:15:00.000Z",
+      "updatedAt": "2026-09-11T10:15:00.000Z",
+      "finishedAt": "2026-09-11T10:15:00.000Z"
+    },
+    {
+      "id": 108,
+      "title": "Loanwords from English, French and German — a very long custom title that should be truncated nicely",
+      "status": "completed",
+      "config": {
+        "script": "mixed",
+        "level": "all",
+        "pos": "any",
+        "jlpt": "any",
+        "count": 25,
+        "source": "random",
+        "sourceTestId": null,
+        "mode": "romaji",
+        "pool": "all"
+      },
+      "totalQuestions": 25,
+      "answeredCount": 25,
+      "currentIndex": 25,
+      "score": 1724,
+      "maxScore": 2500,
+      "answeredMaxScore": 2500,
+      "correctCount": 20,
+      "wrongCount": 3,
+      "skippedCount": 2,
+      "hint1Count": 5,
+      "hint2Count": 3,
+      "romajiHintCount": 0,
+      "accuracy": 0.8,
+      "scorePercent": 0.69,
+      "grade": "C",
+      "currentStreak": 0,
+      "bestStreak": 11,
+      "timeSpentMs": 230000,
+      "createdAt": "2026-09-05T10:15:00.000Z",
+      "updatedAt": "2026-09-05T10:15:00.000Z",
+      "finishedAt": "2026-09-05T10:15:00.000Z"
+    },
+    {
+      "id": 105,
+      "title": "Review · 12 words",
+      "status": "completed",
+      "config": {
+        "script": "mixed",
+        "level": "all",
+        "pos": "any",
+        "jlpt": "any",
+        "count": 12,
+        "source": "review",
+        "sourceTestId": null,
+        "mode": "romaji",
+        "pool": "all"
+      },
+      "totalQuestions": 12,
+      "answeredCount": 12,
+      "currentIndex": 12,
+      "score": 988,
+      "maxScore": 1200,
+      "answeredMaxScore": 1200,
+      "correctCount": 11,
+      "wrongCount": 1,
+      "skippedCount": 0,
+      "hint1Count": 2,
+      "hint2Count": 1,
+      "romajiHintCount": 0,
+      "accuracy": 0.917,
+      "scorePercent": 0.823,
+      "grade": "B",
+      "currentStreak": 0,
+      "bestStreak": 8,
+      "timeSpentMs": 110400,
+      "createdAt": "2026-08-10T10:15:00.000Z",
+      "updatedAt": "2026-08-10T10:15:00.000Z",
+      "finishedAt": "2026-08-10T10:15:00.000Z"
+    },
+    {
+      "id": 106,
+      "title": "Retry · Katakana · Intermediate · 30 words",
+      "status": "completed",
+      "config": {
+        "script": "katakana",
+        "level": "all",
+        "pos": "any",
+        "jlpt": "any",
+        "count": 30,
+        "source": "random",
+        "sourceTestId": null,
+        "mode": "romaji",
+        "pool": "all"
+      },
+      "totalQuestions": 30,
+      "answeredCount": 30,
+      "currentIndex": 30,
+      "score": 2342,
+      "maxScore": 3000,
+      "answeredMaxScore": 3000,
+      "correctCount": 25,
+      "wrongCount": 3,
+      "skippedCount": 2,
+      "hint1Count": 6,
+      "hint2Count": 3,
+      "romajiHintCount": 0,
+      "accuracy": 0.833,
+      "scorePercent": 0.781,
+      "grade": "B",
+      "currentStreak": 0,
+      "bestStreak": 9,
+      "timeSpentMs": 276000,
+      "createdAt": "2026-08-04T10:15:00.000Z",
+      "updatedAt": "2026-08-04T10:15:00.000Z",
+      "finishedAt": "2026-08-04T10:15:00.000Z"
+    },
+    {
+      "id": 103,
+      "title": "Listen · Hiragana · JLPT N5 · 20 words",
+      "status": "completed",
+      "config": {
+        "script": "hiragana",
+        "level": "all",
+        "pos": "any",
+        "jlpt": "any",
+        "count": 20,
+        "source": "random",
+        "sourceTestId": null,
+        "mode": "listen",
+        "pool": "all"
+      },
+      "totalQuestions": 20,
+      "answeredCount": 20,
+      "currentIndex": 20,
+      "score": 1128,
+      "maxScore": 2000,
+      "answeredMaxScore": 2000,
+      "correctCount": 14,
+      "wrongCount": 4,
+      "skippedCount": 2,
+      "hint1Count": 4,
+      "hint2Count": 2,
+      "romajiHintCount": 3,
+      "accuracy": 0.7,
+      "scorePercent": 0.564,
+      "grade": "C",
+      "currentStreak": 0,
+      "bestStreak": 6,
+      "timeSpentMs": 184000,
+      "createdAt": "2026-07-09T10:15:00.000Z",
+      "updatedAt": "2026-07-09T10:15:00.000Z",
+      "finishedAt": "2026-07-09T10:15:00.000Z"
+    },
+    {
+      "id": 104,
+      "title": "Katakana · Intermediate · 30 words",
+      "status": "completed",
+      "config": {
+        "script": "katakana",
+        "level": "all",
+        "pos": "any",
+        "jlpt": "any",
+        "count": 30,
+        "source": "random",
+        "sourceTestId": null,
+        "mode": "romaji",
+        "pool": "all"
+      },
+      "totalQuestions": 30,
+      "answeredCount": 30,
+      "currentIndex": 30,
+      "score": 1863,
+      "maxScore": 3000,
+      "answeredMaxScore": 3000,
+      "correctCount": 20,
+      "wrongCount": 7,
+      "skippedCount": 3,
+      "hint1Count": 6,
+      "hint2Count": 3,
+      "romajiHintCount": 0,
+      "accuracy": 0.667,
+      "scorePercent": 0.621,
+      "grade": "C",
+      "currentStreak": 0,
+      "bestStreak": 7,
+      "timeSpentMs": 276000,
+      "createdAt": "2026-07-03T10:15:00.000Z",
+      "updatedAt": "2026-07-03T10:15:00.000Z",
+      "finishedAt": "2026-07-03T10:15:00.000Z"
+    },
+    {
+      "id": 101,
+      "title": "Katakana · Beginner · 10 words",
+      "status": "completed",
+      "config": {
+        "script": "katakana",
+        "level": "all",
+        "pos": "any",
+        "jlpt": "any",
+        "count": 10,
+        "source": "random",
+        "sourceTestId": null,
+        "mode": "romaji",
+        "pool": "all"
+      },
+      "totalQuestions": 10,
+      "answeredCount": 10,
+      "currentIndex": 10,
+      "score": 565,
+      "maxScore": 1000,
+      "answeredMaxScore": 1000,
+      "correctCount": 7,
+      "wrongCount": 2,
+      "skippedCount": 1,
+      "hint1Count": 2,
+      "hint2Count": 1,
+      "romajiHintCount": 0,
+      "accuracy": 0.7,
+      "scorePercent": 0.565,
+      "grade": "C",
+      "currentStreak": 0,
+      "bestStreak": 4,
+      "timeSpentMs": 92000,
+      "createdAt": "2026-06-08T10:15:00.000Z",
+      "updatedAt": "2026-06-08T10:15:00.000Z",
+      "finishedAt": "2026-06-08T10:15:00.000Z"
+    },
+    {
+      "id": 102,
+      "title": "Mixed · All levels · 20 words",
+      "status": "completed",
+      "config": {
+        "script": "mixed",
+        "level": "all",
+        "pos": "any",
+        "jlpt": "any",
+        "count": 20,
+        "source": "random",
+        "sourceTestId": null,
+        "mode": "romaji",
+        "pool": "all"
+      },
+      "totalQuestions": 20,
+      "answeredCount": 20,
+      "currentIndex": 20,
+      "score": 1635,
+      "maxScore": 2000,
+      "answeredMaxScore": 2000,
+      "correctCount": 19,
+      "wrongCount": 1,
+      "skippedCount": 0,
+      "hint1Count": 4,
+      "hint2Count": 2,
+      "romajiHintCount": 0,
+      "accuracy": 0.95,
+      "scorePercent": 0.818,
+      "grade": "B",
+      "currentStreak": 0,
+      "bestStreak": 5,
+      "timeSpentMs": 184000,
+      "createdAt": "2026-06-02T10:15:00.000Z",
+      "updatedAt": "2026-06-02T10:15:00.000Z",
+      "finishedAt": "2026-06-02T10:15:00.000Z"
+    },
+    {
+      "id": 100,
+      "title": "Hiragana · Beginner · 10 words",
+      "status": "completed",
+      "config": {
+        "script": "hiragana",
+        "level": "all",
+        "pos": "any",
+        "jlpt": "any",
+        "count": 10,
+        "source": "random",
+        "sourceTestId": null,
+        "mode": "romaji",
+        "pool": "all"
+      },
+      "totalQuestions": 10,
+      "answeredCount": 10,
+      "currentIndex": 10,
+      "score": 824,
+      "maxScore": 1000,
+      "answeredMaxScore": 1000,
+      "correctCount": 9,
+      "wrongCount": 1,
+      "skippedCount": 0,
+      "hint1Count": 2,
+      "hint2Count": 1,
+      "romajiHintCount": 0,
+      "accuracy": 0.9,
+      "scorePercent": 0.824,
+      "grade": "B",
+      "currentStreak": 0,
+      "bestStreak": 3,
+      "timeSpentMs": 92000,
+      "createdAt": "2026-06-01T10:15:00.000Z",
+      "updatedAt": "2026-06-01T10:15:00.000Z",
+      "finishedAt": "2026-06-01T10:15:00.000Z"
+    }
+  ],
+  "vocab": {
+    "learned": [
+      {
+        "word": {
+          "id": "1000000",
+          "kana": "ねこ",
+          "romaji": "neko",
+          "script": "hiragana",
+          "kanji": [
+            "猫"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "cat (esp. the domestic cat, Felis catus)",
+                "feline"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "cat (esp. the domestic cat, Felis catus); feline",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 5,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 2,
+          "correct": 2,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": true
+        }
+      },
+      {
+        "word": {
+          "id": "1000137",
+          "kana": "コーヒー",
+          "romaji": "kōhī",
+          "script": "katakana",
+          "kanji": [
+            "珈琲"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "coffee"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "coffee",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "Dutch",
+              "text": "koffie",
+              "wasei": false
+            }
+          ],
+          "jlpt": 5,
+          "level": 1,
+          "features": [
+            "long"
+          ],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 3,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1000274",
+          "kana": "がっこう",
+          "romaji": "gakkou",
+          "script": "hiragana",
+          "kanji": [
+            "学校"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "school"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "school",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 5,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 4,
+          "correct": 4,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1000411",
+          "kana": "パーティー",
+          "romaji": "pātī",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "party (social gathering)",
+                "party (group of people, e.g. in a game)"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "party (social gathering); party (group of people, e.g. in a game)",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "party",
+              "wasei": false
+            }
+          ],
+          "jlpt": 4,
+          "level": 2,
+          "features": [
+            "long"
+          ],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 5,
+          "correct": 5,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1000548",
+          "kana": "きって",
+          "romaji": "kitte",
+          "script": "hiragana",
+          "kanji": [
+            "切手"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "postage stamp"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "postage stamp",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 5,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 2,
+          "correct": 2,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1000685",
+          "kana": "ケーキ",
+          "romaji": "kēki",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "cake"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "cake",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "cake",
+              "wasei": false
+            }
+          ],
+          "jlpt": 4,
+          "level": 1,
+          "features": [
+            "long"
+          ],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 3,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": true
+        }
+      },
+      {
+        "word": {
+          "id": "1000822",
+          "kana": "ちょっと",
+          "romaji": "chotto",
+          "script": "hiragana",
+          "kanji": [
+            "一寸"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Adverb"
+              ],
+              "gloss": [
+                "a little",
+                "a bit",
+                "slightly",
+                "just a minute"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "a little; a bit; slightly; just a minute",
+          "posCategory": "adverb",
+          "origin": [],
+          "jlpt": 5,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 4,
+          "correct": 4,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1000959",
+          "kana": "スーパー",
+          "romaji": "sūpā",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "supermarket",
+                "super (e.g. super-fast)",
+                "superimposition (in film, television, etc.)"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "supermarket; super (e.g. super-fast); superimposition (in film, television, etc.)",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "super",
+              "wasei": false
+            }
+          ],
+          "jlpt": 4,
+          "level": 1,
+          "features": [
+            "long"
+          ],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 5,
+          "correct": 5,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1001096",
+          "kana": "まっちゃ",
+          "romaji": "matcha",
+          "script": "hiragana",
+          "kanji": [
+            "抹茶"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "matcha",
+                "powdered green tea"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "matcha; powdered green tea",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": null,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 2,
+          "correct": 2,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1001233",
+          "kana": "ニュース",
+          "romaji": "nyūsu",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "news"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "news",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "news",
+              "wasei": false
+            }
+          ],
+          "jlpt": 5,
+          "level": 1,
+          "features": [
+            "long"
+          ],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 3,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1001370",
+          "kana": "しんぶん",
+          "romaji": "shinbun",
+          "script": "hiragana",
+          "kanji": [
+            "新聞"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "newspaper"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "newspaper",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 5,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 4,
+          "correct": 4,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": true
+        }
+      },
+      {
+        "word": {
+          "id": "1001507",
+          "kana": "ジュース",
+          "romaji": "jūsu",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "juice",
+                "soft drink (carbonated or uncarbonated)",
+                "deuce (in tennis)"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "juice; soft drink (carbonated or uncarbonated); deuce (in tennis)",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "juice",
+              "wasei": false
+            }
+          ],
+          "jlpt": 5,
+          "level": 1,
+          "features": [
+            "long"
+          ],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 5,
+          "correct": 5,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1001644",
+          "kana": "ほんや",
+          "romaji": "hon'ya",
+          "script": "hiragana",
+          "kanji": [
+            "本屋"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "bookshop",
+                "bookstore"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "bookshop; bookstore",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 5,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 2,
+          "correct": 2,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1001781",
+          "kana": "シャツ",
+          "romaji": "shatsu",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "shirt",
+                "singlet",
+                "undershirt"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "shirt; singlet; undershirt",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "shirt",
+              "wasei": false
+            }
+          ],
+          "jlpt": 5,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 3,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1001918",
+          "kana": "きんえん",
+          "romaji": "kin'en",
+          "script": "hiragana",
+          "kanji": [
+            "禁煙"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun",
+                "Suru verb"
+              ],
+              "gloss": [
+                "abstaining from smoking",
+                "quitting smoking",
+                "No Smoking!",
+                "Smoking Prohibited!"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "abstaining from smoking; quitting smoking; No Smoking!; Smoking Prohibited!",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 3,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 4,
+          "correct": 4,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1002055",
+          "kana": "ファイル",
+          "romaji": "fairu",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "file (holder for documents)",
+                "file (computer)"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "file (holder for documents); file (computer)",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "file",
+              "wasei": false
+            }
+          ],
+          "jlpt": 3,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 5,
+          "correct": 5,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": true
+        }
+      },
+      {
+        "word": {
+          "id": "1002192",
+          "kana": "こんにゃく",
+          "romaji": "konnyaku",
+          "script": "hiragana",
+          "kanji": [
+            "蒟蒻"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "konjac (Amorphophallus konjac)",
+                "devil's tongue",
+                "konnyaku",
+                "jelly made from konjac starch"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "konjac (Amorphophallus konjac); devil's tongue; konnyaku; jelly made from konjac starch",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": null,
+          "level": 2,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 2,
+          "correct": 2,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1002329",
+          "kana": "フォーク",
+          "romaji": "fōku",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "fork",
+                "folk (music)"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "fork; folk (music)",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "fork",
+              "wasei": false
+            }
+          ],
+          "jlpt": 5,
+          "level": 1,
+          "features": [
+            "long"
+          ],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 3,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1002466",
+          "kana": "おかあさん",
+          "romaji": "okaasan",
+          "script": "hiragana",
+          "kanji": [
+            "お母さん"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "mother",
+                "mom",
+                "mum",
+                "ma"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "mother; mom; mum; ma",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 5,
+          "level": 2,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 4,
+          "correct": 4,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1002603",
+          "kana": "ウェブ",
+          "romaji": "webu",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "web",
+                "World Wide Web"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "web; World Wide Web",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "web",
+              "wasei": false
+            }
+          ],
+          "jlpt": null,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 5,
+          "correct": 5,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1002740",
+          "kana": "とうきょう",
+          "romaji": "toukyou",
+          "script": "hiragana",
+          "kanji": [
+            "東京"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "Tokyo"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "Tokyo",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": null,
+          "level": 2,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 2,
+          "correct": 2,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": true
+        }
+      },
+      {
+        "word": {
+          "id": "1002877",
+          "kana": "ウォッカ",
+          "romaji": "wokka",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "vodka"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "vodka",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "Russian",
+              "text": "vodka",
+              "wasei": false
+            }
+          ],
+          "jlpt": null,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 3,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1003014",
+          "kana": "せんせい",
+          "romaji": "sensei",
+          "script": "hiragana",
+          "kanji": [
+            "先生"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "teacher",
+                "instructor",
+                "master",
+                "doctor"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "teacher; instructor; master; doctor",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 5,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 4,
+          "correct": 4,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1003151",
+          "kana": "ディスク",
+          "romaji": "disuku",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "disk",
+                "disc"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "disk; disc",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "disk",
+              "wasei": false
+            }
+          ],
+          "jlpt": null,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 5,
+          "correct": 5,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1003288",
+          "kana": "おおきい",
+          "romaji": "ookii",
+          "script": "hiragana",
+          "kanji": [
+            "大きい"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "I-adjective"
+              ],
+              "gloss": [
+                "big",
+                "large",
+                "great"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "big; large; great",
+          "posCategory": "adjective",
+          "origin": [],
+          "jlpt": 5,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 2,
+          "correct": 2,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1003425",
+          "kana": "ティッシュ",
+          "romaji": "tisshu",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "tissue (paper)",
+                "paper handkerchief"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "tissue (paper); paper handkerchief",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "tissue",
+              "wasei": false
+            }
+          ],
+          "jlpt": 3,
+          "level": 2,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 3,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": true
+        }
+      },
+      {
+        "word": {
+          "id": "1003562",
+          "kana": "くうき",
+          "romaji": "kuuki",
+          "script": "hiragana",
+          "kanji": [
+            "空気"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "air",
+                "atmosphere",
+                "mood",
+                "situation"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "air; atmosphere; mood; situation",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 4,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 4,
+          "correct": 4,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1003699",
+          "kana": "チェック",
+          "romaji": "chekku",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun",
+                "Suru verb"
+              ],
+              "gloss": [
+                "check",
+                "checking",
+                "checkered pattern",
+                "check (in chess)"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "check; checking; checkered pattern; check (in chess)",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "check",
+              "wasei": false
+            }
+          ],
+          "jlpt": 3,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 5,
+          "correct": 5,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1003836",
+          "kana": "ぎゅうにゅう",
+          "romaji": "gyuunyuu",
+          "script": "hiragana",
+          "kanji": [
+            "牛乳"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "(cow's) milk"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "(cow's) milk",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 5,
+          "level": 2,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 2,
+          "correct": 2,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1003973",
+          "kana": "ジェット",
+          "romaji": "jetto",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "jet (aircraft, engine, stream of fluid)"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "jet (aircraft, engine, stream of fluid)",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "jet",
+              "wasei": false
+            }
+          ],
+          "jlpt": null,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 3,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1004110",
+          "kana": "しゅくだい",
+          "romaji": "shukudai",
+          "script": "hiragana",
+          "kanji": [
+            "宿題"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "homework",
+                "assignment",
+                "pending issue",
+                "open question to be settled later"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "homework; assignment; pending issue; open question to be settled later",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 5,
+          "level": 2,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 4,
+          "correct": 4,
+          "wrong": 0,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": true
+        }
+      },
+      {
+        "word": {
+          "id": "1004247",
+          "kana": "ヴァイオリン",
+          "romaji": "vaiorin",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "violin"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "violin",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "violin",
+              "wasei": false
+            }
+          ],
+          "jlpt": null,
+          "level": 2,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 5,
+          "correct": 5,
+          "wrong": 1,
+          "lastResult": "correct",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      }
+    ],
+    "review": [
+      {
+        "word": {
+          "id": "1004384",
+          "kana": "じゃま",
+          "romaji": "jama",
+          "script": "hiragana",
+          "kanji": [
+            "邪魔"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Na-adjective",
+                "Noun",
+                "Suru verb"
+              ],
+              "gloss": [
+                "hindrance",
+                "obstacle",
+                "nuisance",
+                "interference"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "hindrance; obstacle; nuisance; interference",
+          "posCategory": "adjective",
+          "origin": [],
+          "jlpt": 3,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 1,
+          "wrong": 2,
+          "lastResult": "wrong",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1004521",
+          "kana": "バッグ",
+          "romaji": "baggu",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "bag (esp. a handbag)"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "bag (esp. a handbag)",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "bag",
+              "wasei": false
+            }
+          ],
+          "jlpt": null,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 1,
+          "wrong": 2,
+          "lastResult": "skipped",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1004658",
+          "kana": "ちゅうい",
+          "romaji": "chuui",
+          "script": "hiragana",
+          "kanji": [
+            "注意"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun",
+                "Suru verb"
+              ],
+              "gloss": [
+                "caution",
+                "care",
+                "attention (heed)",
+                "warning",
+                "advice"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "caution; care; attention (heed); warning; advice",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 4,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 1,
+          "wrong": 2,
+          "lastResult": "wrong",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1004795",
+          "kana": "マッチ",
+          "romaji": "matchi",
+          "script": "katakana",
+          "kanji": [
+            "燐寸"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "match (for lighting fires)",
+                "match (sports, game)",
+                "matching (going together well)"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "match (for lighting fires); match (sports, game); matching (going together well)",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "match",
+              "wasei": false
+            }
+          ],
+          "jlpt": 4,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 1,
+          "wrong": 2,
+          "lastResult": "wrong",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": true
+        }
+      },
+      {
+        "word": {
+          "id": "1004932",
+          "kana": "ふじさん",
+          "romaji": "fujisan",
+          "script": "hiragana",
+          "kanji": [
+            "富士山"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "Mount Fuji, the highest mountain in Japan, an active stratovolcano on Honshu island straddling Shizuoka and Yamanashi prefectures"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "Mount Fuji, the highest mountain in Japan, an active stratovolcano on Honshu island straddling Shizuoka and Yamanashi prefectures",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": null,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 1,
+          "wrong": 2,
+          "lastResult": "skipped",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1005069",
+          "kana": "メイン",
+          "romaji": "mein",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "No-adjective",
+                "Noun"
+              ],
+              "gloss": [
+                "main",
+                "principal",
+                "main dish"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "main; principal; main dish",
+          "posCategory": "adjective",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "main",
+              "wasei": false
+            }
+          ],
+          "jlpt": null,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 1,
+          "wrong": 2,
+          "lastResult": "wrong",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1005206",
+          "kana": "サッカー",
+          "romaji": "sakkā",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "soccer",
+                "football",
+                "association football"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "soccer; football; association football",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "soccer",
+              "wasei": false
+            }
+          ],
+          "jlpt": 4,
+          "level": 1,
+          "features": [
+            "long"
+          ],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 1,
+          "wrong": 2,
+          "lastResult": "wrong",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1005343",
+          "kana": "べんきょう",
+          "romaji": "benkyou",
+          "script": "hiragana",
+          "kanji": [
+            "勉強"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun",
+                "Suru verb"
+              ],
+              "gloss": [
+                "study",
+                "diligence",
+                "working hard",
+                "experience",
+                "lesson (for the future)",
+                "discount",
+                "price reduction"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "study; diligence; working hard; experience; lesson (for the future); discount; price reduction",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 5,
+          "level": 2,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 1,
+          "wrong": 2,
+          "lastResult": "skipped",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1005480",
+          "kana": "アルバイト",
+          "romaji": "arubaito",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun",
+                "Suru verb"
+              ],
+              "gloss": [
+                "part-time job",
+                "side job"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "part-time job; side job",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "German",
+              "text": "Arbeit",
+              "wasei": false
+            }
+          ],
+          "jlpt": 4,
+          "level": 2,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 1,
+          "wrong": 2,
+          "lastResult": "wrong",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": true
+        }
+      },
+      {
+        "word": {
+          "id": "1005617",
+          "kana": "ひこうき",
+          "romaji": "hikouki",
+          "script": "hiragana",
+          "kanji": [
+            "飛行機"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "aeroplane",
+                "airplane",
+                "aircraft"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "aeroplane; airplane; aircraft",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 5,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 1,
+          "wrong": 2,
+          "lastResult": "wrong",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1005754",
+          "kana": "エレベーター",
+          "romaji": "erebētā",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "elevator",
+                "lift"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "elevator; lift",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "elevator",
+              "wasei": false
+            }
+          ],
+          "jlpt": 5,
+          "level": 2,
+          "features": [
+            "long"
+          ],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 1,
+          "wrong": 2,
+          "lastResult": "skipped",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1005891",
+          "kana": "りょこう",
+          "romaji": "ryokou",
+          "script": "hiragana",
+          "kanji": [
+            "旅行"
+          ],
+          "usuallyKana": false,
+          "senses": [
+            {
+              "pos": [
+                "Noun",
+                "Suru verb"
+              ],
+              "gloss": [
+                "travel",
+                "trip",
+                "journey",
+                "excursion",
+                "tour"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "travel; trip; journey; excursion; tour",
+          "posCategory": "noun",
+          "origin": [],
+          "jlpt": 5,
+          "level": 1,
+          "features": [],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 1,
+          "wrong": 2,
+          "lastResult": "wrong",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      },
+      {
+        "word": {
+          "id": "1006028",
+          "kana": "コンピューター",
+          "romaji": "konpyūtā",
+          "script": "katakana",
+          "kanji": [],
+          "usuallyKana": true,
+          "senses": [
+            {
+              "pos": [
+                "Noun"
+              ],
+              "gloss": [
+                "computer"
+              ],
+              "info": []
+            }
+          ],
+          "meaning": "computer",
+          "posCategory": "noun",
+          "origin": [
+            {
+              "lang": "English",
+              "text": "computer",
+              "wasei": false
+            }
+          ],
+          "jlpt": 4,
+          "level": 3,
+          "features": [
+            "long"
+          ],
+          "homophones": []
+        },
+        "progress": {
+          "seen": 3,
+          "correct": 1,
+          "wrong": 2,
+          "lastResult": "wrong",
+          "lastSeenAt": "2026-11-13T12:00:00.000Z",
+          "starred": false
+        }
+      }
+    ]
+  },
+  "source": {
+    "attribution": "Dictionary data: JMdict © Electronic Dictionary Research and Development Group, used under CC BY-SA 4.0",
+    "jlptAttribution": "JLPT levels: Jonathan Waller (tanos.co.uk), CC BY, via stephenmk/yomitan-jlpt-vocab"
+  }
+}

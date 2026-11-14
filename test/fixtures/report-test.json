@@ -1,0 +1,3039 @@
+{
+  "generatedAt": "2026-11-14T00:30:00.000Z",
+  "tzOffset": -540,
+  "user": {
+    "displayName": "Atrajit",
+    "email": "atrajit@example.com",
+    "isGuest": false
+  },
+  "test": {
+    "id": 42,
+    "title": "Mixed · All levels · 45 words — weekend review before the JLPT N4 mock exam",
+    "status": "active",
+    "config": {
+      "script": "mixed",
+      "level": "all",
+      "pos": "any",
+      "jlpt": "any",
+      "count": 45,
+      "source": "random",
+      "sourceTestId": null,
+      "mode": "romaji",
+      "pool": "all"
+    },
+    "totalQuestions": 45,
+    "answeredCount": 40,
+    "currentIndex": 40,
+    "score": 2800,
+    "maxScore": 4500,
+    "answeredMaxScore": 4000,
+    "correctCount": 30,
+    "wrongCount": 8,
+    "skippedCount": 2,
+    "hint1Count": 6,
+    "hint2Count": 4,
+    "romajiHintCount": 0,
+    "accuracy": 0.75,
+    "scorePercent": 0.7,
+    "grade": "B",
+    "currentStreak": 5,
+    "bestStreak": 5,
+    "timeSpentMs": 401644,
+    "createdAt": "2026-11-13T23:40:00.000Z",
+    "updatedAt": "2026-11-13T23:49:21.644Z",
+    "finishedAt": null
+  },
+  "mode": "romaji",
+  "modeLabel": "Romaji → write",
+  "questions": [
+    {
+      "id": 9000,
+      "position": 0,
+      "romaji": "neko",
+      "status": "correct",
+      "expected": "ねこ",
+      "script": "hiragana",
+      "userAnswer": "ねこ",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 11859,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "ね",
+          "actual": "ね"
+        },
+        {
+          "op": "match",
+          "expected": "こ",
+          "actual": "こ"
+        }
+      ],
+      "word": {
+        "id": "1000000",
+        "kana": "ねこ",
+        "romaji": "neko",
+        "script": "hiragana",
+        "kanji": [
+          "猫"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "cat (esp. the domestic cat, Felis catus)",
+              "feline"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "cat (esp. the domestic cat, Felis catus); feline",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": 5,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:40:15.859Z"
+    },
+    {
+      "id": 9001,
+      "position": 1,
+      "romaji": "kōhī",
+      "status": "correct",
+      "expected": "コーヒー",
+      "script": "katakana",
+      "userAnswer": "コーヒー",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 17319,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "コ",
+          "actual": "コ"
+        },
+        {
+          "op": "match",
+          "expected": "ー",
+          "actual": "ー"
+        },
+        {
+          "op": "match",
+          "expected": "ヒ",
+          "actual": "ヒ"
+        },
+        {
+          "op": "match",
+          "expected": "ー",
+          "actual": "ー"
+        }
+      ],
+      "word": {
+        "id": "1000137",
+        "kana": "コーヒー",
+        "romaji": "kōhī",
+        "script": "katakana",
+        "kanji": [
+          "珈琲"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "coffee"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "coffee",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "Dutch",
+            "text": "koffie",
+            "wasei": false
+          }
+        ],
+        "jlpt": 5,
+        "level": 1,
+        "features": [
+          "long"
+        ],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:40:37.178Z"
+    },
+    {
+      "id": 9002,
+      "position": 2,
+      "romaji": "gakkou",
+      "status": "wrong",
+      "expected": "がっこう",
+      "script": "hiragana",
+      "userAnswer": "がっこん",
+      "errorType": "spelling",
+      "points": 0,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 15679,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "が",
+          "actual": "が"
+        },
+        {
+          "op": "match",
+          "expected": "っ",
+          "actual": "っ"
+        },
+        {
+          "op": "match",
+          "expected": "こ",
+          "actual": "こ"
+        },
+        {
+          "op": "sub",
+          "expected": "う",
+          "actual": "ん"
+        }
+      ],
+      "word": {
+        "id": "1000274",
+        "kana": "がっこう",
+        "romaji": "gakkou",
+        "script": "hiragana",
+        "kanji": [
+          "学校"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "school"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "school",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": 5,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:40:56.857Z"
+    },
+    {
+      "id": 9003,
+      "position": 3,
+      "romaji": "pātī",
+      "status": "correct",
+      "expected": "パーティー",
+      "script": "katakana",
+      "userAnswer": "パーティー",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 4544,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "パ",
+          "actual": "パ"
+        },
+        {
+          "op": "match",
+          "expected": "ー",
+          "actual": "ー"
+        },
+        {
+          "op": "match",
+          "expected": "テ",
+          "actual": "テ"
+        },
+        {
+          "op": "match",
+          "expected": "ィ",
+          "actual": "ィ"
+        },
+        {
+          "op": "match",
+          "expected": "ー",
+          "actual": "ー"
+        }
+      ],
+      "word": {
+        "id": "1000411",
+        "kana": "パーティー",
+        "romaji": "pātī",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "party (social gathering)",
+              "party (group of people, e.g. in a game)"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "party (social gathering); party (group of people, e.g. in a game)",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "party",
+            "wasei": false
+          }
+        ],
+        "jlpt": 4,
+        "level": 2,
+        "features": [
+          "long"
+        ],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:41:05.401Z"
+    },
+    {
+      "id": 9004,
+      "position": 4,
+      "romaji": "kitte",
+      "status": "correct",
+      "expected": "きって",
+      "script": "hiragana",
+      "userAnswer": "きって",
+      "errorType": null,
+      "points": 80,
+      "hint1Used": false,
+      "hint2Used": true,
+      "hint2Revealed": 1,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 6207,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "き",
+          "actual": "き"
+        },
+        {
+          "op": "match",
+          "expected": "っ",
+          "actual": "っ"
+        },
+        {
+          "op": "match",
+          "expected": "て",
+          "actual": "て"
+        }
+      ],
+      "word": {
+        "id": "1000548",
+        "kana": "きって",
+        "romaji": "kitte",
+        "script": "hiragana",
+        "kanji": [
+          "切手"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "postage stamp"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "postage stamp",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": 5,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:41:15.608Z"
+    },
+    {
+      "id": 9005,
+      "position": 5,
+      "romaji": "kēki",
+      "status": "correct",
+      "expected": "ケーキ",
+      "script": "katakana",
+      "userAnswer": "ケーキ",
+      "errorType": null,
+      "points": 60,
+      "hint1Used": true,
+      "hint2Used": true,
+      "hint2Revealed": 1,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 8877,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "ケ",
+          "actual": "ケ"
+        },
+        {
+          "op": "match",
+          "expected": "ー",
+          "actual": "ー"
+        },
+        {
+          "op": "match",
+          "expected": "キ",
+          "actual": "キ"
+        }
+      ],
+      "word": {
+        "id": "1000685",
+        "kana": "ケーキ",
+        "romaji": "kēki",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "cake"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "cake",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "cake",
+            "wasei": false
+          }
+        ],
+        "jlpt": 4,
+        "level": 1,
+        "features": [
+          "long"
+        ],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:41:28.485Z"
+    },
+    {
+      "id": 9006,
+      "position": 6,
+      "romaji": "chotto",
+      "status": "wrong",
+      "expected": "ちょっと",
+      "script": "hiragana",
+      "userAnswer": "チョット",
+      "errorType": "script",
+      "points": 0,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 12932,
+      "diff": [
+        {
+          "op": "sub",
+          "expected": "ち",
+          "actual": "チ"
+        },
+        {
+          "op": "sub",
+          "expected": "ょ",
+          "actual": "ョ"
+        },
+        {
+          "op": "sub",
+          "expected": "っ",
+          "actual": "ッ"
+        },
+        {
+          "op": "sub",
+          "expected": "と",
+          "actual": "ト"
+        }
+      ],
+      "word": {
+        "id": "1000822",
+        "kana": "ちょっと",
+        "romaji": "chotto",
+        "script": "hiragana",
+        "kanji": [
+          "一寸"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Adverb"
+            ],
+            "gloss": [
+              "a little",
+              "a bit",
+              "slightly",
+              "just a minute"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "a little; a bit; slightly; just a minute",
+        "posCategory": "adverb",
+        "origin": [],
+        "jlpt": 5,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:41:45.417Z"
+    },
+    {
+      "id": 9007,
+      "position": 7,
+      "romaji": "sūpā",
+      "status": "correct",
+      "expected": "スーパー",
+      "script": "katakana",
+      "userAnswer": "スーパー",
+      "errorType": null,
+      "points": 70,
+      "hint1Used": false,
+      "hint2Used": true,
+      "hint2Revealed": 2,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 14834,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "ス",
+          "actual": "ス"
+        },
+        {
+          "op": "match",
+          "expected": "ー",
+          "actual": "ー"
+        },
+        {
+          "op": "match",
+          "expected": "パ",
+          "actual": "パ"
+        },
+        {
+          "op": "match",
+          "expected": "ー",
+          "actual": "ー"
+        }
+      ],
+      "word": {
+        "id": "1000959",
+        "kana": "スーパー",
+        "romaji": "sūpā",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "supermarket",
+              "super (e.g. super-fast)",
+              "superimposition (in film, television, etc.)"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "supermarket; super (e.g. super-fast); superimposition (in film, television, etc.)",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "super",
+            "wasei": false
+          }
+        ],
+        "jlpt": 4,
+        "level": 1,
+        "features": [
+          "long"
+        ],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:42:04.251Z"
+    },
+    {
+      "id": 9008,
+      "position": 8,
+      "romaji": "matcha",
+      "status": "correct",
+      "expected": "まっちゃ",
+      "script": "hiragana",
+      "userAnswer": "まっちゃ",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 12154,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "ま",
+          "actual": "ま"
+        },
+        {
+          "op": "match",
+          "expected": "っ",
+          "actual": "っ"
+        },
+        {
+          "op": "match",
+          "expected": "ち",
+          "actual": "ち"
+        },
+        {
+          "op": "match",
+          "expected": "ゃ",
+          "actual": "ゃ"
+        }
+      ],
+      "word": {
+        "id": "1001096",
+        "kana": "まっちゃ",
+        "romaji": "matcha",
+        "script": "hiragana",
+        "kanji": [
+          "抹茶"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "matcha",
+              "powdered green tea"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "matcha; powdered green tea",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": null,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:42:20.405Z"
+    },
+    {
+      "id": 9009,
+      "position": 9,
+      "romaji": "nyūsu",
+      "status": "correct",
+      "expected": "ニュース",
+      "script": "katakana",
+      "userAnswer": "ニュース",
+      "errorType": null,
+      "points": 80,
+      "hint1Used": true,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 15992,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "ニ",
+          "actual": "ニ"
+        },
+        {
+          "op": "match",
+          "expected": "ュ",
+          "actual": "ュ"
+        },
+        {
+          "op": "match",
+          "expected": "ー",
+          "actual": "ー"
+        },
+        {
+          "op": "match",
+          "expected": "ス",
+          "actual": "ス"
+        }
+      ],
+      "word": {
+        "id": "1001233",
+        "kana": "ニュース",
+        "romaji": "nyūsu",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "news"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "news",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "news",
+            "wasei": false
+          }
+        ],
+        "jlpt": 5,
+        "level": 1,
+        "features": [
+          "long"
+        ],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:42:40.397Z"
+    },
+    {
+      "id": 9010,
+      "position": 10,
+      "romaji": "shinbun",
+      "status": "wrong",
+      "expected": "しんぶん",
+      "script": "hiragana",
+      "userAnswer": "しぶん",
+      "errorType": "spelling",
+      "points": 0,
+      "hint1Used": true,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 5549,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "し",
+          "actual": "し"
+        },
+        {
+          "op": "del",
+          "expected": "ん",
+          "actual": null
+        },
+        {
+          "op": "match",
+          "expected": "ぶ",
+          "actual": "ぶ"
+        },
+        {
+          "op": "match",
+          "expected": "ん",
+          "actual": "ん"
+        }
+      ],
+      "word": {
+        "id": "1001370",
+        "kana": "しんぶん",
+        "romaji": "shinbun",
+        "script": "hiragana",
+        "kanji": [
+          "新聞"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "newspaper"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "newspaper",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": 5,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:42:49.946Z"
+    },
+    {
+      "id": 9011,
+      "position": 11,
+      "romaji": "jūsu",
+      "status": "correct",
+      "expected": "ジュース",
+      "script": "katakana",
+      "userAnswer": "ジュース",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 13531,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "ジ",
+          "actual": "ジ"
+        },
+        {
+          "op": "match",
+          "expected": "ュ",
+          "actual": "ュ"
+        },
+        {
+          "op": "match",
+          "expected": "ー",
+          "actual": "ー"
+        },
+        {
+          "op": "match",
+          "expected": "ス",
+          "actual": "ス"
+        }
+      ],
+      "word": {
+        "id": "1001507",
+        "kana": "ジュース",
+        "romaji": "jūsu",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "juice",
+              "soft drink (carbonated or uncarbonated)",
+              "deuce (in tennis)"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "juice; soft drink (carbonated or uncarbonated); deuce (in tennis)",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "juice",
+            "wasei": false
+          }
+        ],
+        "jlpt": 5,
+        "level": 1,
+        "features": [
+          "long"
+        ],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:43:07.477Z"
+    },
+    {
+      "id": 9012,
+      "position": 12,
+      "romaji": "hon'ya",
+      "status": "correct",
+      "expected": "ほんや",
+      "script": "hiragana",
+      "userAnswer": "ほんや",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 14947,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "ほ",
+          "actual": "ほ"
+        },
+        {
+          "op": "match",
+          "expected": "ん",
+          "actual": "ん"
+        },
+        {
+          "op": "match",
+          "expected": "や",
+          "actual": "や"
+        }
+      ],
+      "word": {
+        "id": "1001644",
+        "kana": "ほんや",
+        "romaji": "hon'ya",
+        "script": "hiragana",
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "bookshop",
+              "bookstore"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "bookshop; bookstore",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": 5,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:43:26.424Z"
+    },
+    {
+      "id": 9013,
+      "position": 13,
+      "romaji": "shatsu",
+      "status": "correct",
+      "expected": "シャツ",
+      "script": "katakana",
+      "userAnswer": "シャツ",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 4007,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "シ",
+          "actual": "シ"
+        },
+        {
+          "op": "match",
+          "expected": "ャ",
+          "actual": "ャ"
+        },
+        {
+          "op": "match",
+          "expected": "ツ",
+          "actual": "ツ"
+        }
+      ],
+      "word": {
+        "id": "1001781",
+        "kana": "シャツ",
+        "romaji": "shatsu",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "shirt",
+              "singlet",
+              "undershirt"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "shirt; singlet; undershirt",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "shirt",
+            "wasei": false
+          }
+        ],
+        "jlpt": 5,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:43:34.431Z"
+    },
+    {
+      "id": 9014,
+      "position": 14,
+      "romaji": "kin'en",
+      "status": "skipped",
+      "expected": "きんえん",
+      "script": "hiragana",
+      "userAnswer": null,
+      "errorType": "skipped",
+      "points": 0,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": null,
+      "timeMs": 12724,
+      "diff": [
+        {
+          "op": "del",
+          "expected": "き",
+          "actual": null
+        },
+        {
+          "op": "del",
+          "expected": "ん",
+          "actual": null
+        },
+        {
+          "op": "del",
+          "expected": "え",
+          "actual": null
+        },
+        {
+          "op": "del",
+          "expected": "ん",
+          "actual": null
+        }
+      ],
+      "word": {
+        "id": "1001918",
+        "kana": "きんえん",
+        "romaji": "kin'en",
+        "script": "hiragana",
+        "kanji": [
+          "禁煙"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun",
+              "Suru verb"
+            ],
+            "gloss": [
+              "abstaining from smoking",
+              "quitting smoking",
+              "No Smoking!",
+              "Smoking Prohibited!"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "abstaining from smoking; quitting smoking; No Smoking!; Smoking Prohibited!",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": 3,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:43:51.155Z"
+    },
+    {
+      "id": 9015,
+      "position": 15,
+      "romaji": "fairu",
+      "status": "correct",
+      "expected": "ファイル",
+      "script": "katakana",
+      "userAnswer": "ファイル",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "keys",
+      "timeMs": 8863,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "フ",
+          "actual": "フ"
+        },
+        {
+          "op": "match",
+          "expected": "ァ",
+          "actual": "ァ"
+        },
+        {
+          "op": "match",
+          "expected": "イ",
+          "actual": "イ"
+        },
+        {
+          "op": "match",
+          "expected": "ル",
+          "actual": "ル"
+        }
+      ],
+      "word": {
+        "id": "1002055",
+        "kana": "ファイル",
+        "romaji": "fairu",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "file (holder for documents)",
+              "file (computer)"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "file (holder for documents); file (computer)",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "file",
+            "wasei": false
+          }
+        ],
+        "jlpt": 3,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:44:04.018Z"
+    },
+    {
+      "id": 9016,
+      "position": 16,
+      "romaji": "konnyaku",
+      "status": "correct",
+      "expected": "こんにゃく",
+      "script": "hiragana",
+      "userAnswer": "こんにゃく",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "handwriting",
+      "timeMs": 7880,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "こ",
+          "actual": "こ"
+        },
+        {
+          "op": "match",
+          "expected": "ん",
+          "actual": "ん"
+        },
+        {
+          "op": "match",
+          "expected": "に",
+          "actual": "に"
+        },
+        {
+          "op": "match",
+          "expected": "ゃ",
+          "actual": "ゃ"
+        },
+        {
+          "op": "match",
+          "expected": "く",
+          "actual": "く"
+        }
+      ],
+      "word": {
+        "id": "1002192",
+        "kana": "こんにゃく",
+        "romaji": "konnyaku",
+        "script": "hiragana",
+        "kanji": [
+          "蒟蒻"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "konjac (Amorphophallus konjac)",
+              "devil's tongue",
+              "konnyaku",
+              "jelly made from konjac starch"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "konjac (Amorphophallus konjac); devil's tongue; konnyaku; jelly made from konjac starch",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": null,
+        "level": 2,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:44:15.898Z"
+    },
+    {
+      "id": 9017,
+      "position": 17,
+      "romaji": "fōku",
+      "status": "wrong",
+      "expected": "フォーク",
+      "script": "katakana",
+      "userAnswer": "フォーーク",
+      "errorType": "spelling",
+      "points": 0,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "handwriting",
+      "timeMs": 6308,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "フ",
+          "actual": "フ"
+        },
+        {
+          "op": "match",
+          "expected": "ォ",
+          "actual": "ォ"
+        },
+        {
+          "op": "ins",
+          "expected": null,
+          "actual": "ー"
+        },
+        {
+          "op": "match",
+          "expected": "ー",
+          "actual": "ー"
+        },
+        {
+          "op": "match",
+          "expected": "ク",
+          "actual": "ク"
+        }
+      ],
+      "word": {
+        "id": "1002329",
+        "kana": "フォーク",
+        "romaji": "fōku",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "fork",
+              "folk (music)"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "fork; folk (music)",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "fork",
+            "wasei": false
+          }
+        ],
+        "jlpt": 5,
+        "level": 1,
+        "features": [
+          "long"
+        ],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:44:26.206Z"
+    },
+    {
+      "id": 9018,
+      "position": 18,
+      "romaji": "okaasan",
+      "status": "correct",
+      "expected": "おかあさん",
+      "script": "hiragana",
+      "userAnswer": "おかあさん",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "handwriting",
+      "timeMs": 11537,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "お",
+          "actual": "お"
+        },
+        {
+          "op": "match",
+          "expected": "か",
+          "actual": "か"
+        },
+        {
+          "op": "match",
+          "expected": "あ",
+          "actual": "あ"
+        },
+        {
+          "op": "match",
+          "expected": "さ",
+          "actual": "さ"
+        },
+        {
+          "op": "match",
+          "expected": "ん",
+          "actual": "ん"
+        }
+      ],
+      "word": {
+        "id": "1002466",
+        "kana": "おかあさん",
+        "romaji": "okaasan",
+        "script": "hiragana",
+        "kanji": [
+          "お母さん"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "mother",
+              "mom",
+              "mum",
+              "ma"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "mother; mom; mum; ma",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": 5,
+        "level": 2,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:44:41.743Z"
+    },
+    {
+      "id": 9019,
+      "position": 19,
+      "romaji": "webu",
+      "status": "correct",
+      "expected": "ウェブ",
+      "script": "katakana",
+      "userAnswer": "ウェブ",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "handwriting",
+      "timeMs": 15264,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "ウ",
+          "actual": "ウ"
+        },
+        {
+          "op": "match",
+          "expected": "ェ",
+          "actual": "ェ"
+        },
+        {
+          "op": "match",
+          "expected": "ブ",
+          "actual": "ブ"
+        }
+      ],
+      "word": {
+        "id": "1002603",
+        "kana": "ウェブ",
+        "romaji": "webu",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "web",
+              "World Wide Web"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "web; World Wide Web",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "web",
+            "wasei": false
+          }
+        ],
+        "jlpt": null,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:45:01.007Z"
+    },
+    {
+      "id": 9020,
+      "position": 20,
+      "romaji": "toukyou",
+      "status": "correct",
+      "expected": "とうきょう",
+      "script": "hiragana",
+      "userAnswer": "とうきょう",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "handwriting",
+      "timeMs": 13544,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "と",
+          "actual": "と"
+        },
+        {
+          "op": "match",
+          "expected": "う",
+          "actual": "う"
+        },
+        {
+          "op": "match",
+          "expected": "き",
+          "actual": "き"
+        },
+        {
+          "op": "match",
+          "expected": "ょ",
+          "actual": "ょ"
+        },
+        {
+          "op": "match",
+          "expected": "う",
+          "actual": "う"
+        }
+      ],
+      "word": {
+        "id": "1002740",
+        "kana": "とうきょう",
+        "romaji": "toukyou",
+        "script": "hiragana",
+        "kanji": [
+          "東京"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "Tokyo"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "Tokyo",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": null,
+        "level": 2,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:45:18.551Z"
+    },
+    {
+      "id": 9021,
+      "position": 21,
+      "romaji": "wokka",
+      "status": "wrong",
+      "expected": "ウォッカ",
+      "script": "katakana",
+      "userAnswer": "ワォッカ",
+      "errorType": "spelling",
+      "points": 0,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "handwriting",
+      "timeMs": 11532,
+      "diff": [
+        {
+          "op": "sub",
+          "expected": "ウ",
+          "actual": "ワ"
+        },
+        {
+          "op": "match",
+          "expected": "ォ",
+          "actual": "ォ"
+        },
+        {
+          "op": "match",
+          "expected": "ッ",
+          "actual": "ッ"
+        },
+        {
+          "op": "match",
+          "expected": "カ",
+          "actual": "カ"
+        }
+      ],
+      "word": {
+        "id": "1002877",
+        "kana": "ウォッカ",
+        "romaji": "wokka",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "vodka"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "vodka",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "Russian",
+            "text": "vodka",
+            "wasei": false
+          }
+        ],
+        "jlpt": null,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:45:34.083Z"
+    },
+    {
+      "id": 9022,
+      "position": 22,
+      "romaji": "sensei",
+      "status": "correct",
+      "expected": "せんせい",
+      "script": "hiragana",
+      "userAnswer": "せんせい",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "handwriting",
+      "timeMs": 4707,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "せ",
+          "actual": "せ"
+        },
+        {
+          "op": "match",
+          "expected": "ん",
+          "actual": "ん"
+        },
+        {
+          "op": "match",
+          "expected": "せ",
+          "actual": "せ"
+        },
+        {
+          "op": "match",
+          "expected": "い",
+          "actual": "い"
+        }
+      ],
+      "word": {
+        "id": "1003014",
+        "kana": "せんせい",
+        "romaji": "sensei",
+        "script": "hiragana",
+        "kanji": [
+          "先生"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "teacher",
+              "instructor",
+              "master",
+              "doctor"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "teacher; instructor; master; doctor",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": 5,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:45:42.790Z"
+    },
+    {
+      "id": 9023,
+      "position": 23,
+      "romaji": "disuku",
+      "status": "correct",
+      "expected": "ディスク",
+      "script": "katakana",
+      "userAnswer": "ディスク",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "handwriting",
+      "timeMs": 9866,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "デ",
+          "actual": "デ"
+        },
+        {
+          "op": "match",
+          "expected": "ィ",
+          "actual": "ィ"
+        },
+        {
+          "op": "match",
+          "expected": "ス",
+          "actual": "ス"
+        },
+        {
+          "op": "match",
+          "expected": "ク",
+          "actual": "ク"
+        }
+      ],
+      "word": {
+        "id": "1003151",
+        "kana": "ディスク",
+        "romaji": "disuku",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "disk",
+              "disc"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "disk; disc",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "disk",
+            "wasei": false
+          }
+        ],
+        "jlpt": null,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:45:56.656Z"
+    },
+    {
+      "id": 9024,
+      "position": 24,
+      "romaji": "ookii",
+      "status": "correct",
+      "expected": "おおきい",
+      "script": "hiragana",
+      "userAnswer": "おおきい",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "handwriting",
+      "timeMs": 4615,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "お",
+          "actual": "お"
+        },
+        {
+          "op": "match",
+          "expected": "お",
+          "actual": "お"
+        },
+        {
+          "op": "match",
+          "expected": "き",
+          "actual": "き"
+        },
+        {
+          "op": "match",
+          "expected": "い",
+          "actual": "い"
+        }
+      ],
+      "word": {
+        "id": "1003288",
+        "kana": "おおきい",
+        "romaji": "ookii",
+        "script": "hiragana",
+        "kanji": [
+          "大きい"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "I-adjective"
+            ],
+            "gloss": [
+              "big",
+              "large",
+              "great"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "big; large; great",
+        "posCategory": "adjective",
+        "origin": [],
+        "jlpt": 5,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:46:05.271Z"
+    },
+    {
+      "id": 9025,
+      "position": 25,
+      "romaji": "tisshu",
+      "status": "wrong",
+      "expected": "ティッシュ",
+      "script": "katakana",
+      "userAnswer": "てぃっしゅ",
+      "errorType": "script",
+      "points": 0,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "handwriting",
+      "timeMs": 5189,
+      "diff": [
+        {
+          "op": "sub",
+          "expected": "テ",
+          "actual": "て"
+        },
+        {
+          "op": "sub",
+          "expected": "ィ",
+          "actual": "ぃ"
+        },
+        {
+          "op": "sub",
+          "expected": "ッ",
+          "actual": "っ"
+        },
+        {
+          "op": "sub",
+          "expected": "シ",
+          "actual": "し"
+        },
+        {
+          "op": "sub",
+          "expected": "ュ",
+          "actual": "ゅ"
+        }
+      ],
+      "word": {
+        "id": "1003425",
+        "kana": "ティッシュ",
+        "romaji": "tisshu",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "tissue (paper)",
+              "paper handkerchief"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "tissue (paper); paper handkerchief",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "tissue",
+            "wasei": false
+          }
+        ],
+        "jlpt": 3,
+        "level": 2,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:46:14.460Z"
+    },
+    {
+      "id": 9026,
+      "position": 26,
+      "romaji": "kuuki",
+      "status": "correct",
+      "expected": "くうき",
+      "script": "hiragana",
+      "userAnswer": "くうき",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "handwriting",
+      "timeMs": 11954,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "く",
+          "actual": "く"
+        },
+        {
+          "op": "match",
+          "expected": "う",
+          "actual": "う"
+        },
+        {
+          "op": "match",
+          "expected": "き",
+          "actual": "き"
+        }
+      ],
+      "word": {
+        "id": "1003562",
+        "kana": "くうき",
+        "romaji": "kuuki",
+        "script": "hiragana",
+        "kanji": [
+          "空気"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "air",
+              "atmosphere",
+              "mood",
+              "situation"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "air; atmosphere; mood; situation",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": 4,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:46:30.414Z"
+    },
+    {
+      "id": 9027,
+      "position": 27,
+      "romaji": "chekku",
+      "status": "correct",
+      "expected": "チェック",
+      "script": "katakana",
+      "userAnswer": "チェック",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "handwriting",
+      "timeMs": 6982,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "チ",
+          "actual": "チ"
+        },
+        {
+          "op": "match",
+          "expected": "ェ",
+          "actual": "ェ"
+        },
+        {
+          "op": "match",
+          "expected": "ッ",
+          "actual": "ッ"
+        },
+        {
+          "op": "match",
+          "expected": "ク",
+          "actual": "ク"
+        }
+      ],
+      "word": {
+        "id": "1003699",
+        "kana": "チェック",
+        "romaji": "chekku",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun",
+              "Suru verb"
+            ],
+            "gloss": [
+              "check",
+              "checking",
+              "checkered pattern",
+              "check (in chess)"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "check; checking; checkered pattern; check (in chess)",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "check",
+            "wasei": false
+          }
+        ],
+        "jlpt": 3,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:46:41.396Z"
+    },
+    {
+      "id": 9028,
+      "position": 28,
+      "romaji": "gyuunyuu",
+      "status": "wrong",
+      "expected": "ぎゅうにゅう",
+      "script": "hiragana",
+      "userAnswer": "",
+      "errorType": "empty",
+      "points": 0,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "device",
+      "timeMs": 12342,
+      "diff": [
+        {
+          "op": "del",
+          "expected": "ぎ",
+          "actual": null
+        },
+        {
+          "op": "del",
+          "expected": "ゅ",
+          "actual": null
+        },
+        {
+          "op": "del",
+          "expected": "う",
+          "actual": null
+        },
+        {
+          "op": "del",
+          "expected": "に",
+          "actual": null
+        },
+        {
+          "op": "del",
+          "expected": "ゅ",
+          "actual": null
+        },
+        {
+          "op": "del",
+          "expected": "う",
+          "actual": null
+        }
+      ],
+      "word": {
+        "id": "1003836",
+        "kana": "ぎゅうにゅう",
+        "romaji": "gyuunyuu",
+        "script": "hiragana",
+        "kanji": [
+          "牛乳"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "(cow's) milk"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "(cow's) milk",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": 5,
+        "level": 2,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:46:57.738Z"
+    },
+    {
+      "id": 9029,
+      "position": 29,
+      "romaji": "jetto",
+      "status": "correct",
+      "expected": "ジェット",
+      "script": "katakana",
+      "userAnswer": "ジェット",
+      "errorType": null,
+      "points": 80,
+      "hint1Used": true,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "device",
+      "timeMs": 6743,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "ジ",
+          "actual": "ジ"
+        },
+        {
+          "op": "match",
+          "expected": "ェ",
+          "actual": "ェ"
+        },
+        {
+          "op": "match",
+          "expected": "ッ",
+          "actual": "ッ"
+        },
+        {
+          "op": "match",
+          "expected": "ト",
+          "actual": "ト"
+        }
+      ],
+      "word": {
+        "id": "1003973",
+        "kana": "ジェット",
+        "romaji": "jetto",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "jet (aircraft, engine, stream of fluid)"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "jet (aircraft, engine, stream of fluid)",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "jet",
+            "wasei": false
+          }
+        ],
+        "jlpt": null,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:47:08.481Z"
+    },
+    {
+      "id": 9030,
+      "position": 30,
+      "romaji": "shukudai",
+      "status": "correct",
+      "expected": "しゅくだい",
+      "script": "hiragana",
+      "userAnswer": "しゅくだい",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "device",
+      "timeMs": 3505,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "し",
+          "actual": "し"
+        },
+        {
+          "op": "match",
+          "expected": "ゅ",
+          "actual": "ゅ"
+        },
+        {
+          "op": "match",
+          "expected": "く",
+          "actual": "く"
+        },
+        {
+          "op": "match",
+          "expected": "だ",
+          "actual": "だ"
+        },
+        {
+          "op": "match",
+          "expected": "い",
+          "actual": "い"
+        }
+      ],
+      "word": {
+        "id": "1004110",
+        "kana": "しゅくだい",
+        "romaji": "shukudai",
+        "script": "hiragana",
+        "kanji": [
+          "宿題"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "homework",
+              "assignment",
+              "pending issue",
+              "open question to be settled later"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "homework; assignment; pending issue; open question to be settled later",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": 5,
+        "level": 2,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:47:15.986Z"
+    },
+    {
+      "id": 9031,
+      "position": 31,
+      "romaji": "vaiorin",
+      "status": "correct",
+      "expected": "ヴァイオリン",
+      "script": "katakana",
+      "userAnswer": "ヴァイオリン",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "device",
+      "timeMs": 14229,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "ヴ",
+          "actual": "ヴ"
+        },
+        {
+          "op": "match",
+          "expected": "ァ",
+          "actual": "ァ"
+        },
+        {
+          "op": "match",
+          "expected": "イ",
+          "actual": "イ"
+        },
+        {
+          "op": "match",
+          "expected": "オ",
+          "actual": "オ"
+        },
+        {
+          "op": "match",
+          "expected": "リ",
+          "actual": "リ"
+        },
+        {
+          "op": "match",
+          "expected": "ン",
+          "actual": "ン"
+        }
+      ],
+      "word": {
+        "id": "1004247",
+        "kana": "ヴァイオリン",
+        "romaji": "vaiorin",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "violin"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "violin",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "violin",
+            "wasei": false
+          }
+        ],
+        "jlpt": null,
+        "level": 2,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:47:34.215Z"
+    },
+    {
+      "id": 9032,
+      "position": 32,
+      "romaji": "jama",
+      "status": "wrong",
+      "expected": "じゃま",
+      "script": "hiragana",
+      "userAnswer": "じま",
+      "errorType": "spelling",
+      "points": 0,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "device",
+      "timeMs": 10630,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "じ",
+          "actual": "じ"
+        },
+        {
+          "op": "del",
+          "expected": "ゃ",
+          "actual": null
+        },
+        {
+          "op": "match",
+          "expected": "ま",
+          "actual": "ま"
+        }
+      ],
+      "word": {
+        "id": "1004384",
+        "kana": "じゃま",
+        "romaji": "jama",
+        "script": "hiragana",
+        "kanji": [
+          "邪魔"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Na-adjective",
+              "Noun",
+              "Suru verb"
+            ],
+            "gloss": [
+              "hindrance",
+              "obstacle",
+              "nuisance",
+              "interference"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "hindrance; obstacle; nuisance; interference",
+        "posCategory": "adjective",
+        "origin": [],
+        "jlpt": 3,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:47:48.845Z"
+    },
+    {
+      "id": 9033,
+      "position": 33,
+      "romaji": "baggu",
+      "status": "correct",
+      "expected": "バッグ",
+      "script": "katakana",
+      "userAnswer": "バッグ",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "device",
+      "timeMs": 7593,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "バ",
+          "actual": "バ"
+        },
+        {
+          "op": "match",
+          "expected": "ッ",
+          "actual": "ッ"
+        },
+        {
+          "op": "match",
+          "expected": "グ",
+          "actual": "グ"
+        }
+      ],
+      "word": {
+        "id": "1004521",
+        "kana": "バッグ",
+        "romaji": "baggu",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "bag (esp. a handbag)"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "bag (esp. a handbag)",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "bag",
+            "wasei": false
+          }
+        ],
+        "jlpt": null,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:48:00.438Z"
+    },
+    {
+      "id": 9034,
+      "position": 34,
+      "romaji": "chuui",
+      "status": "skipped",
+      "expected": "ちゅうい",
+      "script": "hiragana",
+      "userAnswer": null,
+      "errorType": "skipped",
+      "points": 0,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": null,
+      "timeMs": 11826,
+      "diff": [
+        {
+          "op": "del",
+          "expected": "ち",
+          "actual": null
+        },
+        {
+          "op": "del",
+          "expected": "ゅ",
+          "actual": null
+        },
+        {
+          "op": "del",
+          "expected": "う",
+          "actual": null
+        },
+        {
+          "op": "del",
+          "expected": "い",
+          "actual": null
+        }
+      ],
+      "word": {
+        "id": "1004658",
+        "kana": "ちゅうい",
+        "romaji": "chuui",
+        "script": "hiragana",
+        "kanji": [
+          "注意"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun",
+              "Suru verb"
+            ],
+            "gloss": [
+              "caution",
+              "care",
+              "attention (heed)",
+              "warning",
+              "advice"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "caution; care; attention (heed); warning; advice",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": 4,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:48:16.264Z"
+    },
+    {
+      "id": 9035,
+      "position": 35,
+      "romaji": "matchi",
+      "status": "correct",
+      "expected": "マッチ",
+      "script": "katakana",
+      "userAnswer": "マッチ",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "device",
+      "timeMs": 4324,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "マ",
+          "actual": "マ"
+        },
+        {
+          "op": "match",
+          "expected": "ッ",
+          "actual": "ッ"
+        },
+        {
+          "op": "match",
+          "expected": "チ",
+          "actual": "チ"
+        }
+      ],
+      "word": {
+        "id": "1004795",
+        "kana": "マッチ",
+        "romaji": "matchi",
+        "script": "katakana",
+        "kanji": [
+          "燐寸"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "match (for lighting fires)",
+              "match (sports, game)",
+              "matching (going together well)"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "match (for lighting fires); match (sports, game); matching (going together well)",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "match",
+            "wasei": false
+          }
+        ],
+        "jlpt": 4,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:48:24.588Z"
+    },
+    {
+      "id": 9036,
+      "position": 36,
+      "romaji": "fujisan",
+      "status": "correct",
+      "expected": "ふじさん",
+      "script": "hiragana",
+      "userAnswer": "ふじさん",
+      "errorType": null,
+      "points": 80,
+      "hint1Used": true,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "device",
+      "timeMs": 9779,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "ふ",
+          "actual": "ふ"
+        },
+        {
+          "op": "match",
+          "expected": "じ",
+          "actual": "じ"
+        },
+        {
+          "op": "match",
+          "expected": "さ",
+          "actual": "さ"
+        },
+        {
+          "op": "match",
+          "expected": "ん",
+          "actual": "ん"
+        }
+      ],
+      "word": {
+        "id": "1004932",
+        "kana": "ふじさん",
+        "romaji": "fujisan",
+        "script": "hiragana",
+        "kanji": [
+          "富士山"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "Mount Fuji, the highest mountain in Japan, an active stratovolcano on Honshu island straddling Shizuoka and Yamanashi prefectures"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "Mount Fuji, the highest mountain in Japan, an active stratovolcano on Honshu island straddling Shizuoka and Yamanashi prefectures",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": null,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:48:38.367Z"
+    },
+    {
+      "id": 9037,
+      "position": 37,
+      "romaji": "mein",
+      "status": "correct",
+      "expected": "メイン",
+      "script": "katakana",
+      "userAnswer": "メイン",
+      "errorType": null,
+      "points": 100,
+      "hint1Used": false,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "device",
+      "timeMs": 7534,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "メ",
+          "actual": "メ"
+        },
+        {
+          "op": "match",
+          "expected": "イ",
+          "actual": "イ"
+        },
+        {
+          "op": "match",
+          "expected": "ン",
+          "actual": "ン"
+        }
+      ],
+      "word": {
+        "id": "1005069",
+        "kana": "メイン",
+        "romaji": "mein",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "No-adjective",
+              "Noun"
+            ],
+            "gloss": [
+              "main",
+              "principal",
+              "main dish"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "main; principal; main dish",
+        "posCategory": "adjective",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "main",
+            "wasei": false
+          }
+        ],
+        "jlpt": null,
+        "level": 1,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:48:49.901Z"
+    },
+    {
+      "id": 9038,
+      "position": 38,
+      "romaji": "sakkā",
+      "status": "correct",
+      "expected": "サッカー",
+      "script": "katakana",
+      "userAnswer": "サッカー",
+      "errorType": null,
+      "points": 70,
+      "hint1Used": false,
+      "hint2Used": true,
+      "hint2Revealed": 2,
+      "romajiHintUsed": false,
+      "inputMethod": "device",
+      "timeMs": 14347,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "サ",
+          "actual": "サ"
+        },
+        {
+          "op": "match",
+          "expected": "ッ",
+          "actual": "ッ"
+        },
+        {
+          "op": "match",
+          "expected": "カ",
+          "actual": "カ"
+        },
+        {
+          "op": "match",
+          "expected": "ー",
+          "actual": "ー"
+        }
+      ],
+      "word": {
+        "id": "1005206",
+        "kana": "サッカー",
+        "romaji": "sakkā",
+        "script": "katakana",
+        "kanji": [],
+        "usuallyKana": true,
+        "senses": [
+          {
+            "pos": [
+              "Noun"
+            ],
+            "gloss": [
+              "soccer",
+              "football",
+              "association football"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "soccer; football; association football",
+        "posCategory": "noun",
+        "origin": [
+          {
+            "lang": "English",
+            "text": "soccer",
+            "wasei": false
+          }
+        ],
+        "jlpt": 4,
+        "level": 1,
+        "features": [
+          "long"
+        ],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:49:08.248Z"
+    },
+    {
+      "id": 9039,
+      "position": 39,
+      "romaji": "benkyou",
+      "status": "correct",
+      "expected": "べんきょう",
+      "script": "hiragana",
+      "userAnswer": "べんきょう",
+      "errorType": null,
+      "points": 80,
+      "hint1Used": true,
+      "hint2Used": false,
+      "hint2Revealed": 0,
+      "romajiHintUsed": false,
+      "inputMethod": "device",
+      "timeMs": 9396,
+      "diff": [
+        {
+          "op": "match",
+          "expected": "べ",
+          "actual": "べ"
+        },
+        {
+          "op": "match",
+          "expected": "ん",
+          "actual": "ん"
+        },
+        {
+          "op": "match",
+          "expected": "き",
+          "actual": "き"
+        },
+        {
+          "op": "match",
+          "expected": "ょ",
+          "actual": "ょ"
+        },
+        {
+          "op": "match",
+          "expected": "う",
+          "actual": "う"
+        }
+      ],
+      "word": {
+        "id": "1005343",
+        "kana": "べんきょう",
+        "romaji": "benkyou",
+        "script": "hiragana",
+        "kanji": [
+          "勉強"
+        ],
+        "usuallyKana": false,
+        "senses": [
+          {
+            "pos": [
+              "Noun",
+              "Suru verb"
+            ],
+            "gloss": [
+              "study",
+              "diligence",
+              "working hard",
+              "experience",
+              "lesson (for the future)",
+              "discount",
+              "price reduction"
+            ],
+            "info": []
+          }
+        ],
+        "meaning": "study; diligence; working hard; experience; lesson (for the future); discount; price reduction",
+        "posCategory": "noun",
+        "origin": [],
+        "jlpt": 5,
+        "level": 2,
+        "features": [],
+        "homophones": []
+      },
+      "answeredAt": "2026-11-13T23:49:21.644Z"
+    },
+    {
+      "id": 9040,
+      "position": 40,
+      "romaji": "arubaito",
+      "status": "pending"
+    },
+    {
+      "id": 9041,
+      "position": 41,
+      "romaji": "hikouki",
+      "status": "pending"
+    },
+    {
+      "id": 9042,
+      "position": 42,
+      "romaji": "erebētā",
+      "status": "pending"
+    },
+    {
+      "id": 9043,
+      "position": 43,
+      "romaji": "ryokou",
+      "status": "pending"
+    },
+    {
+      "id": 9044,
+      "position": 44,
+      "romaji": "konpyūtā",
+      "status": "pending"
+    }
+  ],
+  "byScript": {
+    "hiragana": {
+      "answered": 20,
+      "correct": 13,
+      "accuracy": 0.65
+    },
+    "katakana": {
+      "answered": 20,
+      "correct": 17,
+      "accuracy": 0.85
+    }
+  },
+  "byInput": {
+    "keys": {
+      "answered": 15,
+      "correct": 12,
+      "accuracy": 0.8
+    },
+    "handwriting": {
+      "answered": 12,
+      "correct": 9,
+      "accuracy": 0.75
+    },
+    "device": {
+      "answered": 11,
+      "correct": 9,
+      "accuracy": 0.818
+    }
+  },
+  "inputLabels": {
+    "keys": "Kana keys",
+    "handwriting": "Handwriting",
+    "device": "Device keyboard"
+  },
+  "weakChars": [
+    {
+      "char": "ッ",
+      "script": "katakana",
+      "correct": 1,
+      "wrong": 3,
+      "accuracy": 0.25
+    },
+    {
+      "char": "ぎ",
+      "script": "hiragana",
+      "correct": 1,
+      "wrong": 2,
+      "accuracy": 0.333
+    },
+    {
+      "char": "ー",
+      "script": "katakana",
+      "correct": 6,
+      "wrong": 3,
+      "accuracy": 0.667
+    },
+    {
+      "char": "ょ",
+      "script": "hiragana",
+      "correct": 3,
+      "wrong": 1,
+      "accuracy": 0.75
+    },
+    {
+      "char": "シ",
+      "script": "katakana",
+      "correct": 3,
+      "wrong": 1,
+      "accuracy": 0.75
+    }
+  ],
+  "source": {
+    "attribution": "Dictionary data: JMdict © Electronic Dictionary Research and Development Group, used under CC BY-SA 4.0",
+    "jlptAttribution": "JLPT levels: Jonathan Waller (tanos.co.uk), CC BY, via stephenmk/yomitan-jlpt-vocab"
+  }
+}

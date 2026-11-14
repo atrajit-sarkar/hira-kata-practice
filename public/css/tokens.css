@@ -1,0 +1,233 @@
+/*
+ * HiraKata design tokens (SPEC §11).
+ * Light values live on :root; dark values apply when the OS prefers dark and the user has not
+ * forced light, or when the user forces dark via html[data-theme="dark"].
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces & text */
+  --bg: #f6f5f1;
+  --surface-1: #ffffff;
+  --surface-2: #fbfaf7;
+  --surface-3: #f0eee8;
+  --border: rgba(11, 11, 11, .10);
+  --border-strong: rgba(11, 11, 11, .18);
+  --text-primary: #1b1a17;
+  --text-secondary: #52514e;
+  --text-muted: #6f6d68;
+
+  /* Brand (indigo 藍) */
+  --brand-50: #eef0ff;
+  --brand-100: #e0e4ff;
+  --brand-200: #c7cdfe;
+  --brand-300: #a5affc;
+  --brand-400: #818cf8;
+  --brand-500: #6366f1;
+  --brand-600: #4f46e5;
+  --brand-700: #4338ca;
+  --brand-800: #3730a3;
+  --brand-900: #312e81;
+  --brand: #4f46e5;
+  --brand-hover: #4338ca;
+  --brand-contrast: #ffffff;
+  --brand-soft: rgba(79, 70, 229, .10);
+  --brand-text: #4338ca;
+  --accent: #d13c2f;
+  --accent-soft: rgba(209, 60, 47, .10);
+
+  /* Scripts */
+  --hira: #2a78d6;
+  --hira-soft: rgba(42, 120, 214, .12);
+  --hira-text: #1d62b5;
+  --kata: #eb6834;
+  --kata-soft: rgba(235, 104, 52, .12);
+  --kata-text: #b8481a;
+
+  /* Status */
+  --success: #0ca30c;
+  --success-text: #006300;
+  --success-soft: rgba(12, 163, 12, .12);
+  --danger: #d03b3b;
+  --danger-text: #b42323;
+  --danger-soft: rgba(208, 59, 59, .10);
+  --warning: #fab219;
+  --warning-contrast: #0b0b0b;
+  --warning-soft: rgba(250, 178, 25, .16);
+  --warning-text: #8a5a00;
+
+  /* Charts */
+  --chart-grid: #e1e0d9;
+  --chart-axis: #c3c2b7;
+  --chart-muted: #898781;
+  --seq-100: #cde2fb;
+  --seq-150: #b7d3f6;
+  --seq-200: #9ec5f4;
+  --seq-250: #86b6ef;
+  --seq-300: #6da7ec;
+  --seq-350: #5598e7;
+  --seq-400: #3987e5;
+  --seq-450: #2a78d6;
+  --seq-500: #256abf;
+  --seq-550: #1c5cab;
+  --seq-600: #184f95;
+  --seq-650: #104281;
+  --seq-700: #0d366b;
+
+  /* Typography */
+  --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", Meiryo, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", Meiryo, sans-serif;
+  --font-kana: "Klee One", var(--font-jp);
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", Consolas, monospace;
+
+  /* Radii */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+
+  /* Shadows (soft, layered) */
+  --shadow-1: 0 1px 2px rgba(27, 26, 23, .05), 0 1px 1px rgba(27, 26, 23, .03);
+  --shadow-2: 0 1px 2px rgba(27, 26, 23, .05), 0 4px 12px -2px rgba(27, 26, 23, .07), 0 12px 24px -8px rgba(27, 26, 23, .06);
+  --shadow-3: 0 2px 4px rgba(27, 26, 23, .05), 0 12px 28px -6px rgba(27, 26, 23, .14), 0 28px 56px -16px rgba(27, 26, 23, .16);
+  --ring: 0 0 0 3px rgba(79, 70, 229, .35);
+  --ring-danger: 0 0 0 3px rgba(208, 59, 59, .28);
+
+  /* Spacing */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-7: 32px;
+  --s-8: 40px;
+  --s-9: 48px;
+  --s-10: 64px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --dur-3: 320ms;
+  --dur-4: 500ms;
+
+  /* Layout */
+  --container: 1120px;
+  --container-narrow: 720px;
+  --topbar-h: 64px;
+  --topbar-bg: rgba(246, 245, 241, .78);
+  --overlay: rgba(20, 19, 16, .42);
+  --paper-grain: rgba(27, 26, 23, .035);
+}
+
+/* Dark values, shared by both selectors below. Kept identical on purpose. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0d0d0d;
+    --surface-1: #1a1a19;
+    --surface-2: #212120;
+    --surface-3: #2a2a28;
+    --border: rgba(255, 255, 255, .10);
+    --border-strong: rgba(255, 255, 255, .18);
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted: #9a998f;
+    --brand: #6d72f3;
+    --brand-hover: #818cf8;
+    --brand-contrast: #ffffff;
+    --brand-soft: rgba(109, 114, 243, .18);
+    --brand-text: #a5affc;
+    --accent: #e5533f;
+    --accent-soft: rgba(229, 83, 63, .16);
+    --hira: #3987e5;
+    --hira-soft: rgba(57, 135, 229, .18);
+    --hira-text: #7fb3f2;
+    --kata: #d95926;
+    --kata-soft: rgba(217, 89, 38, .20);
+    --kata-text: #f2915f;
+    --success: #0ca30c;
+    --success-text: #3fcf6a;
+    --success-soft: rgba(12, 163, 12, .18);
+    --danger: #e66767;
+    --danger-text: #f08b8b;
+    --danger-soft: rgba(230, 103, 103, .16);
+    --warning: #fab219;
+    --warning-soft: rgba(250, 178, 25, .14);
+    --warning-text: #f6c55a;
+    --chart-grid: #2c2c2a;
+    --chart-axis: #383835;
+    --chart-muted: #898781;
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, .5), 0 0 0 1px rgba(255, 255, 255, .02);
+    --shadow-2: 0 2px 6px rgba(0, 0, 0, .45), 0 12px 24px -8px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .03);
+    --shadow-3: 0 4px 10px rgba(0, 0, 0, .5), 0 24px 56px -12px rgba(0, 0, 0, .7), 0 0 48px -12px rgba(109, 114, 243, .18);
+    --ring: 0 0 0 3px rgba(129, 140, 248, .45);
+    --ring-danger: 0 0 0 3px rgba(230, 103, 103, .35);
+    --topbar-bg: rgba(13, 13, 13, .72);
+    --overlay: rgba(0, 0, 0, .62);
+    --paper-grain: rgba(255, 255, 255, .025);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0d0d0d;
+  --surface-1: #1a1a19;
+  --surface-2: #212120;
+  --surface-3: #2a2a28;
+  --border: rgba(255, 255, 255, .10);
+  --border-strong: rgba(255, 255, 255, .18);
+  --text-primary: #f0efec;
+  --text-secondary: #c3c2b7;
+  --text-muted: #9a998f;
+  --brand: #6d72f3;
+  --brand-hover: #818cf8;
+  --brand-contrast: #ffffff;
+  --brand-soft: rgba(109, 114, 243, .18);
+  --brand-text: #a5affc;
+  --accent: #e5533f;
+  --accent-soft: rgba(229, 83, 63, .16);
+  --hira: #3987e5;
+  --hira-soft: rgba(57, 135, 229, .18);
+  --hira-text: #7fb3f2;
+  --kata: #d95926;
+  --kata-soft: rgba(217, 89, 38, .20);
+  --kata-text: #f2915f;
+  --success: #0ca30c;
+  --success-text: #3fcf6a;
+  --success-soft: rgba(12, 163, 12, .18);
+  --danger: #e66767;
+  --danger-text: #f08b8b;
+  --danger-soft: rgba(230, 103, 103, .16);
+  --warning: #fab219;
+  --warning-soft: rgba(250, 178, 25, .14);
+  --warning-text: #f6c55a;
+  --chart-grid: #2c2c2a;
+  --chart-axis: #383835;
+  --chart-muted: #898781;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, .5), 0 0 0 1px rgba(255, 255, 255, .02);
+  --shadow-2: 0 2px 6px rgba(0, 0, 0, .45), 0 12px 24px -8px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .03);
+  --shadow-3: 0 4px 10px rgba(0, 0, 0, .5), 0 24px 56px -12px rgba(0, 0, 0, .7), 0 0 48px -12px rgba(109, 114, 243, .18);
+  --ring: 0 0 0 3px rgba(129, 140, 248, .45);
+  --ring-danger: 0 0 0 3px rgba(230, 103, 103, .35);
+  --topbar-bg: rgba(13, 13, 13, .72);
+  --overlay: rgba(0, 0, 0, .62);
+  --paper-grain: rgba(255, 255, 255, .025);
+}
+
+[data-kana-font="gothic"] {
+  --font-kana: var(--font-jp);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-1: 1ms;
+    --dur-2: 1ms;
+    --dur-3: 1ms;
+    --dur-4: 1ms;
+  }
+}

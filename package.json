@@ -1,0 +1,27 @@
+{
+  "name": "hirakata",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HiraKata - a professional hiragana & katakana writing practice web app with hints, live guided spelling, vocabulary meanings, accounts, dashboard analytics and PDF progress reports.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning server/index.js",
+    "dev": "node --env-file-if-exists=.env --watch --disable-warning=ExperimentalWarning server/index.js",
+    "test": "node --disable-warning=ExperimentalWarning --test \"test/**/*.test.js\"",
+    "build:words": "node scripts/build-wordbank.mjs",
+    "build:strokes": "node scripts/build-kana-strokes.mjs",
+    "e2e": "node --disable-warning=ExperimentalWarning e2e/smoke.mjs",
+    "shot": "node scripts/dev/shot.mjs"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.3.0",
+    "pdfkit": "^0.20.2"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.17.0"
+  }
+}

@@ -1,0 +1,10 @@
+node_modules/
+.cache/
+data/*.db
+data/*.db-*
+*.log
+e2e/screenshots/
+e2e/downloads/
+.env
+.DS_Store
+Thumbs.db

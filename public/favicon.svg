@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>HiraKata</title>
+  <defs>
+    <clipPath id="c"><rect width="64" height="64" rx="16"/></clipPath>
+  </defs>
+  <g clip-path="url(#c)">
+    <rect width="64" height="64" fill="#eb6834"/>
+    <path d="M0 0H64L0 64Z" fill="#2a78d6"/>
+    <path d="M64 0L0 64" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
+    <g font-family="'Noto Sans JP','Hiragino Sans','Yu Gothic UI',Meiryo,sans-serif" font-weight="700" font-size="25" fill="#fff" text-anchor="middle">
+      <text x="21" y="31">あ</text>
+      <text x="43" y="53">ア</text>
+    </g>
+  </g>
+</svg>
